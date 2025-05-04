@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Invent2E</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <header class="top-navbar">
+            <div class="logo-container">
+                <a href="/" class="logo">
+                    <!-- Replace with your actual logo -->
+                    <img src="~/images/logo.png" alt="invent2E" id="logo-img" />
+                    <span>invent2E</span>
+                </a>
+            </div>
+            <nav class="top-menu">
+                <a href="/dashboard" class="nav-item">
+                    <i class="material-icons">dashboard</i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/products" class="nav-item active">
+                    <i class="material-icons">inventory_2</i>
+                    <span>Products</span>
+                </a>
+                <a href="/supplier" class="nav-item">
+                    <i class="material-icons">local_shipping</i>
+                    <span>Supplier</span>
+                </a>
+                <a href="/customer" class="nav-item">
+                    <i class="material-icons">people</i>
+                    <span>Customer</span>
+                </a>
+                <a href="/orders" class="nav-item">
+                    <i class="material-icons">shopping_cart</i>
+                    <span>Orders</span>
+                </a>
+                <a href="/reports" class="nav-item">
+                    <i class="material-icons">bar_chart</i>
+                    <span>Reports</span>
+                </a>
+            </nav>
+            <div class="user-actions">
+                <button class="btn icon-btn">
+                    <i class="material-icons">settings</i>
+                </button>
+                <button class="btn icon-btn">
+                    <i class="material-icons">notifications</i>
+                </button>
+                <div class="user-avatar">J</div>
+            </div>
+        </header>
+
+        <main class="content-area">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
