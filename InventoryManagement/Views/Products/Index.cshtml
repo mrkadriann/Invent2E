@@ -18,15 +18,17 @@
     </div>
 
     <div class="products-content">
-        <div class="products-sidebar">
+        <form asp-action="Index" method="get" class="products-sidebar">
             <div class="filter-section">
                 <h3>SORT BY:</h3>
                 <div class="select-container">
-                    <select class="form-select">
-                        <option>Alphabetical: A-Z</option>
-                        <option>Alphabetical: Z-A</option>
-                        <option>Price: Low to High</option>
-                        <option>Price: High to Low</option>
+                    <select name="sortBy" class="form-select" onchange="this.form.submit()" >
+                        <option value="NameAsc" selected="@(Model.SortBy == "NameAsc")">Alphabetical: A-Z</option>
+                        <option value="NameDesc" selected="@(Model.SortBy == "NameDesc")">Alphabetical: Z-A</option>
+                        <option value="PriceAsc" selected="@(Model.SortBy == "PriceAsc")">Price: Low to High</option>
+                        <option value="PriceDesc" selected="@(Model.SortBy == "PriceDesc")">Price: High to Low</option>
+                        <option value="StockAsc" selected="@(Model.SortBy == "StockAsc")">Stock: Low to High</option>
+                        <option value="StockDesc" selected="@(Model.SortBy == "StockDesc")">Stock: High to Low</option>
                     </select>
                 </div>
             </div>
@@ -34,10 +36,13 @@
             <div class="filter-section">
                 <h3>STOCKS:</h3>
                 <div class="select-container">
-                    <select class="form-select">
-                        <option>All Stocks</option>
-                        <option>Low Stock</option>
-                        <option>Out of Stock</option>
+                    <select name="stockStatus" class="form-select" onchange="this.form.submit()">
+
+                        <option value="all" selected="@(Model.StockStatus == "all" || string.IsNullOrEmpty(Model.StockStatus))">All Stocks</option>
+                        <option value="low" selected="@(Model.StockStatus == "low")">Low Stock</option>
+                        <option value="danger" selected="@(Model.StockStatus == "danger")">Very Low/Out</option>
+                        <option value="normal" selected="@(Model.StockStatus == "normal")">Normal</option>
+                        <option value="overstocked" selected="@(Model.StockStatus == "overstocked")">Overstocked</option>
                     </select>
                 </div>
             </div>
@@ -45,38 +50,51 @@
             <div class="filter-section">
                 <h3>CATEGORY:</h3>
                 <div class="select-container">
-                    <select class="form-select">
-                        <option>All Stocks</option>
-                        <option>Men's Clothes</option>
-                        <option>Women's Clothes</option>
-                        <option>Men's Shoes</option>
-                        <option>Women's Shoes</option>
-                        <option>Unisex Shoes</option>
+                    <select name="category" class="form-select" onchange="this.form.submit()">
+                        <option value="All" selected="@(Model.Category == "All" || string.IsNullOrEmpty(Model.Category))">All Categories</option>
+                        @foreach (var cat in Model.AvailableCategories)
+                        {
+                            <option value="@cat" selected="@(Model.Category == cat)">@cat</option>
+                        }
                     </select>
                 </div>
             </div>
 
             <div class="filter-section">
-                <h3>Price</h3>
+                <h3>PRICE:</h3>
                 <div class="price-inputs">
                     <div class="input-group">
                         <span class="input-group-text">₱</span>
-                        <input type="number" class="form-control" placeholder="Minimum Price">
+                        <input type="number" name="minPrice" class="form-control" placeholder="Minimum Price" value="@Model.MinPrice" step="any">
                     </div>
                     <div class="input-group mt-2">
                         <span class="input-group-text">₱</span>
-                        <input type="number" class="form-control" placeholder="Maximum Price">
+                        <input type="number" name="maxPrice" class="form-control" placeholder="Maximum Price" value="@Model.MaxPrice" step="any">
+
+                        <button type="submit" class="btn btn-outline-secondary w-100 mt-2">
+                            <i class="material-icons">check</i> Apply Price
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <button class="btn btn-outline-secondary w-100 mt-3">
+
+
+            <a asp-action="Index" class="btn btn-outline-secondary w-100 mt-3">
                 <i class="material-icons">refresh</i> Reset Filters
-            </button>
-        </div>
+            </a>
+        </form>
 
         <div class="products-main">
 
+            @if (!Model.Products.Any())
+            {
+                <div class="alert alert-warning text-center" role="alert">
+                    No products found matching your criteria. Try adjusting the filters.
+                </div>
+            }
+            else
+            {
             <div class="products-grid">
                 @foreach (var product in Model.Products)
                 {
@@ -103,6 +121,7 @@
                     </div>
                 }
             </div>
+            }
         </div>
     </div>
 </div>
