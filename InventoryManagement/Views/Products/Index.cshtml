@@ -10,11 +10,13 @@
         </div>
         <div class="search-container">
             <i class="material-icons search-icon">search</i>
+            @* For search functionality, you'd add name="searchString" or similar and handle in controller *@
             <input type="text" class="form-control search-input" placeholder="Search Product here">
         </div>
-        <button class="btn btn-success add-product-btn">
+        @* This button would typically link to a Create action *@
+        <a asp-action="Create" asp-controller="Products" class="btn btn-success add-product-btn">
             <i class="material-icons">add</i> Add Product
-        </button>
+        </a>
     </div>
 
     <div class="products-content">
@@ -22,13 +24,13 @@
             <div class="filter-section">
                 <h3>SORT BY:</h3>
                 <div class="select-container">
-                    <select name="sortBy" class="form-select" onchange="this.form.submit()" >
-                        <option value="NameAsc" selected="@(Model.SortBy == "NameAsc")">Alphabetical: A-Z</option>
-                        <option value="NameDesc" selected="@(Model.SortBy == "NameDesc")">Alphabetical: Z-A</option>
-                        <option value="PriceAsc" selected="@(Model.SortBy == "PriceAsc")">Price: Low to High</option>
-                        <option value="PriceDesc" selected="@(Model.SortBy == "PriceDesc")">Price: High to Low</option>
-                        <option value="StockAsc" selected="@(Model.SortBy == "StockAsc")">Stock: Low to High</option>
-                        <option value="StockDesc" selected="@(Model.SortBy == "StockDesc")">Stock: High to Low</option>
+                    <select name="sortBy" class="form-select" onchange="this.form.submit()">
+                        <option value="nameasc" selected="@(Model.SortBy == "nameasc")">Alphabetical: A-Z</option>
+                        <option value="namedesc" selected="@(Model.SortBy == "namedesc")">Alphabetical: Z-A</option>
+                        <option value="priceasc" selected="@(Model.SortBy == "priceasc")">Price: Low to High</option>
+                        <option value="pricedesc" selected="@(Model.SortBy == "pricedesc")">Price: High to Low</option>
+                        <option value="stockasc" selected="@(Model.SortBy == "stockasc")">Stock: Low to High</option>
+                        <option value="stockdesc" selected="@(Model.SortBy == "stockdesc")">Stock: High to Low</option>
                     </select>
                 </div>
             </div>
@@ -36,8 +38,8 @@
             <div class="filter-section">
                 <h3>STOCKS:</h3>
                 <div class="select-container">
-                    <select name="stockStatus" class="form-select" onchange="this.form.submit()">
-
+                    @* CORRECTED name attribute here *@
+                    <select name="stockStatusFilter" class="form-select" onchange="this.form.submit()">
                         <option value="all" selected="@(Model.StockStatus == "all" || string.IsNullOrEmpty(Model.StockStatus))">All Stocks</option>
                         <option value="low" selected="@(Model.StockStatus == "low")">Low Stock</option>
                         <option value="danger" selected="@(Model.StockStatus == "danger")">Very Low/Out</option>
@@ -50,11 +52,12 @@
             <div class="filter-section">
                 <h3>CATEGORY:</h3>
                 <div class="select-container">
-                    <select name="category" class="form-select" onchange="this.form.submit()">
-                        <option value="All" selected="@(Model.Category == "All" || string.IsNullOrEmpty(Model.Category))">All Categories</option>
+                    @* CORRECTED name attribute here *@
+                    <select name="categoryFilter" class="form-select" onchange="this.form.submit()">
+                        <option value="All" selected="@(string.Equals(Model.Category, "All", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(Model.Category))">All Categories</option>
                         @foreach (var cat in Model.AvailableCategories)
                         {
-                            <option value="@cat" selected="@(Model.Category == cat)">@cat</option>
+                            <option value="@cat" selected="@(string.Equals(Model.Category, cat, StringComparison.OrdinalIgnoreCase))">@cat</option>
                         }
                     </select>
                 </div>
@@ -70,15 +73,16 @@
                     <div class="input-group mt-2">
                         <span class="input-group-text">₱</span>
                         <input type="number" name="maxPrice" class="form-control" placeholder="Maximum Price" value="@Model.MaxPrice" step="any">
-
-                        <button type="submit" class="btn btn-outline-secondary w-100 mt-2">
-                            <i class="material-icons">check</i> Apply Price
-                        </button>
                     </div>
+                    @* Moved button outside the inner input-group for better structure if desired, or keep as is.
+                       The button inside the second input-group might look a bit unusual with Bootstrap.
+                       Consider placing it after the maxPrice input-group.
+                    *@
+                    <button type="submit" class="btn btn-outline-secondary w-100 mt-2">
+                        <i class="material-icons">check</i> Apply Price
+                    </button>
                 </div>
             </div>
-
-
 
             <a asp-action="Index" class="btn btn-outline-secondary w-100 mt-3">
                 <i class="material-icons">refresh</i> Reset Filters
@@ -86,7 +90,6 @@
         </form>
 
         <div class="products-main">
-
             @if (!Model.Products.Any())
             {
                 <div class="alert alert-warning text-center" role="alert">
@@ -95,32 +98,33 @@
             }
             else
             {
-            <div class="products-grid">
-                @foreach (var product in Model.Products)
-                {
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="@product.ImageUrl" alt="@product.Name">
-                            <button class="more-options-btn">
-                                <i class="material-icons">more_horiz</i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">@product.Name</h3>
-                            <p class="product-category">@product.Category</p>
-                            <div class="product-stock">
-                                <i class="material-icons">inventory_2</i>
-                                <span>Stock: @product.Stock in stocks</span>
-                                <span class="stock-status @product.StockStatus">@product.StockStatus</span>
+                <div class="products-grid">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "/images/placeholder.jpg" : product.ImageUrl)" alt="@product.Name">
+                                @* This button would need JavaScript to show options, or link to actions *@
+                                <button class="more-options-btn">
+                                    <i class="material-icons">more_horiz</i>
+                                </button>
                             </div>
-                            <div class="product-price">
-                                <span>PRICE:</span>
-                                <span class="price">₱ @product.Price.ToString("N0")</span>
+                            <div class="product-info">
+                                <h3 class="product-name">@product.Name</h3>
+                                <p class="product-category">@product.Category</p>
+                                <div class="product-stock">
+                                    <i class="material-icons">inventory_2</i>
+                                    <span>Stock: @(product.Stock.HasValue ? product.Stock.Value.ToString() : "N/A") in stocks</span>
+                                    <span class="stock-status @product.StockStatus?.ToLowerInvariant()">@product.StockStatus</span>
+                                </div>
+                                <div class="product-price">
+                                    <span>PRICE:</span>
+                                    <span class="price">₱ @(product.Price.HasValue ? product.Price.Value.ToString("N0") : "N/A")</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
             }
         </div>
     </div>

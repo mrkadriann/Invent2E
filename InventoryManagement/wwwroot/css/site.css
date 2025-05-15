@@ -13,6 +13,9 @@
     --nav-inactive-bg: #1e293b;
     --nav-active-bg: #13ae6f;
     --nav-hover-bg: #283548;
+    --button-hover-bg: rgba(255, 255, 255, 0.08);
+    --button-hover-text: var(--text-light);
+    --image-bg: #0f172a;
 }
 
 body {

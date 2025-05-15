@@ -1,0 +1,204 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\source\\repos\\Invent2E\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\models\\addproductviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\models\\addproductviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\models\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\models\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\data\\inventorydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\data\\inventorydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DELL\\AppData\\Local\\SourceServer\\f68c6a996dd501c71d6087d85be7222f7f41dc1f6bf94042dd4c8c6e41454ab3\\InventoryManagement\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AddProductViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Models\\AddProductViewModel.cs",
+              "RelativeDocumentMoniker": "InventoryManagement\\Models\\AddProductViewModel.cs",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Models\\AddProductViewModel.cs",
+              "RelativeToolTip": "InventoryManagement\\Models\\AddProductViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T04:48:19.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "InventoryManagement\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "InventoryManagement\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAuwIUAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T12:37:58.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\appsettings.json",
+              "RelativeDocumentMoniker": "InventoryManagement\\appsettings.json",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\appsettings.json",
+              "RelativeToolTip": "InventoryManagement\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-14T11:28:20.806Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\AppData\\Local\\SourceServer\\f68c6a996dd501c71d6087d85be7222f7f41dc1f6bf94042dd4c8c6e41454ab3\\InventoryManagement\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\f68c6a996dd501c71d6087d85be7222f7f41dc1f6bf94042dd4c8c6e41454ab3\\InventoryManagement\\Program.cs",
+              "ToolTip": "C:\\Users\\DELL\\AppData\\Local\\SourceServer\\f68c6a996dd501c71d6087d85be7222f7f41dc1f6bf94042dd4c8c6e41454ab3\\InventoryManagement\\Program.cs",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\f68c6a996dd501c71d6087d85be7222f7f41dc1f6bf94042dd4c8c6e41454ab3\\InventoryManagement\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T13:50:34.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Views\\Products\\Index.cshtml",
+              "RelativeDocumentMoniker": "InventoryManagement\\Views\\Products\\Index.cshtml",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Views\\Products\\Index.cshtml",
+              "RelativeToolTip": "InventoryManagement\\Views\\Products\\Index.cshtml",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAqwIIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-05T11:20:33.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "InventoryManagement\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Models\\Product.cs",
+              "RelativeToolTip": "InventoryManagement\\Models\\Product.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAwwGMAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T11:31:50.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Models\\ProductViewModel.cs",
+              "RelativeDocumentMoniker": "InventoryManagement\\Models\\ProductViewModel.cs",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Models\\ProductViewModel.cs",
+              "RelativeToolTip": "InventoryManagement\\Models\\ProductViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T12:48:44.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "InventoryDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Data\\InventoryDbContext.cs",
+              "RelativeDocumentMoniker": "InventoryManagement\\Data\\InventoryDbContext.cs",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Data\\InventoryDbContext.cs",
+              "RelativeToolTip": "InventoryManagement\\Data\\InventoryDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T11:45:22.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "InventoryManagement\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "InventoryManagement\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T13:49:19.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "InventoryManagement\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "InventoryManagement\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T11:20:18.994Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "InventoryManagement\\wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "InventoryManagement\\wwwroot\\js\\site.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-05T12:46:43.15Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
