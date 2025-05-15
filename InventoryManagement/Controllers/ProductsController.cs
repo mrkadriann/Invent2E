@@ -112,5 +112,10 @@ namespace InventoryManagement.Controllers
 
             return View(viewModel);
         }
+
+        public ActionResult Add()
+        {
+            return View("CreateProduct");
+        }
     }
 }

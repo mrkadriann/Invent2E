@@ -1,0 +1,200 @@
+﻿@{
+    ViewBag.Title = "Add New Product";
+}
+
+<link rel="stylesheet" href="~/css/CreateProduct.css" asp-append-version="true" />
+
+<div class="container-fluid product-create-page">
+    <div class="row mb-4">
+        <div class="col-12">
+            <a href="@Url.Action("Index", "Product")" class="back-link">
+                <!-- Replace with Material Icons arrow_back icon -->
+                <i class="material-icons" style="vertical-align: middle; font-size: 20px;">arrow_back</i>
+                <span style="vertical-align: middle;">Back To product list</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="page-title">Add New Product</h1>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { @class = "product-form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-panel">
+                    <div class="form-group">
+                        <label for="ProductName">Product Name</label>
+                        <input type="text" id="ProductName" name="ProductName" class="form-control" required />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ProductID">Product ID</label>
+                                <input type="text" id="ProductID" name="ProductID" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ProductCategory">Product Category</label>
+                                <select id="ProductCategory" name="ProductCategory" class="form-control">
+                                    <option value="">Select Category</option>
+                                    <!-- Add your category options here -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Height">Height</label>
+                                <div class="input-group">
+                                    <input type="number" id="Height" name="Height" class="form-control" step="0.01" />
+                                    <div class="input-group-append custom-select-wrapper">
+                                        <select name="HeightUnit" class="form-control unit-select">
+                                            <option value="cm">cm</option>
+                                            <option value="in">in</option>
+                                        </select>
+                                        <div class="select-icon-container">
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Width">Width</label>
+                                <div class="input-group">
+                                    <input type="number" id="Width" name="Width" class="form-control" step="0.01" />
+                                    <div class="input-group-append custom-select-wrapper">
+                                        <select name="WidthUnit" class="form-control unit-select">
+                                            <option value="cm">cm</option>
+                                            <option value="in">in</option>
+                                        </select>
+                                        <div class="select-icon-container">
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Weight">Weight</label>
+                                <div class="input-group">
+                                    <input type="number" id="Weight" name="Weight" class="form-control" step="0.01" />
+                                    <div class="input-group-append custom-select-wrapper">
+                                        <select name="WeightUnit" class="form-control unit-select">
+                                            <option value="kg">kg</option>
+                                            <option value="lb">lb</option>
+                                        </select>
+                                        <div class="select-icon-container">
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Color">Color</label>
+                                <input type="text" id="Color" name="Color" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Supplier">Supplier</label>
+                                <select id="Supplier" name="Supplier" class="form-control">
+                                    <option value="">Select Supplier</option>
+                                    <!-- Add your supplier options here -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="QuantityStocks">Quantity Stocks</label>
+                                <input type="number" id="QuantityStocks" name="QuantityStocks" class="form-control" min="0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-panel">
+                    <div class="form-group">
+                        <label for="ProductDescription">Product Description</label>
+                        <textarea id="ProductDescription" name="ProductDescription" class="form-control" rows="6"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Add Image</label>
+                        <div class="image-upload-container">
+                            <div class="image-upload-box">
+                                <input type="file" id="ProductImage1" name="ProductImage1" class="image-upload" accept="image/*" />
+                                <div class="upload-placeholder">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                            </div>
+                            <div class="image-upload-box">
+                                <input type="file" id="ProductImage2" name="ProductImage2" class="image-upload" accept="image/*" />
+                                <div class="upload-placeholder">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="WholesalePrice">Wholesale Price</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">₱</span>
+                                    </div>
+                                    <input type="number" id="WholesalePrice" name="WholesalePrice" class="form-control" step="0.01" min="0" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RetailPrice">Retail Price</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">₱</span>
+                                    </div>
+                                    <input type="number" id="RetailPrice" name="RetailPrice" class="form-control" step="0.01" min="0" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Profit">Profit</label>
+                        <input type="number" id="Profit" name="Profit" class="form-control" step="0.01" min="0" readonly />
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" onclick="location.href='@Url.Action("Index", "Product")'">Cancel</button>
+                        <button type="submit" class="btn btn-save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

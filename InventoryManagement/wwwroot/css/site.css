@@ -1,8 +1,8 @@
 :root {
     --primary-color: #00c77b;
-    --dark-bg: #101827;
+    --dark-bg: #141E22;
     --lightdark-bg: #141E22;
-    --card-bg: #1e293b;
+    --card-bg: #1A262D;
     --text-light: #ffffff;
     --text-gray: #8f8f8f;
     --text-muted: #9ca3af;
@@ -16,7 +16,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--dark-bg);
@@ -34,7 +34,6 @@ body {
     display: flex;
     align-items: center;
     background-color: var(--dark-bg);
-    border-bottom: 1px solid var(--border-color);
     padding: 10px 20px;
     height: 64px;
 }
@@ -61,6 +60,7 @@ body {
     display: flex;
     flex: 1;
     gap: 10px;
+    margin-left: 155px
 }
 
 .nav-item {
@@ -177,7 +177,7 @@ body {
 
 /* Products sidebar styles */
 .products-sidebar {
-    width: 240px;
+    width: 320px;
     background-color: var(--card-bg);
     border-radius: 8px;
     padding: 20px;
@@ -283,6 +283,8 @@ body {
 .search-container {
     position: relative;
     flex: 1;
+    margin-left: 73px;
+    margin-right: 450px;
 }
 
 .search-icon {

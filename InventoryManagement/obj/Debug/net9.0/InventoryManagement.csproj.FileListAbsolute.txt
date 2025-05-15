@@ -78,8 +78,6 @@ C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryMana
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\o7jzbk5mq8-muycvpuwrr.gz
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\fb2ncmpgzh-87fc7y1x7t.gz
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\sghwoazbr4-mlv21k5csn.gz
-C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\wtwnlvhkih-1g1tv63wlh.gz
-C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\j8klvch3fr-1g1tv63wlh.gz
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -95,4 +93,8 @@ C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryMana
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\InventoryManagement.pdb
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\InventoryManagement.genruntimeconfig.cache
 C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\ref\InventoryManagement.dll
-C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\mx6a2ccs8i-ngxja6f27o.gz
+C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\InventoryManagement.sourcelink.json
+C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\mx6a2ccs8i-fnmm43iowt.gz
+C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\wtwnlvhkih-50jj4m3ud3.gz
+C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\j8klvch3fr-50jj4m3ud3.gz
+C:\Users\novam\OneDrive\Desktop\Code\VS\ASPNET\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\eqw0idx41s-3dh5pn5k6s.gz
