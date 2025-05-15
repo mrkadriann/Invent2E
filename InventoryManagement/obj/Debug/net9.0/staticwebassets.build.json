@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9UL4RagUkB1xo1vOlApBCZvYTaCduzi+83VJp1u+QdI=",
+  "Hash": "Hiv7UOZyOfGa/ra9mTb4TnlPXuuqxXI/LEjOpSEpLkQ=",
   "Source": "InventoryManagement",
   "BasePath": "_content/InventoryManagement",
   "Mode": "Default",
@@ -687,6 +687,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-gsc827ma18.gz",
+      "SourceId": "InventoryManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/InventoryManagement",
+      "RelativePath": "css/add-product#[.{fingerprint=gsc827ma18}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "hnlnf2sibi",
+      "Integrity": "XcQvknHJHhMMeaWmgOYXYnZiAuDqv5G+wfixjcKL+so=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css"
     },
     {
       "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\h8j8p53jcj-0j3bgjxly4.gz",
@@ -1401,6 +1422,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\InventoryManagement.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
+      "SourceId": "InventoryManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\",
+      "BasePath": "_content/InventoryManagement",
+      "RelativePath": "css/add-product#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gsc827ma18",
+      "Integrity": "wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\add-product.css"
     },
     {
       "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\site.css",
@@ -2917,6 +2959,304 @@
   ],
   "Endpoints": [
     {
+      "Route": "css/add-product.css",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-gsc827ma18.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000511770727"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1953"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"XcQvknHJHhMMeaWmgOYXYnZiAuDqv5G+wfixjcKL+so=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 06:13:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM="
+        }
+      ]
+    },
+    {
+      "Route": "css/add-product.css",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6550"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 06:13:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM="
+        }
+      ]
+    },
+    {
+      "Route": "css/add-product.css.gz",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-gsc827ma18.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1953"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"XcQvknHJHhMMeaWmgOYXYnZiAuDqv5G+wfixjcKL+so=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 06:13:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-XcQvknHJHhMMeaWmgOYXYnZiAuDqv5G+wfixjcKL+so="
+        }
+      ]
+    },
+    {
+      "Route": "css/add-product.gsc827ma18.css",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-gsc827ma18.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000511770727"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1953"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"XcQvknHJHhMMeaWmgOYXYnZiAuDqv5G+wfixjcKL+so=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 06:13:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gsc827ma18"
+        },
+        {
+          "Name": "label",
+          "Value": "css/add-product.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM="
+        }
+      ]
+    },
+    {
+      "Route": "css/add-product.gsc827ma18.css",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6550"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 06:13:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gsc827ma18"
+        },
+        {
+          "Name": "label",
+          "Value": "css/add-product.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wJD+V5hWOEdjvJabscCQWhKLHMiLfGKUQaPCQa0ZWDM="
+        }
+      ]
+    },
+    {
+      "Route": "css/add-product.gsc827ma18.css.gz",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-gsc827ma18.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1953"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"XcQvknHJHhMMeaWmgOYXYnZiAuDqv5G+wfixjcKL+so=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 06:13:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gsc827ma18"
+        },
+        {
+          "Name": "label",
+          "Value": "css/add-product.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-XcQvknHJHhMMeaWmgOYXYnZiAuDqv5G+wfixjcKL+so="
+        }
+      ]
+    },
+    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mx6a2ccs8i-zherrtommm.gz",
       "Selectors": [
@@ -4275,7 +4615,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4336,7 +4676,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4381,7 +4721,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4436,7 +4776,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4497,7 +4837,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4542,7 +4882,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4597,7 +4937,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4650,7 +4990,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4687,7 +5027,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4734,7 +5074,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4787,7 +5127,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4824,7 +5164,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 14:53:13 GMT"
+          "Value": "Thu, 15 May 2025 06:58:43 GMT"
         },
         {
           "Name": "Cache-Control",

@@ -1,0 +1,218 @@
+﻿@model InventoryManagement.Models.AddProductViewModel
+@{
+    ViewData["Title"] = "Add New Product";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="~/css/add-product.css" asp-append-version="true" />
+
+<div class="add-product-page-container">
+    <div class="back-to-list">
+        <a asp-action="Index" asp-controller="Products"><i class="fas fa-arrow-left"></i> Back to product list</a>
+    </div>
+
+    <h1 class="page-title">Add New Product</h1>
+
+    <form asp-action="AddProduct" method="post" enctype="multipart/form-data" class="add-product-form">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-layout">
+            <!-- Left Column -->
+            <div class="form-column">
+                <div class="form-group">
+                    <label asp-for="ItemName" class="form-label"></label>
+                    <input asp-for="ItemName" class="form-control-custom" />
+                    <span asp-validation-for="ItemName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @* Product Category takes full width here *@
+                    <label asp-for="SelectedProductCategoryId" class="form-label"></label>
+                    <select asp-for="SelectedProductCategoryId" asp-items="Model.ProductCategories" class="form-select-custom">
+                        @* "Select Category..." option is added in the controller *@
+                    </select>
+                    <span asp-validation-for="SelectedProductCategoryId" class="text-danger"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label asp-for="HeightValue" class="form-label">Height</label>
+                        <div class="input-with-unit">
+                            <input asp-for="HeightValue" type="number" step="0.01" class="form-control-custom" placeholder="0.00" />
+                            <select asp-for="HeightUnit" asp-items="Model.DimensionUnits" class="form-select-unit"></select>
+                        </div>
+                        <span asp-validation-for="HeightValue" class="text-danger"></span>
+                    </div>
+                    <div class="form-group half-width">
+                        <label asp-for="WidthValue" class="form-label">Width</label>
+                        <div class="input-with-unit">
+                            <input asp-for="WidthValue" type="number" step="0.01" class="form-control-custom" placeholder="0.00" />
+                            <select asp-for="WidthUnit" asp-items="Model.DimensionUnits" class="form-select-unit"></select>
+                        </div>
+                        <span asp-validation-for="WidthValue" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label asp-for="WeightValue" class="form-label">Weight</label>
+                        <div class="input-with-unit">
+                            <input asp-for="WeightValue" type="number" step="0.01" class="form-control-custom" placeholder="0.00" />
+                            <select asp-for="WeightUnit" asp-items="Model.WeightUnits" class="form-select-unit"></select>
+                        </div>
+                        <span asp-validation-for="WeightValue" class="text-danger"></span>
+                    </div>
+                    <div class="form-group half-width">
+                        <label asp-for="Color" class="form-label"></label>
+                        <input asp-for="Color" class="form-control-custom" />
+                        <span asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label asp-for="SelectedSupplierName" class="form-label">Supplier</label>
+                        <select asp-for="SelectedSupplierName" asp-items="Model.Suppliers" class="form-select-custom">
+                            @* "Select Supplier..." option is added in the controller *@
+                        </select>
+                        <span asp-validation-for="SelectedSupplierName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group half-width">
+                        <label asp-for="QuantityInStock" class="form-label">Quantity Stocks</label>
+                        <div class="input-with-icon">
+                            <input asp-for="QuantityInStock" type="number" class="form-control-custom" placeholder="0" />
+                            <i class="fas fa-cubes input-icon"></i>
+                        </div>
+                        <span asp-validation-for="QuantityInStock" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="form-column">
+                <div class="form-group">
+                    <label asp-for="ProductDescriptionText" class="form-label">Product Description</label>
+                    <textarea asp-for="ProductDescriptionText" class="form-control-custom" rows="4"></textarea>
+                    <span asp-validation-for="ProductDescriptionText" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImageFiles" class="form-label">Add Images</label>
+                    <div class="image-upload-container">
+                        <div class="image-upload-box">
+                            <input type="file" name="ImageFiles" id="imageFile_0" class="image-upload-input" accept="image/*" onchange="previewImage(this, 'preview1')" />
+                            <label class="image-upload-label" for="imageFile_0"> <i class="fas fa-plus"></i></label>
+                            <img id="preview1" class="image-preview" src="#" alt="Preview 1" style="display:none;" />
+                        </div>
+                        <div class="image-upload-box">
+                            <input type="file" name="ImageFiles" id="imageFile_1" class="image-upload-input" accept="image/*" onchange="previewImage(this, 'preview2')" />
+                            <label class="image-upload-label" for="imageFile_1"><i class="fas fa-plus"></i></label>
+                            <img id="preview2" class="image-preview" src="#" alt="Preview 2" style="display:none;" />
+                        </div>
+                        @* Add more <input type="file" name="ImageFiles" ... /> if you want more static upload slots *@
+                        @* Or use a single <input type="file" name="ImageFiles" multiple .../> to allow multiple selections *@
+                    </div>
+                    <span asp-validation-for="ImageFiles" class="text-danger"></span>
+                    <small class="form-text text-muted">You can select multiple files if the input field has the 'multiple' attribute, or use separate inputs as shown.</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label asp-for="WholesalePrice" class="form-label"></label>
+                        <div class="input-group-custom">
+                            @* For optional currency symbol styling *@
+                            <span class="input-group-text-custom">₱</span> @* Example for PHP Peso symbol, adjust if needed *@
+                            <input asp-for="WholesalePrice" type="number" step="0.01" class="form-control-custom" placeholder="0.00" />
+                        </div>
+                        <span asp-validation-for="WholesalePrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group half-width">
+                        <label asp-for="RetailPrice" class="form-label"></label>
+                        <div class="input-group-custom">
+                            <span class="input-group-text-custom">₱</span> @* Example for PHP Peso symbol *@
+                            <input asp-for="RetailPrice" type="number" step="0.01" class="form-control-custom" placeholder="0.00" />
+                        </div>
+                        <span asp-validation-for="RetailPrice" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Profit" class="form-label"></label>
+                    <div class="input-group-custom">
+                        <span class="input-group-text-custom">₱</span> @* Example for PHP Peso symbol *@
+                        <input asp-for="Profit" type="number" step="0.01" class="form-control-custom" placeholder="0.00 (auto-calculated or manual)" />
+                    </div>
+                    <span asp-validation-for="Profit" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a asp-action="Index" asp-controller="Products" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="btn btn-save">Save</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            const preview = document.getElementById(previewId);
+            // Assuming the label is the next sibling element of the input
+            const label = input.closest('.image-upload-box').querySelector('.image-upload-label');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    if(label) label.style.display = 'none'; // Hide the plus icon/label
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+                if(label) label.style.display = 'flex'; // Show the plus icon/label
+            }
+        }
+
+        // Auto-calculate profit
+        const wholesalePriceInput = document.querySelector('input[name="WholesalePrice"]');
+        const retailPriceInput = document.querySelector('input[name="RetailPrice"]');
+        const profitInput = document.querySelector('input[name="Profit"]');
+
+        function calculateProfit() {
+            const wholesale = parseFloat(wholesalePriceInput.value) || 0;
+            const retail = parseFloat(retailPriceInput.value) || 0;
+
+            if (wholesale > 0 && retail > 0 && retail >= wholesale) {
+                profitInput.value = (retail - wholesale).toFixed(2);
+                profitInput.placeholder = "0.00 (auto-calculated or manual)"; // Reset placeholder
+            } else {
+                profitInput.value = '';
+                // Optionally, provide feedback if retail < wholesale
+                if (retail > 0 && wholesale > 0 && retail < wholesale) {
+                     profitInput.placeholder = "Retail < Wholesale";
+                } else {
+                     profitInput.placeholder = "0.00 (auto-calculated or manual)";
+                }
+            }
+        }
+
+        if (wholesalePriceInput && retailPriceInput && profitInput) {
+            wholesalePriceInput.addEventListener('input', calculateProfit);
+            retailPriceInput.addEventListener('input', calculateProfit);
+        }
+
+        // Note for multiple file uploads with name="ImageFiles":
+        // ASP.NET Core MVC binds multiple files to a List<IFormFile> if they share the same 'name' attribute.
+        // So, <input type="file" name="ImageFiles" id="imageFile_0" ... />
+        // and <input type="file" name="ImageFiles" id="imageFile_1" ... /> is correct for the backend.
+        // The unique 'id' attributes are for the client-side preview script to target specific img tags.
+    </script>
+}

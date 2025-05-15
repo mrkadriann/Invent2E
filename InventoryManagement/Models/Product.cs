@@ -17,7 +17,7 @@ namespace InventoryManagement.Models
         [Column("supplier")]
         public string Supplier {  get; set; } // Pwede siyang gawing SupplierId when collaborating
         [Column("category_id")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
@@ -69,14 +69,16 @@ namespace InventoryManagement.Models
         [Required]
         [Column("width")]
         public string Width { get; set; }
+        [Column("weight")]
+        public string? Weight {  get; set; }
         [Required]
         [Column("color")]
         public string Color { get; set; }
-        [Column("wholesale_price")]
+        [Column("wholesale_price", TypeName ="Decimal(18,2)")]
         public decimal WholesalePrice { get; set; }
-        [Column("retail_price")]
+        [Column("retail_price", TypeName = "Decimal(18,2)")]
         public decimal RetailPrice { get; set; }
-        [Column("profit")]
+        [Column("profit", TypeName = "Decimal(18,2)")]
         public decimal Profit { get; set; }
 
         [ForeignKey("ItemId")]

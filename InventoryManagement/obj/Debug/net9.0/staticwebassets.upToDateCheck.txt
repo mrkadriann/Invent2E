@@ -30,6 +30,7 @@ C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\jquery\dist\
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\favicon.ico
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\css\add-product.css
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
@@ -60,6 +61,7 @@ C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\di
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\jquery\dist\jquery.min.map
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+wwwroot\css\add-product.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\images\logo.png

@@ -249,6 +249,7 @@ C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\Invento
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\scopedcss\bundle\InventoryManagement.styles.css
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\scopedcss\projectbundle\InventoryManagement.bundle.scp.css
+C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\gdwj84cwpc-gsc827ma18.gz
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\mx6a2ccs8i-zherrtommm.gz
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\fa0c915zel-61n19gt1b8.gz
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\2aq2e76qnl-lkla6qhjhf.gz
