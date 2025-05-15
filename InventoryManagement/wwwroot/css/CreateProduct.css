@@ -1,0 +1,160 @@
+﻿/* CreateProduct.css */
+/* Custom styles for product creation page */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.product-create-page {
+    padding: 20px;
+}
+
+.back-link {
+    color: #8F8F8F;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+    .back-link:hover {
+        color: #cccccc;
+    }
+
+.page-title {
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+.form-panel {
+    background-color: #1A262D;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    height: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-control {
+    background-color: #1A262D;
+    border: 1px solid #8F8F8F;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+    .form-control:focus {
+        border-color: #4d4d4d;
+        outline: none;
+    }
+.custom-select-wrapper {
+    position: relative;
+    display: flex;
+    padding: 0;
+}
+
+.unit-select {
+    width: 65px;
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #283943;
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 20px; /* Make room for the icon */
+    position: relative;
+    z-index: 1;
+}
+
+.select-icon-container {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* This makes the icon not interfere with clicks */
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+.select-icon-container i {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.image-upload-container {
+    display: flex;
+    gap: 10px;
+}
+
+.image-upload-box {
+    width: 70px;
+    height: 70px;
+    border: 1px dashed #555555;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.image-upload {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-placeholder {
+    color: #777777;
+    font-size: 24px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+}
+
+.btn-save {
+    background-color: #00e676;
+    border: none;
+    color: #000000;
+}
+
+.btn-cancel:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.btn-save:hover {
+    background-color: #00c853;
+}
