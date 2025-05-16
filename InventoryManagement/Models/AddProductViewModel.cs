@@ -36,7 +36,8 @@ namespace InventoryManagement.Models
         public string? Color { get; set; }
 
         [Display(Name = "Supplier")]
-        public string? SelectedSupplierName { get; set; }
+        [Required(ErrorMessage = "Please select a supplier.")]
+        public int SelectedSupplierId { get; set; }
         public List<SelectListItem>? Suppliers { get; set; }
 
         [Display(Name = "Quantity Stocks")]

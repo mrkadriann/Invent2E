@@ -60,9 +60,11 @@ C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\jquery-valid
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\jquery\dist\jquery.min.map
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\css\supplier.css
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
 wwwroot\css\add-product.css
 wwwroot\css\site.css
+wwwroot\css\supplier.css
 wwwroot\favicon.ico
 wwwroot\images\logo.png
 wwwroot\images\products\adidas-forum.jpg

@@ -13,33 +13,35 @@
         <header class="top-navbar">
             <div class="logo-container">
                 <a href="/" class="logo">
-                    <!-- Replace with your actual logo -->
                     <img src="~/images/logo.png" alt="invent2E" id="logo-img" />
                     <span>invent2E</span>
                 </a>
             </div>
             <nav class="top-menu">
-                <a href="/dashboard" class="nav-item">
+                @{
+                    var currentPageTitle = ViewData["Title"] as string ?? "";
+                }
+                <a href="/dashboard" class="nav-item @(currentPageTitle == "Dashboard" ? "active" : "")">
                     <i class="material-icons">dashboard</i>
                     <span>Dashboard</span>
                 </a>
-                <a href="/products" class="nav-item active">
+                <a href="/products" class="nav-item @(currentPageTitle == "Products" ? "active" : "")">
                     <i class="material-icons">inventory_2</i>
                     <span>Products</span>
                 </a>
-                <a href="/supplier" class="nav-item">
+                <a href="/Supplier" class="nav-item @(currentPageTitle == "Supplier" ? "active" : "")">
                     <i class="material-icons">local_shipping</i>
                     <span>Supplier</span>
                 </a>
-                <a href="/customer" class="nav-item">
+                <a href="/customer" class="nav-item @(currentPageTitle == "Customer" ? "active" : "")">
                     <i class="material-icons">people</i>
                     <span>Customer</span>
                 </a>
-                <a href="/orders" class="nav-item">
+                <a href="/orders" class="nav-item @(currentPageTitle == "Orders" ? "active" : "")">
                     <i class="material-icons">shopping_cart</i>
                     <span>Orders</span>
                 </a>
-                <a href="/reports" class="nav-item">
+                <a href="/reports" class="nav-item @(currentPageTitle == "Reports" ? "active" : "")">
                     <i class="material-icons">bar_chart</i>
                     <span>Reports</span>
                 </a>

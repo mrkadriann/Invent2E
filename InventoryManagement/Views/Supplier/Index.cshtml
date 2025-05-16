@@ -1,0 +1,152 @@
+﻿@model InventoryManagement.Models.SupplierViewModel
+@{
+	ViewData["Title"] = "Supplier";
+}
+<link rel="stylesheet" href="~/css/supplier.css" asp-append-version="true" />
+<div class="suppliers-container">
+    <div class="suppliers-actions-row">
+        <div class="suppliers-title">
+            <h1>Supplier</h1>
+        </div>
+        <div class="search-container" style="flex-grow: 1;">
+            <i class="material-icons search-icon">search</i>
+            <input type="text" class="form-control search-input" placeholder="Search Product here">
+        </div>
+        @* This button would typically link to an AddSupplier action *@
+        <a href="#" class="btn btn-success add-supplier-btn">
+
+            <i class="material-icons">add</i> Add Supplier
+        </a>
+    </div>
+
+    <div class="suppliers-content">
+        <form method="get" class="suppliers-sidebar">
+
+            <div class="filter-section">
+                @* Product Status in image, but for suppliers, it might be just search or general status filter below *@
+                <h3 style="text-transform: uppercase; color: var(--text-light); font-weight: 500; font-size: 14px; margin-bottom: 10px;">Product Status</h3>
+                <div class="search-container-sidebar">
+                    <i class="material-icons search-icon">search</i>
+                    <input type="text" name="searchSupplierInSidebar" class="form-control search-input-sidebar" placeholder="SEARCH SUPPLIER">
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>FILTER BY</h3>
+                <div class="select-container">
+                    <select name="filterByLocation" class="form-select">
+                        <option value="">Location</option>
+                        <option value="manila">Manila</option>
+                        <option value="cebu">Cebu</option>
+                        @* Add more location options here *@
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>FILTER</h3>
+                <div class="filter-status-buttons">
+                    <button type="button" class="btn-filter active">All</button>
+                    <button type="button" class="btn-filter">Active</button>
+                    <button type="button" class="btn-filter">Inactive</button>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>PAYABLES RANGE</h3>
+                <div class="price-inputs">
+                    <div class="input-group">
+                        <span class="input-group-text">₱</span>
+                        <input type="number" name="minPayables" class="form-control" placeholder="Minimum Price">
+                    </div>
+                    <div class="input-group mt-2">
+                        <span class="input-group-text">₱</span>
+                        <input type="number" name="maxPayables" class="form-control" placeholder="Maximum Price">
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>TOTAL ITEM RANGE</h3>
+                <div class="price-inputs">
+                    <div class="input-group">
+                        <input type="number" name="minItems" class="form-control form-control-standalone" placeholder="Minimum Price">
+                    </div>
+                    <div class="input-group mt-2">
+                        <input type="number" name="maxItems" class="form-control form-control-standalone" placeholder="Maximum Price">
+                    </div>
+                </div>
+            </div>
+
+            <button type="reset" class="btn btn-outline-secondary w-100 mt-3">
+                <i class="material-icons">refresh</i> Reset Filters
+            </button>
+        </form>
+
+        <div class="suppliers-main">
+            <div class="supplier-list">
+                @* START: Sample Supplier Card (Repeat this block for each supplier) *@
+                @for (int i = 0; i < 4; i++)
+                {
+                    string portalStatus = (i % 3 == 0) ? "Active" : ((i % 3 == 1) ? "Inactive" : "Active"); // cycle through Active/Inactive
+                    string avatarInitial = new string[] { "L", "S", "A", "M" }[i % 4];
+                    string supplierName = new string[] { "Lei Corp", " снабжение Supplies", "Active Goods Co.", "Metro Distributions" }[i % 4];
+                    string subName = new string[] { "Lei Huit", "Sergei Ivanov", "Alice Wonderland", "Mark Pogi" }[i % 4];
+                    string email = new string[] { "leihuit@gmail.com", "sergei@snab.снаб", "alice@active.co", "mark@metro.dist" }[i % 4];
+                    string phone = new string[] { "+63927-156-1328", "+79031234567", "+16505550100", "+639171234567" }[i % 4];
+                    string payables = new string[] { "₱1,000.00", "₱2,500.00", "₱850.00", "₱10,200.00" }[i % 4];
+                    string address = new string[] {
+                "Mezzanine Floor, Jb Crystal Building, Quirino Hwy, Novaliches, Quezon City",
+                "ул. Тверская, д. 10, Москва, Россия, 125009",
+                "123 Main Street, Anytown, CA 90210, USA",
+                "Unit 5, Tech Tower, BGC, Taguig City, Metro Manila"
+                    }[i % 4];
+                    string productCount = new string[] { "12 Product(s)", "35 Product(s)", "8 Product(s)", "150 Product(s)" }[i % 4];
+
+                    <div class="supplier-card">
+                        <div class="supplier-card-main-info">
+                            <div class="supplier-avatar" style="@(avatarInitial == "L" ? "background-color: #8b5cf6;" : (avatarInitial == "S" ? "background-color: #3b82f6;" : (avatarInitial == "A" ? "background-color: #10b981;" : "background-color: #f59e0b;")))">@avatarInitial</div>
+                            <div class="supplier-details">
+                                <h3 class="supplier-name">@supplierName</h3>
+                                <p class="supplier-subname">@subName</p>
+                            </div>
+                            <div class="supplier-contacts">
+                                <div class="contact-item">
+                                    <i class="material-icons">email</i>
+                                    <span>@email</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="material-icons">phone</i>
+                                    <span>@phone</span>
+                                </div>
+                            </div>
+                            <div class="supplier-payables">
+                                <span class="payables-label">PAYABLES</span>
+                                <span class="payables-amount">@payables</span>
+                            </div>
+                            <button class="more-options-btn-supplier">
+                                <i class="material-icons">more_horiz</i>
+                            </button>
+                        </div>
+                        <div class="supplier-card-secondary-info">
+                            <div class="supplier-address">
+                                <i class="material-icons">location_on</i>
+                                <span>@address</span>
+                            </div>
+                            <div class="supplier-product-count">
+                                <i class="material-icons">inventory_2</i>
+                                <span>@productCount</span>
+                            </div>
+                            <div class="supplier-portal-status">
+                                <span class="portal-status-label">PORTAL STATUS:</span>
+                                <span class="status-badge status-@(portalStatus.ToLower())">@portalStatus</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @* END: Sample Supplier Card *@
+
+            </div>
+        </div>
+    </div>
+</div>

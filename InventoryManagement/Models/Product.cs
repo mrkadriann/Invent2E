@@ -14,8 +14,10 @@ namespace InventoryManagement.Models
         [Column("item_name")]
         public string ItemName { get; set; }
         [Required]
-        [Column("supplier")]
-        public string Supplier {  get; set; } // Pwede siyang gawing SupplierId when collaborating
+        [Column("supplier_id")]
+        public int SupplierId {  get; set; } // Pwede siyang gawing SupplierId when collaborating
+        [ForeignKey("SupplierId")]
+        public virtual Supplier Supplier { get; set; }
         [Column("category_id")]
         public int? CategoryId { get; set; }
         [ForeignKey("CategoryId")]
@@ -77,7 +79,7 @@ namespace InventoryManagement.Models
         [Column("wholesale_price", TypeName ="Decimal(18,2)")]
         public decimal WholesalePrice { get; set; }
         [Column("retail_price", TypeName = "Decimal(18,2)")]
-        public decimal RetailPrice { get; set; }
+        public decimal? RetailPrice { get; set; }
         [Column("profit", TypeName = "Decimal(18,2)")]
         public decimal Profit { get; set; }
 

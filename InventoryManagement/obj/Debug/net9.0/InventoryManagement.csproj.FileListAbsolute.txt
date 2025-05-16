@@ -330,3 +330,4 @@ C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\refint\
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\InventoryManagement.pdb
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\InventoryManagement.genruntimeconfig.cache
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\ref\InventoryManagement.dll
+C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\zfxkfnnz67-b6ydabdu32.gz

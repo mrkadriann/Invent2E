@@ -15,6 +15,10 @@ namespace InventoryManagement.Data
         public DbSet<ImageData> Images { get; set; }
         public DbSet<Description> Descriptions { get; set; }
 
+        //Supplier
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<SupplierContact> SupplierContacts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -30,6 +34,13 @@ namespace InventoryManagement.Data
                 .WithOne(i => i.Product)
                 .HasForeignKey(i => i.ItemId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Supplier)
+                .WithMany(s => s.Products)
+                .HasForeignKey(p => p.SupplierId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.PrimaryImage)
@@ -53,6 +64,14 @@ namespace InventoryManagement.Data
             modelBuilder.Entity<Quantity>()
                 .Property(q => q.Qty)
                 .HasDefaultValue(0);
+
+            // Supplier
+            modelBuilder.Entity<Supplier>()
+                .HasMany(s => s.SupplierContacts)
+                .WithOne(sc => sc.Supplier)
+                .HasForeignKey(sc => sc.SupplierComapnyId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace InventoryManagement.Models // Or InventoryManagement.ViewModels
+﻿namespace InventoryManagement.Models
 {
     public class ProductForView
     {
@@ -16,10 +16,10 @@
         public List<ProductForView> Products { get; set; }
         public int TotalProducts { get; set; }
         public string SortBy { get; set; }
-        public string Category { get; set; } // This stores the selected category filter
+        public string Category { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
-        public string StockStatus { get; set; } // This stores the selected stock status filter
+        public string StockStatus { get; set; }
         public List<string> AvailableCategories { get; set; }
 
         public ProductViewModel()

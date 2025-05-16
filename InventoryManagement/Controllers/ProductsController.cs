@@ -43,12 +43,12 @@ namespace InventoryManagement.Controllers
 
             if (minPrice.HasValue)
             {
-                productsQuery = productsQuery.Where(p => p.Description != null && p.Description.RetailPrice >= minPrice.Value);
+                productsQuery = productsQuery.Where(p => p.Description != null && p.Description.RetailPrice.HasValue && p.Description.RetailPrice.Value >= minPrice.Value);
             }
 
             if (maxPrice.HasValue)
             {
-                productsQuery = productsQuery.Where(p => p.Description != null && p.Description.RetailPrice <= maxPrice.Value);
+                productsQuery = productsQuery.Where(p => p.Description != null && p.Description.RetailPrice.HasValue && p.Description.RetailPrice.Value <= maxPrice.Value);
             }
 
             if (!string.IsNullOrEmpty(stockStatusFilter) && stockStatusFilter.ToLower() != "all")
@@ -78,10 +78,10 @@ namespace InventoryManagement.Controllers
                     productsQuery = productsQuery.OrderByDescending(p => p.ItemName);
                     break;
                 case "priceasc":
-                    productsQuery = productsQuery.OrderBy(p => p.Description != null ? p.Description.RetailPrice : decimal.MaxValue);
+                    productsQuery = productsQuery.OrderBy(p => (p.Description != null && p.Description.RetailPrice.HasValue) ? p.Description.RetailPrice.Value : decimal.MaxValue);
                     break;
                 case "pricedesc":
-                    productsQuery = productsQuery.OrderByDescending(p => p.Description != null ? p.Description.RetailPrice : decimal.MinValue);
+                    productsQuery = productsQuery.OrderByDescending(p => (p.Description != null && p.Description.RetailPrice.HasValue) ? p.Description.RetailPrice.Value : decimal.MinValue);
                     break;
                 case "categoryasc":
                     productsQuery = productsQuery.OrderBy(p => p.Category != null ? p.Category.CategoryName : string.Empty)
@@ -118,7 +118,7 @@ namespace InventoryManagement.Controllers
                            $"/Image/GetImage/{p.PrimaryImage.ImageId}" : "/images/placeholder.jpg"
             }).ToList();
 
-            var viewModel = new ProductViewModel // Assuming ProductViewModel is defined elsewhere for the Index page
+            var viewModel = new ProductViewModel 
             {
                 Products = productViewModels,
                 TotalProducts = productViewModels.Count(),
@@ -151,15 +151,17 @@ namespace InventoryManagement.Controllers
                 .OrderBy(c => c.Text)
                 .ToListAsync(),
 
-                Suppliers = new List<SelectListItem>
+                Suppliers = await _context.Suppliers
+                .OrderBy(s => s.CompanyName)
+                .Select(s => new SelectListItem
                 {
-                    new SelectListItem { Value = "", Text = "Select Supplier..."},
-                    new SelectListItem { Value = "Supplier Alpha", Text = "Supplier Alpha"}, // Corrected
-                    new SelectListItem { Value = "Beta Components", Text = "Beta Components"},
-                    new SelectListItem { Value = "Gamma Wholesale", Text = "Gamma Wholesale"} // Corrected
-                }
+                    Value = s.SupplierId.ToString(),
+                    Text = s.CompanyName
+                })
+                .ToListAsync()
             };
             viewModel.ProductCategories.Insert(0, new SelectListItem { Value = "", Text = "Select Category..." });
+            viewModel.Suppliers.Insert(0, new SelectListItem { Value = "", Text = "Select Supplier..." });
             return View(viewModel);
         }
 
@@ -177,7 +179,8 @@ namespace InventoryManagement.Controllers
             var product = new Product
             {
                 ItemName = model.ItemName,
-                Supplier = model.SelectedSupplierName ?? "N/A",
+                //Supplier = model.SelectedSupplierName ?? "N/A",
+                SupplierId = model.SelectedSupplierId,
                 CategoryId = model.SelectedProductCategoryId,
                 AllImages = new List<ImageData>() // Initialize collection
             };
@@ -281,6 +284,16 @@ namespace InventoryManagement.Controllers
                                             .OrderBy(c => c.Text)
                                             .ToListAsync();
             model.ProductCategories.Insert(0, new SelectListItem { Value = "", Text = "Select Category..." });
+
+            model.Suppliers = await _context.Suppliers
+                                    .OrderBy(s => s.CompanyName)
+                                    .Select(s => new SelectListItem
+                                    {
+                                        Value = s.SupplierId.ToString(),
+                                        Text = s.CompanyName
+                                    })
+                                    .ToListAsync();
+            model.Suppliers.Insert(0, new SelectListItem { Value = "", Text = "Select Supplier...." });
 
             model.Suppliers = new List<SelectListItem>
             {

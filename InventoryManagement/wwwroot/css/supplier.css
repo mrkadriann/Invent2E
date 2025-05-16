@@ -1,0 +1,334 @@
+﻿.suppliers-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Or calc(100vh - heightOfNavbar) if navbar is fixed */
+    padding: 0; /* Assuming parent content-area has padding */
+}
+
+.suppliers-actions-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Matches image */
+    gap: 20px; /* Matches image */
+}
+
+.suppliers-title h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+.suppliers-actions-row .search-container {
+    min-width: 300px; /* Give search bar ample space */
+}
+
+.add-supplier-btn {
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+
+.suppliers-content {
+    display: flex;
+    flex: 1; /* Take remaining vertical space */
+    gap: 20px;
+    /* If the page itself should not scroll, but sidebar/main scroll independently: */
+    max-height: calc(100vh - 64px - 20px - (28px + 20px + 20px) - 20px); /* Approx: navbar - padding_top - (h1 + action_row_margin_bottom + action_row_padding) - padding_bottom */
+    /* A simpler approach if suppliers-container is already within a padded content-area */
+    /* max-height: calc(100% - (height_of_suppliers_actions_row_including_margin)); */
+}
+
+.suppliers-sidebar {
+    width: 260px; /* Matches image width */
+    background-color: var(--card-bg); /* #1e293b */
+    border-radius: 8px;
+    padding: 20px;
+    flex-shrink: 0;
+    height: fit-content; /* Adjusts to content */
+    max-height: 100%; /* Ensure it doesn't overflow .suppliers-content */
+    overflow-y: auto; /* Scroll if content is too tall */
+}
+
+    .suppliers-sidebar .filter-section h3 {
+        font-size: 12px;
+        color: var(--text-gray); /* #8f8f8f */
+        margin-bottom: 10px;
+        font-weight: 500; /* Semibold */
+        text-transform: uppercase;
+    }
+
+.search-container-sidebar {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-input-sidebar {
+    padding-left: 38px; /* Space for icon */
+    background-color: var(--dark-bg); /* #101827 */
+    border: 1px solid var(--border-color); /* #334155 */
+    border-radius: 4px;
+    color: var(--text-light);
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+}
+
+    .search-input-sidebar::placeholder {
+        color: var(--text-gray);
+        text-transform: uppercase;
+    }
+
+.search-container-sidebar .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted); /* #9ca3af */
+    font-size: 20px;
+}
+
+.filter-status-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 8px;
+}
+
+.btn-filter {
+    padding: 8px 5px; /* Adjusted padding */
+    font-size: 13px;
+    background-color: var(--dark-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+    .btn-filter:hover {
+        background-color: var(--nav-hover-bg); /* #283548 */
+        color: var(--text-light);
+    }
+
+    .btn-filter.active {
+        background-color: var(--primary-color); /* #00c77b */
+        color: var(--text-light); /* White text on active */
+        border-color: var(--primary-color);
+    }
+
+/* For inputs in "TOTAL ITEM RANGE" that don't have a currency symbol */
+.form-control-standalone {
+    border-radius: 4px !important; /* Override default input-group styling */
+}
+
+.suppliers-sidebar .form-control::placeholder {
+    color: var(--text-gray); /* #8f8f8f */
+    font-size: 13px;
+}
+
+
+.suppliers-main {
+    flex: 1;
+    overflow-y: auto; /* Allows scrolling of supplier list */
+    max-height: 100%; /* Ensure it doesn't overflow .suppliers-content */
+    padding-right: 5px; /* Small space for scrollbar to not touch cards */
+}
+
+.supplier-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Space between supplier cards */
+}
+
+.supplier-card {
+    background-color: var(--card-bg); /* #1e293b */
+    border-radius: 8px;
+    padding: 16px 20px;
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Space between main and secondary info sections */
+    border: 1px solid var(--border-color); /* #334155 */
+}
+
+.supplier-card-main-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.supplier-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* background-color: #8b5cf6; Example purple, can be dynamic */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    flex-shrink: 0;
+    text-transform: uppercase;
+}
+
+.supplier-details {
+    flex: 1; /* Takes available space */
+    min-width: 150px;
+}
+
+.supplier-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 2px;
+    color: var(--text-light);
+}
+
+.supplier-subname {
+    font-size: 13px;
+    color: var(--text-muted); /* #9ca3af */
+    margin: 0;
+}
+
+.supplier-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--text-muted);
+    min-width: 200px; /* Ensure enough space */
+    margin-left: auto; /* Push it towards payables if space allows */
+    margin-right: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .contact-item i.material-icons {
+        font-size: 16px;
+        color: var(--text-gray);
+    }
+
+.supplier-payables {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    min-width: 100px;
+    margin-left: auto; /* Pushes to the right before more-options */
+}
+
+.payables-label {
+    font-size: 11px;
+    color: var(--text-gray);
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.payables-amount {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.more-options-btn-supplier {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0 5px;
+    margin-left: 10px; /* Space from payables */
+    align-self: flex-start; /* Align to top of the flex row */
+}
+
+    .more-options-btn-supplier i.material-icons {
+        font-size: 24px;
+    }
+
+    .more-options-btn-supplier:hover {
+        color: var(--text-light);
+    }
+
+.supplier-card-secondary-info {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Space between items */
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+    .supplier-card-secondary-info i.material-icons {
+        font-size: 18px;
+        color: var(--text-gray);
+        margin-right: 6px; /* Space between icon and text */
+    }
+
+.supplier-address,
+.supplier-product-count {
+    display: flex;
+    align-items: center;
+}
+
+.supplier-address {
+    flex: 2; /* Allow address to take more space */
+    min-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    .supplier-address span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+.supplier-product-count {
+    flex: 1;
+    min-width: 120px; /* Give some fixed space */
+}
+
+.supplier-portal-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto; /* Pushes status to the far right */
+}
+
+.portal-status-label {
+    font-size: 11px;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.status-badge {
+    padding: 3px 10px;
+    border-radius: 12px; /* Pill shape */
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize; /* 'Active', 'Inactive' */
+}
+
+    .status-badge.status-active {
+        background-color: rgba(139, 92, 246, 0.15); /* Light purple background (hex: #8b5cf6) */
+        color: #a78bfa; /* Brighter Purple text to match image */
+    }
+
+    .status-badge.status-inactive {
+        background-color: rgba(107, 114, 128, 0.15); /* Light gray background (var --text-muted with alpha) */
+        color: #9ca3af; /* Gray text (var --text-muted) */
+    }
+
+/* Ensure material icons are vertically aligned with text */
+.material-icons {
+    vertical-align: middle;
+}

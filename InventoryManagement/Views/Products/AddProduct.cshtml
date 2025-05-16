@@ -72,11 +72,10 @@
 
                 <div class="form-row">
                     <div class="form-group half-width">
-                        <label asp-for="SelectedSupplierName" class="form-label">Supplier</label>
-                        <select asp-for="SelectedSupplierName" asp-items="Model.Suppliers" class="form-select-custom">
-                            @* "Select Supplier..." option is added in the controller *@
+                        <label asp-for="SelectedSupplierId" class="control-label"></label>
+                        <select asp-for="SelectedSupplierId" class="form-control" asp-items="Model.Suppliers">
                         </select>
-                        <span asp-validation-for="SelectedSupplierName" class="text-danger"></span>
+                        <span asp-validation-for="SelectedSupplierId" class="text-danger"></span>
                     </div>
                     <div class="form-group half-width">
                         <label asp-for="QuantityInStock" class="form-label">Quantity Stocks</label>
@@ -209,10 +208,5 @@
             retailPriceInput.addEventListener('input', calculateProfit);
         }
 
-        // Note for multiple file uploads with name="ImageFiles":
-        // ASP.NET Core MVC binds multiple files to a List<IFormFile> if they share the same 'name' attribute.
-        // So, <input type="file" name="ImageFiles" id="imageFile_0" ... />
-        // and <input type="file" name="ImageFiles" id="imageFile_1" ... /> is correct for the backend.
-        // The unique 'id' attributes are for the client-side preview script to target specific img tags.
     </script>
 }
