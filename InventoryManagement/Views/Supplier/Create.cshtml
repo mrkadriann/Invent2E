@@ -1,0 +1,195 @@
+﻿@model InventoryManagement.Models.AddSupplierViewModel
+
+@{
+    ViewData["Title"] = "Add New Supplier";
+}
+
+<link rel="stylesheet" href="~/css/add-supplier.css" asp-append-version="true" />
+@* Optional: Link to Font Awesome if you want to use an icon for the back button *@
+@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" /> *@
+
+
+<div class="add-supplier-container">
+    <div class="page-header">
+        <a asp-action="Index" class="back-link">
+            <i class="fas fa-arrow-left"></i> @* Font Awesome icon, or use an SVG or text arrow ← *@
+            <span>Back To supplier list</span>
+        </a>
+        <h1 class="page-title-supplier">Supplier Info</h1>
+    </div>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="add-supplier-form-layout">
+            @* LEFT COLUMN CARD *@
+            <div class="form-section-card">
+                <div class="profile-image-area">
+                    <div class="profile-image-preview-container">
+                        <img id="profileImagePreview" src="#" alt="Profile Preview" />
+                        <label for="profileImageUpload" class="profile-image-upload-button profile-image-placeholder" title="Upload profile image">
+                            +
+                        </label>
+                    </div>
+                    <input asp-for="ProfileImageFile" type="file" id="profileImageUpload" accept="image/*" />
+                    @* Optional text label if you prefer it over just the + button
+                    <label for="profileImageUpload" class="custom-file-label-supplier">Upload Image</label> *@
+                    <span asp-validation-for="ProfileImageFile" class="text-danger"></span>
+                </div>
+
+                <div class="form-group-supplier">
+                    <label asp-for="CompanyName"></label>
+                    <input asp-for="CompanyName" class="form-control" placeholder="Enter company name" />
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                </div>
+
+                <h4>Contact Persons</h4>
+                <div class="form-group-supplier">
+                    <label asp-for="PersonName">Name</label> @* Main contact person name is used here as per screenshot logic *@
+                    <input asp-for="PersonName" class="form-control" placeholder="Enter name" />
+                    <span asp-validation-for="PersonName" class="text-danger"></span>
+                </div>
+                <div class="form-row-supplier">
+                    <div class="form-group-supplier">
+                        <label asp-for="Department"></label>
+                        <input asp-for="Department" class="form-control" placeholder="e.g. Sales" />
+                        <span asp-validation-for="Department" class="text-danger"></span>
+                    </div>
+                    <div class="form-group-supplier">
+                        <label asp-for="PhoneNumber">Phone number</label>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group-supplier">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="Enter email address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+
+                <h4>Other contact person</h4>
+                <div class="form-group-supplier">
+                    <label asp-for="PrimaryContactName">Name</label>
+                    <input asp-for="PrimaryContactName" class="form-control" placeholder="Enter name" />
+                    <span asp-validation-for="PrimaryContactName" class="text-danger"></span>
+                </div>
+                <div class="form-row-supplier">
+                    <div class="form-group-supplier">
+                        <label asp-for="PrimaryContactEmail">Email</label>
+                        <input asp-for="PrimaryContactEmail" type="email" class="form-control" placeholder="Enter email" />
+                        <span asp-validation-for="PrimaryContactEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group-supplier">
+                        <label asp-for="PrimaryContactPhone">Phone number</label>
+                        <input asp-for="PrimaryContactPhone" class="form-control" placeholder="Enter phone" />
+                        <span asp-validation-for="PrimaryContactPhone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group-supplier">
+                    @* Address seems to belong to main supplier info, moved here *@
+                    <label asp-for="Address"></label>
+                    <textarea asp-for="Address" class="form-control" placeholder="Enter full address" rows="3"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+
+            @* RIGHT COLUMN CARD *@
+            <div class="form-section-card">
+                <h4>Purchasing Info</h4>
+                <div class="form-group-supplier">
+                    <label asp-for="Currency"></label>
+                    @* Consider making this a select list if you have predefined currencies *@
+                    <select asp-for="Currency" class="form-control">
+                        <option value="">Select Currency...</option>
+                        <option value="PHP">PHP - Philippine Peso</option>
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                    </select>
+                    <span asp-validation-for="Currency" class="text-danger"></span>
+                </div>
+                <div class="form-group-supplier">
+                    <label asp-for="PaymentMethod"></label>
+                    @* Consider making this a select list *@
+                    <select asp-for="PaymentMethod" class="form-control">
+                        <option value="">Select Payment Method...</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="GCash">GCash</option>
+                        <option value="COD">Cash on Delivery</option>
+                    </select>
+                    <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                </div>
+
+                @* The screenshot shows an "Email" field under Purchasing Info - not sure if this is supplier's main email or a specific purchasing email. I'll assume it's a general field. Your model has a main Email, so I'm not adding a new one here unless you clarify. If it's an address for POs for example, then it's fine.*@
+                @*
+                <div class="form-group-supplier">
+                    <label>Email (Purchasing)</label> <!- If different from main email ->
+                    <input type="email" class="form-control" placeholder="Enter purchasing email" />
+                </div>
+                *@
+
+                <div class="form-group-supplier">
+                    <label asp-for="Courier"></label>
+                    @* Consider making this a select list *@
+                    <select asp-for="Courier" class="form-control">
+                        <option value="">Select Courier...</option>
+                        <option value="J&T Express">J&T Express</option>
+                        <option value="LBC">LBC</option>
+                        <option value="Ninja Van">Ninja Van</option>
+                        <option value="DHL">DHL</option>
+                    </select>
+                    <span asp-validation-for="Courier" class="text-danger"></span>
+                </div>
+
+                <div class="form-group-supplier">
+                    <label asp-for="PortalStatus">Portal Status</label>
+                    <select asp-for="PortalStatus" class="form-control">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                    <span asp-validation-for="PortalStatus" class="text-danger"></span>
+                </div>
+
+                <div class="form-actions-supplier">
+                    <a asp-action="Index" class="btn-supplier btn-supplier-cancel">Cancel</a>
+                    <input type="submit" value="Save" class="btn-supplier btn-supplier-save" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $('#profileImageUpload').on('change', function (event) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#profileImagePreview').attr('src', e.target.result).show();
+                    $('.profile-image-placeholder').hide(); // Hide initial/icon
+                }
+                if (event.target.files.length > 0) {
+                    reader.readAsDataURL(event.target.files[0]);
+                } else {
+                     $('#profileImagePreview').hide();
+                     $('.profile-image-placeholder').show(); // Show initial/icon if no file
+                }
+            });
+
+            // Optional: Update placeholder initial based on Company Name input
+            $('#CompanyName').on('input', function() {
+                var companyName = $(this).val();
+                var initial = companyName ? companyName.trim().substring(0, 1).toUpperCase() : 'L';
+                if ($('#profileImagePreview').attr('src') === '#' || !$('#profileImagePreview').is(':visible')) {
+                    $('.profile-image-placeholder').text(initial).show();
+                }
+            });
+        });
+    </script>
+}

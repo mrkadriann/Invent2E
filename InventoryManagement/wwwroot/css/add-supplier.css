@@ -1,0 +1,253 @@
+﻿/* wwwroot/css/add-supplier.css */
+
+:root { /* You can remove this if these variables are globally defined in another linked CSS file */
+    --primary-color: #00c77b; /* Main green from your theme */
+    --dark-bg: #141E22; /* Overall page background */
+    --card-bg: #1A262D; /* Background for form sections/cards */
+    --input-bg: #0F171A; /* Slightly darker input background for contrast */
+    --text-light: #ffffff;
+    --text-gray: #8f8f8f; /* For placeholders */
+    --text-muted: #9ca3af; /* For less important text */
+    --border-color: #2E414D; /* Borders for inputs and cards */
+    --danger: #ef4444; /* For validation messages */
+}
+
+body { /* Assuming this is handled by your global styles */
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    font-family: 'Poppins', sans-serif;
+}
+
+.add-supplier-container {
+    max-width: 1100px; /* Adjust based on screenshot */
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.page-header {
+    margin-bottom: 25px;
+    display: flex; /* For back button and title */
+    align-items: center;
+}
+
+.back-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Space between back link and title */
+}
+
+    .back-link i { /* Assuming you use an icon for back arrow */
+        margin-right: 8px;
+    }
+
+    .back-link:hover {
+        color: var(--primary-color);
+    }
+
+.page-title-supplier {
+    font-size: 24px; /* Adjust as per screenshot */
+    font-weight: 600;
+    color: var(--text-light);
+    text-align: center; /* Center title */
+    flex-grow: 1; /* Allow title to take space and center */
+    /* Remove margin-left if back-link is present, or adjust for better centering */
+}
+
+
+.add-supplier-form-layout {
+    display: flex;
+    gap: 25px; /* Space between the two main columns/cards */
+}
+
+.form-section-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    flex: 1; /* Each card takes up half the space */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between elements inside the card */
+}
+
+    .form-section-card h4 { /* For titles like "Contact Persons", "Purchasing Info" */
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-light);
+        margin-bottom: 5px; /* Reduced margin from default h4 */
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+
+.form-group-supplier {
+    margin-bottom: 15px; /* Space below each form group */
+}
+
+    .form-group-supplier label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        text-transform: uppercase; /* As seen in screenshot for labels */
+    }
+
+    .form-group-supplier .form-control, /* Targeting Bootstrap's default .form-control */
+    .form-group-supplier .custom-file-input { /* For file input */
+        background-color: var(--input-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 10px 12px;
+        color: var(--text-light);
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+        .form-group-supplier .form-control::placeholder {
+            color: var(--text-gray);
+        }
+
+        .form-group-supplier .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 199, 123, 0.2); /* Green glow */
+            background-color: var(--input-bg); /* Keep bg on focus */
+        }
+
+    /* Specific for select (dropdowns) if you use them - adapt from your other CSS */
+    .form-group-supplier select.form-control {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%238f8f8f' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 12px;
+    }
+
+
+.form-row-supplier { /* For arranging multiple fields in a single row within a section */
+    display: flex;
+    gap: 15px; /* Space between items in a row */
+}
+
+    .form-row-supplier .form-group-supplier {
+        flex: 1; /* Each item in the row takes equal width */
+        margin-bottom: 0; /* Remove bottom margin if it's handled by the row's parent gap */
+    }
+
+/* Profile Image Upload Area */
+.profile-image-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the image upload */
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.profile-image-preview-container {
+    width: 80px; /* Size of the circle */
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--input-bg); /* Placeholder bg */
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#profileImagePreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* Hidden by default, shown when image is selected */
+}
+
+
+.profile-image-upload-button { /* The small '+' button */
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--card-bg); /* To make it pop from the circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+}
+
+#profileImageUpload { /* The actual file input, hidden */
+    display: none;
+}
+
+.custom-file-label-supplier { /* If you want to show a text "Upload Image" below */
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    text-align: center;
+}
+
+    .custom-file-label-supplier:hover {
+        text-decoration: underline;
+    }
+
+
+/* Form Actions (Save, Cancel buttons) */
+.form-actions-supplier {
+    display: flex;
+    justify-content: flex-end; /* Align to the right side of its container (the right card) */
+    gap: 15px;
+    margin-top: 20px; /* Space above buttons */
+    padding-top: 20px; /* Space above buttons, if needed for visual separation */
+    /* border-top: 1px solid var(--border-color); /* Optional separator line */
+}
+
+.btn-supplier {
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    min-width: 100px; /* Ensure buttons have some minimum width */
+    text-align: center;
+}
+
+.btn-supplier-cancel {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    text-decoration: none;
+}
+
+    .btn-supplier-cancel:hover {
+        border-color: var(--text-gray);
+        color: var(--text-light);
+    }
+
+.btn-supplier-save {
+    background-color: var(--primary-color);
+    color: var(--dark-bg); /* Or #fff if better contrast */
+}
+
+    .btn-supplier-save:hover {
+        background-color: #00a365; /* Darker shade of primary */
+    }
+
+.text-danger { /* Bootstrap's default validation message color */
+    color: var(--danger) !important;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}

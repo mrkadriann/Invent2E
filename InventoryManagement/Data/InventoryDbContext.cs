@@ -69,9 +69,13 @@ namespace InventoryManagement.Data
             modelBuilder.Entity<Supplier>()
                 .HasMany(s => s.SupplierContacts)
                 .WithOne(sc => sc.Supplier)
-                .HasForeignKey(sc => sc.SupplierComapnyId)
+                .HasForeignKey(sc => sc.SupplierCompanyId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Supplier>()
+                .HasIndex(s => s.CompanyName)
+                .IsUnique();
         }
     }
 }

@@ -130,7 +130,6 @@
 
 .suppliers-main {
     flex: 1;
-    overflow-y: auto; /* Allows scrolling of supplier list */
     max-height: 100%; /* Ensure it doesn't overflow .suppliers-content */
     padding-right: 5px; /* Small space for scrollbar to not touch cards */
 }
@@ -331,4 +330,41 @@
 /* Ensure material icons are vertically aligned with text */
 .material-icons {
     vertical-align: middle;
+}
+
+.supplier-avatar-image-container {
+    width: 50px; /* Or your desired size */
+    height: 50px; /* Or your desired size */
+    border-radius: 50%; /* Makes it circular */
+    overflow: hidden; /* Clips the image to the circle */
+    margin-right: 15px;
+    flex-shrink: 0; /* Prevent shrinking if container is flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0; /* Fallback background */
+}
+
+.supplier-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Scales the image to cover the container, cropping if necessary */
+}
+
+.supplier-avatar-initials { /* Style for the fallback initials div */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em; /* Adjust as needed */
+    font-weight: bold;
+    color: white;
+    border-radius: 50%; /* Keep it circular */
+}
+
+/* Optional: if you use a static placeholder image */
+.supplier-profile-img.placeholder {
+    object-fit: contain; /* Or 'scale-down' if you don't want it cropped */
+    background-color: #f0f0f0;
 }

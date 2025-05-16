@@ -206,10 +206,9 @@ namespace InventoryManagement.Controllers
             };
             product.Quantity = quantity; // Assign to navigation property (lowercase 'product')
 
-            // Handle Image Uploads (convert to byte[])
             if (model.ImageFiles != null && model.ImageFiles.Count > 0)
             {
-                byte imageOrderCounter = 1; // Corrected '1l' to '1'
+                byte imageOrderCounter = 1; 
                 foreach (var formFile in model.ImageFiles)
                 {
                     if (formFile.Length > 0) // Corrected 'FormFile.lenght' to 'formFile.Length'
@@ -222,7 +221,6 @@ namespace InventoryManagement.Controllers
                                 Product = product, // Link back to the product
                                 ImageDt = memoryStream.ToArray(),
                                 ImageOrder = imageOrderCounter++
-                                // ItemId will be set by EF Core due to Product navigation property
                             };
                             product.AllImages.Add(imageData);
                         }
@@ -230,16 +228,14 @@ namespace InventoryManagement.Controllers
                 }
             }
 
-            _context.Products.Add(product); // Add product (and its related entities) to the context
+            _context.Products.Add(product); 
 
             try
             {
-                await _context.SaveChangesAsync(); // Save all changes to the database
+                await _context.SaveChangesAsync();
 
-                // After saving product and its images, if there are images, set the PrimaryImageId
                 if (product.AllImages.Any())
                 {
-                    // Select the first image (ordered by ImageOrder, then by ImageId as a tie-breaker) as primary
                     var primaryImg = product.AllImages
                                             .OrderBy(img => img.ImageOrder ?? byte.MaxValue)
                                             .ThenBy(img => img.ImageId)
@@ -247,8 +243,8 @@ namespace InventoryManagement.Controllers
                     if (primaryImg != null)
                     {
                         product.PrimaryImageId = primaryImg.ImageId;
-                        _context.Products.Update(product); // Mark product as modified to save PrimaryImageId
-                        await _context.SaveChangesAsync(); // Save the PrimaryImageId update
+                        _context.Products.Update(product);
+                        await _context.SaveChangesAsync(); 
                     }
                 }
 
@@ -257,8 +253,6 @@ namespace InventoryManagement.Controllers
             }
             catch (DbUpdateException ex)
             {
-                // Log the error (ex.Message or ex.InnerException.Message for more details)
-                // For production, use a proper logging framework
                 Console.WriteLine($"Error saving product: {ex.Message}");
                 if (ex.InnerException != null)
                 {

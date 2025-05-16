@@ -1,4 +1,5 @@
 using InventoryManagement.Data; // For InventoryDbContext
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 // Program.cs
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
 // Retrieve the connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

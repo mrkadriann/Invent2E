@@ -64,9 +64,9 @@ namespace InventoryManagement.Models
         [Column("phone_number")]
         public string PhoneNumber { get; set; }
         [Column("supplier_company_id")]
-        public int SupplierComapnyId {  get; set; }
+        public int SupplierCompanyId {  get; set; }
 
-        [ForeignKey("SupplierComapnyId")]
+        [ForeignKey("SupplierCompanyId")]
         public virtual Supplier Supplier { get; set; }
     }
 }
