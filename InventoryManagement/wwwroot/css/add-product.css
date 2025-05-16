@@ -2,8 +2,8 @@
 
 :root { /* Re-declare if not globally available or for specificity, or import from main CSS */
     --primary-color: #00c77b;
-    --dark-bg: #101827;
-    --card-bg: #1e293b; /* Used for form sections */
+    --dark-bg: #141E22;
+    --card-bg: #1A262D; /* Used for form sections */
     --text-light: #ffffff;
     --text-gray: #8f8f8f;
     --text-muted: #9ca3af;
@@ -71,7 +71,7 @@
 
 .form-label {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--text-light);
     font-weight: 500;
 }
 
@@ -227,7 +227,7 @@ select.form-select-currency {
 }
 
 .btn {
-    padding: 10px 25px;
+    padding: 10px 35px;
     border-radius: 4px;
     font-size: 14px;
     font-weight: 500;
@@ -238,8 +238,8 @@ select.form-select-currency {
 
 .btn-cancel {
     background-color: transparent;
-    color: var(--text-muted);
-    border: 1px solid var(--border-color);
+    color: #00DF72;
+    border: .5px solid #00DF72;
 }
 
     .btn-cancel:hover {
@@ -248,8 +248,9 @@ select.form-select-currency {
     }
 
 .btn-save {
-    background-color: var(--primary-color);
+    background-color: #00DF72;
     color: var(--dark-bg); /* Or white if contrast is better */
+    padding: 0px 40px;
 }
 
     .btn-save:hover {

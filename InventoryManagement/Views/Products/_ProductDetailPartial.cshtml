@@ -1,0 +1,297 @@
+﻿@model InventoryManagement.Models.ProductDetailViewModel
+<div class="product-detail-header">
+    <div class="product-detail-actions">
+        <div class="left-actions">
+            <button type="button" class="btn-icon" data-bs-dismiss="modal" aria-label="Back">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+
+        <div class="right-actions">
+            <div class="action-buttons">
+                <button type="button" class="btn btn-outline-success btn-sm" onclick="editProduct(@Model.Id)">
+                    Edit
+                </button>
+                <button type="button" class="btn btn-outline-success btn-sm" onclick="duplicateProduct(@Model.Id)">
+                    Duplicate
+                </button>
+            </div>
+            <div class="action-divider"></div>
+            <button type="button" class="btn-icon">
+                <i class="fas fa-ellipsis-h"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="product-detail-content">
+    <div class="product-title-area">
+        <h2 id="productName">@Model.Name</h2>
+        <div class="title-description">
+            <p class="product-meta">Product ID: @Model.ProductId</p>
+            <span class="dot-separator"></span>
+            <p class="product-meta">@Model.Category</p>
+        </div>
+    </div>
+
+    <!-- Navigation buttons (You’ll handle functionality yourself) -->
+    <div class="product-nav-buttons">
+        <button class="nav-btn">&lt;</button>
+        <button class="nav-btn">&gt;</button>
+    </div>
+</div>
+<div class="product-gallery-content">
+    <div class="product-gallery">
+        <div class="main-image-container">
+            <img id="mainProductImage" src="@Model.ImageUrl" alt="@Model.Name" />
+        </div>
+
+        <div class="thumbnail-gallery">
+            <!-- Primary image -->
+            <div class="thumbnail active" onclick="changeMainImage('@Model.ImageUrl')">
+                <img src="@Model.ImageUrl" alt="@Model.Name thumbnail" />
+            </div>
+
+            @if (Model.AdditionalImages != null && Model.AdditionalImages.Any())
+            {
+                foreach (var imgUrl in Model.AdditionalImages)
+                {
+                    <div class="thumbnail" onclick="changeMainImage('@imgUrl')">
+                        <img src="@imgUrl" alt="@Model.Name thumbnail" />
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="stock-panel">
+        <h3 class="stock-title">Stock</h3>
+        <div class="stock-box">
+            <p class="stock-label">QUANTITY ON HAND</p>
+            <div class="stock-amount-wrapper">
+                <div class="stock-amount">
+                    @Model.Stock
+                    <span class="stock-status">@Model.StockStatus</span>
+                </div>
+            </div>
+            <button class="adjust-stock-button">Adjust Stocks</button>
+        </div>
+    </div>
+</div>
+<div class="product-meta-section">
+    <div class="product-info-group">
+        <h3>Product Information</h3>
+        <div class="info-grid">
+            <div class="info-row">
+                <div class="info-label">CATEGORY:</div>
+                <div class="info-value">@Model.Category</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">PRODUCT ID:</div>
+                <div class="info-value">@Model.ProductId</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">HEIGHT:</div>
+                <div class="info-value">@Model.Height</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">WIDTH:</div>
+                <div class="info-value">@Model.Width</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">WEIGHT:</div>
+                <div class="info-value">@Model.Weight</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">COLOR:</div>
+                <div class="info-value">@Model.Color</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">DESCRIPTION:</div>
+                <div class="info-value">@Model.Description</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pricing-info-group">
+        <div class="info-row">
+            <div class="info-label">PRICE:</div>
+            <div class="info-value">₱@Model.Price.ToString("N0")</div>
+        </div>
+        <div class="info-row">
+            <div class="info-label">SUPPLIER:</div>
+            <div class="info-value">@Model.Supplier</div>
+        </div>
+
+        <div class="sales-section">
+            <h3>Sales Information</h3>
+            <div class="info-row">
+                <div class="info-label">Wholesale Price:</div>
+                <div class="info-value">₱@Model.WholesalePrice.ToString("N0")</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Retail Price:</div>
+                <div class="info-value" style="border-bottom: 1px solid white;">₱@Model.RetailPrice.ToString("N0")</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Profit:</div>
+                <div class="info-value">₱@Model.Profit.ToString("N0")</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeMainImage(imageUrl) {
+        // Change the main image
+        document.getElementById('mainProductImage').src = imageUrl;
+
+        // Update active thumbnail
+        document.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.classList.remove('active');
+            if (thumb.querySelector('img').src === imageUrl) {
+                thumb.classList.add('active');
+            }
+        });
+    }
+</script>
+
+@*             @model InventoryManagement.Models.ProductDetailViewModel *@
+@* <div class="product-detail-header"> *@
+@*     <div class="product-title-area"> *@
+@*         <h2 id="productName">@Model.Name</h2> *@
+@*         <p>Product ID: @Model.ProductId</p> *@
+@*         <p>@Model.Category</p> *@
+@*     </div> *@
+@*     <div class="product-detail-actions"> *@
+@*         <div class="product-navigation"> *@
+@*             <div class="nav-arrow" id="prevProduct"> *@
+@*                 <i class="bi bi-chevron-left"></i> *@
+@*             </div> *@
+@*             <div class="nav-arrow" id="nextProduct"> *@
+@*                 <i class="bi bi-chevron-right"></i> *@
+@*             </div> *@
+@*         </div> *@
+@*         <button type="button" class="btn btn-outline-secondary btn-sm" onclick="editProduct(@Model.Id)"> *@
+@*             Edit *@
+@*         </button> *@
+@*         <button type="button" class="btn btn-outline-secondary btn-sm" onclick="duplicateProduct(@Model.Id)"> *@
+@*             Duplicate *@
+@*         </button> *@
+@*         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
+@*     </div> *@
+@* </div> *@
+@* <div class="product-detail-content"> *@
+@*     <div class="product-detail-gallery"> *@
+@*         <div class="main-image-container"> *@
+@*             <img id="mainProductImage" src="@Model.ImageUrl" alt="@Model.Name"> *@
+@*         </div> *@
+@*         <div class="thumbnail-gallery"> *@
+@*             <!-- Always include primary image as first thumbnail --> *@
+@*             <div class="thumbnail active" onclick="changeMainImage('@Model.ImageUrl')"> *@
+@*                 <img src="@Model.ImageUrl" alt="@Model.Name thumbnail"> *@
+@*             </div> *@
+@*             @if (Model.AdditionalImages != null && Model.AdditionalImages.Any()) *@
+@*             { *@
+@*                 foreach (var imgUrl in Model.AdditionalImages) *@
+@*                 { *@
+@*                     <div class="thumbnail" onclick="changeMainImage('@imgUrl')"> *@
+@*                         <img src="@imgUrl" alt="@Model.Name thumbnail"> *@
+@*                     </div> *@
+@*                 } *@
+@*             } *@
+@*         </div> *@
+@*     </div> *@
+@*     <div class="product-detail-info"> *@
+@*         <div class="product-detail-stock-info"> *@
+@*             <h3>Stocks</h3> *@
+@*             <div class="stock-quantity"> *@
+@*                 <p>QUANTITY ON HAND</p> *@
+@*                 <div class="stock-number"> *@
+@*                     <span>@Model.Stock</span> *@
+@*                     <span class="stock-status @Model.StockStatus?.ToLowerInvariant()">@Model.StockStatus</span> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <button type="button" class="adjust-stock-btn" onclick="openAdjustStockModal(@Model.Id)"> *@
+@*                 Adjust Stocks *@
+@*             </button> *@
+@*         </div> *@
+
+@*         <div class="product-information"> *@
+@*             <h3>Product Information</h3> *@
+@*             <div class="info-grid"> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">CATEGORY:</div> *@
+@*                     <div class="info-value">@Model.Category</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">PRODUCT ID:</div> *@
+@*                     <div class="info-value">@Model.ProductId</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">HEIGHT/W:</div> *@
+@*                     <div class="info-value">@Model.Height</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">WIDTH:</div> *@
+@*                     <div class="info-value">@Model.Width</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">WEIGHT:</div> *@
+@*                     <div class="info-value">@Model.Weight</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">COLOR:</div> *@
+@*                     <div class="info-value">@Model.Color</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">SUPPLIER:</div> *@
+@*                     <div class="info-value">@Model.Supplier</div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+
+@*         <div class="sales-information"> *@
+@*             <h3>Sales Information</h3> *@
+@*             <div class="info-grid"> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">PRICE:</div> *@
+@*                     <div class="info-value">₱@Model.Price.ToString("N0")</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">Wholesale Price:</div> *@
+@*                     <div class="info-value">₱@Model.WholesalePrice.ToString("N0")</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">Retail Price:</div> *@
+@*                     <div class="info-value">₱@Model.RetailPrice.ToString("N0")</div> *@
+@*                 </div> *@
+@*                 <div class="info-row"> *@
+@*                     <div class="info-label">Profit:</div> *@
+@*                     <div class="info-value">₱@Model.Profit.ToString("N0")</div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+
+@*         @if (!string.IsNullOrEmpty(Model.Description)) *@
+@*         { *@
+@*             <div class="product-description"> *@
+@*                 <h3>DESCRIPTION:</h3> *@
+@*                 <p>@Model.Description</p> *@
+@*             </div> *@
+@*         } *@
+@*     </div> *@
+@* </div> *@
+@* <script> *@
+@*     function changeMainImage(imageUrl) { *@
+@*         // Change the main image *@
+@*         document.getElementById('mainProductImage').src = imageUrl; *@
+
+@*         // Update active thumbnail *@
+@*         document.querySelectorAll('.thumbnail').forEach(thumb => { *@
+@*             thumb.classList.remove('active'); *@
+@*             if (thumb.querySelector('img').src === imageUrl) { *@
+@*                 thumb.classList.add('active'); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@* </script> *@
