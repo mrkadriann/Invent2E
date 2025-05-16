@@ -301,5 +301,59 @@ namespace InventoryManagement.Controllers
             if (qty.Value <= 50) return "normal";
             return "overstocked";
         }
+
+        // GET: Products/GetProductDetail/5
+        [HttpGet]
+        public async Task<IActionResult> GetProductDetail(int id)
+        {
+            // Fetch product with all related data
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Description)
+                .Include(p => p.Quantity)
+                .Include(p => p.PrimaryImage)
+                .Include(p => p.AllImages)
+                .FirstOrDefaultAsync(p => p.ItemId == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // Create a view model with all the necessary details
+            var viewModel = new ProductDetailViewModel
+            {
+                Id = product.ItemId,
+                ProductId = product.ItemId.ToString(), // Or use another field if you have a separate product ID
+                Name = product.ItemName,
+                Category = product.Category?.CategoryName ?? "Uncategorized",
+                ImageUrl = product.PrimaryImageId.HasValue && product.PrimaryImage != null ?
+                           $"/Image/GetImage/{product.PrimaryImage.ImageId}" : "/images/placeholder.jpg",
+                Stock = product.Quantity?.Qty ?? 0,
+                StockStatus = CalculateStockStatus(product.Quantity?.Qty),
+                Price = product.Description?.RetailPrice ?? 0,
+                RetailPrice = product.Description?.RetailPrice ?? 0,
+                WholesalePrice = product.Description?.WholesalePrice ?? 0,
+                Profit = product.Description?.Profit ?? 0,
+                Supplier = product.Supplier ?? "N/A",
+                Color = product.Description?.Color,
+                Height = product.Description?.Height,
+                Width = product.Description?.Width,
+                Weight = product.Description?.Weight,
+                Description = product.Description?.DescriptionText
+            };
+
+            // Add additional images if they exist
+            if (product.AllImages != null && product.AllImages.Any())
+            {
+                viewModel.AdditionalImages = product.AllImages
+                    .Where(img => img != null && img.ImageId != product.PrimaryImageId)
+                    .OrderBy(img => img.ImageOrder)
+                    .Select(img => $"/Image/GetImage/{img.ImageId}")
+                    .ToList();
+            }
+
+            return PartialView("_ProductDetailPartial", viewModel);
+        }
     }
 }

@@ -101,11 +101,10 @@
                 <div class="products-grid">
                     @foreach (var product in Model.Products)
                     {
-                        <div class="product-card">
+                        <div class="product-card" onclick="openProductDetailPopup(@product.Id)">
                             <div class="product-image">
                                 <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "/images/placeholder.jpg" : product.ImageUrl)" alt="@product.Name">
-                                @* This button would need JavaScript to show options, or link to actions *@
-                                <button class="more-options-btn">
+                                <button class="more-options-btn" onclick="event.stopPropagation()">
                                     <i class="material-icons">more_horiz</i>
                                 </button>
                             </div>
@@ -126,6 +125,22 @@
                     }
                 </div>
             }
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div id="productDetailContent" class="product-detail-container">
+                    <!-- Content will be loaded via AJAX -->
+                    <div class="loader-container">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

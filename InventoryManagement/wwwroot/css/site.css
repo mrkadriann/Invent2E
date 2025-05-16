@@ -1,8 +1,8 @@
 :root {
     --primary-color: #00c77b;
-    --dark-bg: #101827;
+    --dark-bg: #141E22;
     --lightdark-bg: #141E22;
-    --card-bg: #1e293b;
+    --card-bg: #1A262D;
     --text-light: #ffffff;
     --text-gray: #8f8f8f;
     --text-muted: #9ca3af;
@@ -19,7 +19,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--dark-bg);
@@ -37,7 +37,6 @@ body {
     display: flex;
     align-items: center;
     background-color: var(--dark-bg);
-    border-bottom: 1px solid var(--border-color);
     padding: 10px 20px;
     height: 64px;
 }
@@ -64,6 +63,7 @@ body {
     display: flex;
     flex: 1;
     gap: 10px;
+    margin-left: 155px
 }
 
 .nav-item {
@@ -73,12 +73,13 @@ body {
     color: var(--text-muted);
     text-decoration: none;
     transition: all 0.3s ease;
-    border-radius: 6px;
-    background-color: var(--nav-inactive-bg);
+    border-radius: 999px;
+    border: 2px solid #2E414D;
+    background-color: #141E22;
     min-width: 110px;
     justify-content: center;
     font-weight: 500;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
     .nav-item:hover {
@@ -180,11 +181,11 @@ body {
 
 /* Products sidebar styles */
 .products-sidebar {
-    width: 240px;
+    width: 320px;
     background-color: var(--card-bg);
     border-radius: 8px;
     padding: 20px;
-    height: 83vh;
+    height: 60vh;
 }
 
 .filter-section {
@@ -281,11 +282,14 @@ body {
 /* Products main content styles */
 .products-main {
     flex: 1;
+    margin-left: 8px;
 }
 
 .search-container {
     position: relative;
     flex: 1;
+    margin-left: 71px;
+    margin-right: 450px;
 }
 
 .search-icon {
@@ -298,7 +302,7 @@ body {
 
 .search-input {
     padding-left: 40px;
-    background-color: var(--card-bg);
+    background-color: #0F171A;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     color: var(--text-light);
@@ -309,7 +313,7 @@ body {
 .btn-success {
     background-color: var(--primary-color);
     border: none;
-    color: #ffffff;
+    color: #141E22;
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
@@ -427,4 +431,421 @@ body {
 .price {
     font-weight: 600;
     font-size: 16px;
+}
+
+
+/* Product Card Clickable Styling */
+.product-card {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+/* Modal Structure */
+.modal-dialog.modal-lg {
+    max-width: 900px;
+}
+
+.modal-content {
+    border: none;
+    background-color: transparent;
+}
+
+.product-detail-container {
+    background-color: #141D1F;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #2E414D;
+}
+
+
+/* Header Section */
+.product-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 15px;
+    border-bottom: 1px solid #222;
+    background-color: var(--dark-bg);
+}
+
+.product-detail-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px;
+}
+
+.left-actions {
+    display: flex;
+    align-items: center;
+}
+
+.right-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-divider {
+    width: 1px;
+    height: 24px;
+    background-color: #2E414D;
+    margin: 0 10px;
+}
+
+/* Buttons */
+.btn-outline-success {
+    background-color: transparent;
+    color: #22c55e;
+    border: 1px solid #22c55e;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+    .btn-outline-success:hover {
+        background-color: #1e3a2d;
+        border-color: #22c55e;
+        color: #22c55e;
+    }
+
+.btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #1A262D;
+    border: 1px solid #2E414D;
+    border-radius: 10px;
+    color: #888;
+    font-size: 18px;
+    transition: color 0.2s, background-color 0.2s;
+    padding: 0;
+}
+
+    .btn-icon:hover {
+        color: #fff;
+        background-color: #2a2f36;
+    }
+
+
+/* Navigation arrows */
+.product-navigation {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.nav-arrow {
+    background-color: #222;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+    .nav-arrow:hover {
+        background-color: #333;
+    }
+
+/* Content Layout */
+
+/* Title Header Layout */
+.product-detail-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 50px 25px 50px;
+    background-color: var(--dark-bg); /* Optional: dark background for matching style */
+    color: #fff;
+}
+
+.product-title-area h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.title-description {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.product-meta {
+    font-size: 0.875rem;
+    color: #ccc;
+    margin: 0;
+}
+
+.dot-separator {
+    height: 4px;
+    width: 4px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+/* Optional buttons — you'll implement functionality */
+.product-nav-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-btn {
+    border: 1px solid #444;
+    background: transparent;
+    color: #ccc;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+
+/* === Gallery Area === */
+
+.product-gallery-content {
+    display: flex;
+    gap: 30px;
+    padding: 25px 50px;
+    background-color: var(--dark-bg);
+    color: white;
+    width: 100%;
+    height: 100%; /* Ensures it stretches if parent allows */
+    box-sizing: border-box;
+}
+
+.product-gallery {
+    display: flex;
+    gap: 20px;
+    align-items: stretch; /* This makes thumbnails match main image height if needed */
+    flex: 1;
+}
+
+.main-image-container {
+    background-color: white;
+    border-radius: 16px;
+    padding: 10px;
+    width: 450px;
+    height: 300px; /* consistent height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+    .main-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Keeps aspect ratio without cropping */
+        border-radius: 12px;
+    }
+
+.thumbnail-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: start;
+}
+
+.thumbnail {
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, border 0.2s;
+    border: 2px solid transparent;
+    background-color: #fff;
+    padding: 4px;
+    width: 100px;
+    height: 100px; /* consistent square */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+    .thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* keeps image from distorting */
+    }
+
+    .thumbnail.active {
+        border: 2px solid #0ff;
+    }
+
+
+/* === Stock Panel === */
+.stock-panel {
+    background-color: #1f2a2e;
+    padding: 20px;
+    border-radius: 16px;
+    width: 200px;
+}
+
+    .stock-panel h3 {
+        margin-bottom: 16px;
+        font-size: 1.2rem;
+        color: #fff;
+    }
+
+.stock-box {
+    background-color: #253237;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stock-title {
+    text-align: center;
+}
+
+.stock-label {
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+}
+
+.stock-amount-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* ensures vertical centering if needed */
+    text-align: center;
+}
+
+.stock-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+    .stock-amount::first-line {
+        font-size: 2rem;
+    }
+
+.stock-status {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.adjust-stock-button {
+    margin-top: 12px;
+    padding: 6px 14px;
+    background-color: transparent;
+    color: #00ff9d;
+    border: 1px solid #00ff9d;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+    .adjust-stock-button:hover {
+        background-color: #00ff9d22;
+    }
+
+/* Product Detail Section */
+
+.product-meta-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 142px;
+    background-color: var(--dark-bg);
+    color: white;
+    padding: 10px 50px 50px 50px;
+    font-size: 0.85rem; /* globally reduce base size */
+}
+
+.product-info-group,
+.pricing-info-group {
+    flex: 1;
+}
+
+h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.info-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #bbb;
+    width: 40%;
+    font-size: 0.75rem;
+}
+
+.info-value {
+    font-weight: 400;
+    color: #fff;
+    width: 60%;
+    font-size: 0.85rem;
+}
+
+.sales-section {
+    margin-top: 25px;
+}
+
+
+
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .product-detail-content {
+        flex-direction: column;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .product-detail-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
 }
