@@ -341,7 +341,7 @@ namespace InventoryManagement.Controllers
                 RetailPrice = product.Description?.RetailPrice ?? 0,
                 WholesalePrice = product.Description?.WholesalePrice ?? 0,
                 Profit = product.Description?.Profit ?? 0,
-                Supplier = product.Supplier ?? "N/A",
+                Supplier = product.SupplierId.ToString(),
                 Color = product.Description?.Color,
                 Height = product.Description?.Height,
                 Width = product.Description?.Width,

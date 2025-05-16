@@ -569,3 +569,6 @@ C:\Users\novam\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compress
 C:\Users\novam\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\bxda5t2l43-mj433dnm7t.gz
 C:\Users\novam\InventoryManagement\InventoryManagement\obj\Debug\net9.0\compressed\mx6a2ccs8i-f4golkdzit.gz
 >>>>>>> ea371ddf5a863f78f0ebc7c20a7ec8603184c968
+C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\gdwj84cwpc-hoevwtl3w5.gz
+C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\mx6a2ccs8i-1x11lojjqt.gz
+C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\bxda5t2l43-mj433dnm7t.gz
