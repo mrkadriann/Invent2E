@@ -3,8 +3,24 @@ using Microsoft.AspNetCore.Http;
 
 namespace InventoryManagement.Models
 {
+    public class SupplierContactViewModel
+    {
+        public int ContactId { get; set; }
+
+        [Display(Name = "Contact Name")]
+        public string Name { get; set; }
+
+        [Display(Name = "Contact Email")]
+        public string Email { get; set; }
+        public string Phone { get; set; }
+    }
     public class AddSupplierViewModel
     {
+
+        public int SupplierId { get; set; }
+
+        public bool HasExistingProfileImage { get; set; }
+
         [Required(ErrorMessage = "Company Name is required.")]
         [StringLength(100)]
         [Display(Name = "Company Name")]
@@ -49,14 +65,16 @@ namespace InventoryManagement.Models
         [Display(Name = "Portal Status")]
         public string PortalStatus { get; set; } = "Active"; // Default value
 
-        // Optional: If you want to add a primary contact person at the same time
         [Display(Name = "Primary Contact: Name")]
-        public string PrimaryContactName { get; set; }
+        public string? PrimaryContactName { get; set; } // Added ?
+
         [Display(Name = "Primary Contact: Email")]
         [EmailAddress(ErrorMessage = "Invalid Email Address for Primary Contact.")]
-        public string PrimaryContactEmail { get; set; }
+        public string? PrimaryContactEmail { get; set; } // Added ?
+
         [Display(Name = "Primary Contact: Phone")]
         [Phone(ErrorMessage = "Invalid Phone Number for Primary Contact.")]
-        public string PrimaryContactPhone { get; set; }
+        public string? PrimaryContactPhone { get; set; } // Added ?
+        public List<SupplierContactViewModel> OtherContacts { get; set; } = new List<SupplierContactViewModel>();
     }
 }

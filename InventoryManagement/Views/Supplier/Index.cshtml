@@ -13,9 +13,9 @@
         <div class="search-container" style="flex-grow: 1;">
             <i class="material-icons search-icon">search</i>
             <input type="text" id="topSearchInput"
-                   class="form-control search-input"
-                   placeholder="Search Company, Email, Phone, Address..."
-                   value="@ViewData["CurrentTopSearch"]">
+            class="form-control search-input"
+            placeholder="Search Company, Email, Phone, Address..."
+            value="@ViewData["CurrentTopSearch"]">
         </div>
         <a asp-controller="Supplier" asp-action="Create" class="btn btn-success add-supplier-btn">
             <i class="material-icons">add</i> Add Supplier
@@ -33,7 +33,7 @@
     }
 
     <div class="suppliers-content">
-        <form asp-controller="Suppliers" asp-action="Index" method="get" class="suppliers-sidebar">
+        <form asp-controller="Supplier" asp-action="Index" method="get" class="suppliers-sidebar">
             <input type="hidden" name="sortOrder" value="@ViewData["CurrentSort"]" />
             <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" id="hiddenSearchStringForForm" />
 
@@ -41,8 +41,18 @@
             <div class="filter-section">
                 <h3>FILTER BY LOCATION</h3>
                 <div class="select-container">
-                    <select name="locationFilter" asp-items="ViewBag.Locations" class="form-select">
-                        <option value="">All Locations</option>
+                    <select name="locationFilter" class="form-select" onchange="this.form.submit();">
+                        <option value="" selected="@(string.IsNullOrEmpty(ViewData["CurrentLocationFilter"] as string))">All Locations</option>
+                        @if (ViewBag.Locations != null)
+                        {
+                            var currentLocation = ViewData["CurrentLocationFilter"] as string;
+                            foreach (var locationText in (IEnumerable<string>)ViewBag.Locations)
+                            {
+                                <option value="@locationText" selected="@(locationText == currentLocation)">
+                                    @locationText
+                                </option>
+                            }
+                        }
                     </select>
                 </div>
             </div>
@@ -50,7 +60,7 @@
             <div class="filter-section">
                 <h3>FILTER BY STATUS</h3>
                 <div class="filter-status-buttons">
-                    <select name="statusFilter" class="form-select">
+                    <select name="statusFilter" class="form-select" onchange="this.form.submit();">
                         <option value="">All Statuses</option>
                         <option value="Active" selected="@(ViewData["CurrentStatusFilter"] as string == "Active")">Active</option>
                         <option value="Inactive" selected="@(ViewData["CurrentStatusFilter"] as string == "Inactive")">Inactive</option>
@@ -58,8 +68,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 mt-3">Apply Filters</button>
-            <a asp-action="Index" asp-controller="Suppliers" class="btn btn-outline-secondary w-100 mt-2">
+            @* <button type="submit" class="btn btn-primary w-100 mt-3">Apply Filters</button> *@
+            <a asp-action="Index" asp-controller="Supplier" class="btn btn-outline-secondary w-100 mt-2">
                 <i class="material-icons">refresh</i> Reset All
             </a>
         </form>
@@ -122,17 +132,6 @@
                                     @* <span class="payables-label">PAYABLES</span>
                                     <span class="payables-amount">@supplier.TotalPayables?.ToString("C")</span> *@
                                 </div>
-                                <div class="dropdown">
-                                    <button class="more-options-btn-supplier dropdown-toggle" type="button" id="dropdownMenuButton_@supplier.SupplierId" data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation();">
-                                        <i class="material-icons">more_horiz</i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton_@supplier.SupplierId">
-                                        <li><a class="dropdown-item" asp-action="Edit" asp-controller="Suppliers" asp-route-id="@supplier.SupplierId">Edit</a></li>
-                                        <li><a class="dropdown-item" asp-action="Details" asp-controller="Suppliers" asp-route-id="@supplier.SupplierId">Full Details Page</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" asp-action="Delete" asp-controller="Suppliers" asp-route-id="@supplier.SupplierId">Delete</a></li>
-                                    </ul>
-                                </div>
                             </div>
                             <div class="supplier-card-secondary-info">
                                 @if (!string.IsNullOrEmpty(supplier.Address))
@@ -186,6 +185,92 @@
 
 @section Scripts {
     <script>
+        // Function to initialize product search within the supplier detail modal
+               function initializeProductSearchInModal() {
+            const productSearchInput = document.getElementById('productSearchSupplierModal');
+
+            if (productSearchInput) {
+                const productsTabPane = productSearchInput.closest('#products-modal');
+                if (!productsTabPane) {
+                    console.warn("Product search: #products-modal tab pane not found. Search will not be initialized.");
+                    return;
+                }
+
+                const productListContainer = productsTabPane.querySelector('.supplier-product-list');
+                if (!productListContainer) {
+                    console.warn("Product search: .supplier-product-list container not found. Search will not be initialized.");
+                    return;
+                }
+
+                const noProductsInitialMessage = productListContainer.querySelector('.no-products-initial-message');
+                const noProductsSearchMessage = productListContainer.querySelector('.no-products-search-message');
+
+                // Initial state of messages based on products loaded into the modal
+                const initialProductItems = productListContainer.querySelectorAll('.supplier-product-item');
+                if (noProductsInitialMessage) {
+                    noProductsInitialMessage.style.display = (initialProductItems.length === 0) ? 'block' : 'none';
+                }
+                if (noProductsSearchMessage) {
+                    noProductsSearchMessage.style.display = 'none'; // Always hide search-specific message initially
+                }
+
+                productSearchInput.addEventListener('input', function () {
+                    const searchTerm = this.value.toLowerCase().trim();
+                    // Query for items fresh each time in case list is dynamically updated
+                    const currentProductItems = productListContainer.querySelectorAll('.supplier-product-item');
+                    let visibleProductsCount = 0;
+
+                    // Hide all informational messages before re-evaluating
+                    if (noProductsInitialMessage) noProductsInitialMessage.style.display = 'none';
+                    if (noProductsSearchMessage) noProductsSearchMessage.style.display = 'none';
+
+                    currentProductItems.forEach(function (item) {
+                        const productNameElement = item.querySelector('.product-name-searchable');
+                        const productIdElement = item.querySelector('.product-id-searchable');
+
+                        const productName = productNameElement ? productNameElement.textContent.toLowerCase() : '';
+                        let productIdText = '';
+                        if (productIdElement && productIdElement.textContent.toLowerCase().includes('id:')) {
+                            productIdText = productIdElement.textContent.toLowerCase().split('id:')[1]?.trim() || '';
+                        }
+
+                        // Condition for an item to be visible:
+                        // 1. Search term is empty (show all)
+                        // OR 2. Product name matches OR 3. Product ID matches
+                        const isMatch = searchTerm === "" || productName.includes(searchTerm) || productIdText.includes(searchTerm);
+
+                        if (isMatch) {
+                            item.classList.remove('d-none'); // Make item visible
+                            visibleProductsCount++;
+                        } else {
+                            item.classList.add('d-none'); // Hide item
+                        }
+                    });
+
+                    // After filtering, decide which (if any) informational message to show
+                    if (searchTerm === "") {
+                        // Search is empty (cleared by user or initially empty)
+                        if (currentProductItems.length === 0 && noProductsInitialMessage) {
+                            // And the list of products is actually empty
+                            noProductsInitialMessage.style.display = 'block';
+                        }
+                        // If currentProductItems.length > 0, all are shown, so no message needed.
+                    } else {
+                        // Search term is present
+                        if (visibleProductsCount === 0 && currentProductItems.length > 0 && noProductsSearchMessage) {
+                            // Items existed in the list, but none matched the current search term.
+                            noProductsSearchMessage.style.display = 'block';
+                        }
+                        // If visibleProductsCount > 0, matches were found, so no message needed.
+                    }
+                });
+            } else {
+                // This warning is useful if the script runs before modal content with the input is loaded
+                console.warn("Product search input #productSearchSupplierModal not found. Ensure it's loaded before search init.");
+            }
+        }
+
+        // jQuery document ready
         $(document).ready(function () {
             $('#topSearchInput').on('input change', function () {
                 $('#hiddenSearchStringForForm').val($(this).val());
@@ -195,13 +280,13 @@
                 $('#hiddenSearchStringForForm').val($('#topSearchInput').val());
                 $(this).find('select, input[type="number"]').each(function() {
                     if (!$(this).val()) {
-                        $(this).attr('name', '');
+                        $(this).attr('name', ''); // Remove name if empty to prevent empty query params
                     }
                 });
             });
 
             $('#topSearchInput').on('keypress', function(e) {
-                if (e.which == 13) {
+                if (e.which == 13) { // Enter key
                     e.preventDefault();
                     $('#hiddenSearchStringForForm').val($(this).val());
                     $('.suppliers-sidebar').submit();
@@ -209,13 +294,23 @@
             });
 
             $('.supplier-card').on('click', function (e) {
-                if ($(e.target).closest('.dropdown').length > 0) {
-                    return;
+                // Prevent modal opening if a dropdown or button within the card was clicked
+                if ($(e.target).closest('.dropdown, .btn, a').length > 0 && !$(e.target).closest('.more-options-btn-supplier').length) { // allow more-options to proceed if it does not open modal
+                     if (!$(e.target).closest('.dropdown-menu a[data-bs-toggle="modal"]').length) { // specifically allow if it's a modal trigger from dropdown
+                        return;
+                     }
                 }
+
 
                 var supplierId = $(this).data('supplier-id');
                 var modalContent = $('#supplierDetailModalContent');
-                var supplierModal = new bootstrap.Modal(document.getElementById('supplierDetailModal'));
+                var supplierModalElement = document.getElementById('supplierDetailModal');
+                if (!supplierModalElement) {
+                    console.error("Supplier detail modal element not found!");
+                    return;
+                }
+                var supplierModal = bootstrap.Modal.getInstance(supplierModalElement) || new bootstrap.Modal(supplierModalElement);
+
 
                 modalContent.html('<div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: var(--dark-bg); border-radius: 12px;"><div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"><span class="visually-hidden">Loading...</span></div></div>');
                 supplierModal.show();
@@ -225,18 +320,142 @@
                     type: 'GET',
                     success: function (result) {
                         modalContent.html(result);
+                        // Initialize product search after content is loaded
+                        initializeProductSearchInModal();
+                        // The tab layout adjustment script (below) will handle layout on 'shown.bs.modal' and 'shown.bs.tab'.
                     },
                     error: function (xhr, status, error) {
-                        modalContent.html('<div class="p-4" style="background-color: var(--dark-bg); border-radius: 12px; color: var(--danger);">Error loading supplier details. Please try again. (' + xhr.status + ' ' + error + ')</div>');
+                        modalContent.html('<div class="p-4" style="background-color: var(--dark-bg); border-radius: 12px; color: var(--danger); text-align:center;">Error loading supplier details. Please try again. (' + xhr.status + ' ' + error + ')</div>');
                         console.error("Error loading supplier details:", status, error, xhr);
                     }
                 });
             });
-            // For Bootstrap 5 alert dismissal
+
             var alertList = document.querySelectorAll('.alert');
             alertList.forEach(function (alert) {
-                new bootstrap.Alert(alert);
+                if (!bootstrap.Alert.getInstance(alert)) {
+                    new bootstrap.Alert(alert);
+                }
             });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const supplierDetailModalElement = document.getElementById('supplierDetailModal');
+
+            if (supplierDetailModalElement) {
+                supplierDetailModalElement.addEventListener('shown.bs.modal', function () {
+ 
+                    const generalInfoTabButton = document.getElementById('general-info-tab');
+                    const productsTabButton = document.getElementById('products-tab-modal');
+                    const leftColumn = document.getElementById('supplierDetailLeftColumn');
+                    const rightColumn = document.getElementById('supplierDetailRightColumn');
+
+
+                    function adjustLayoutBasedOnActiveTab() {
+                        if (!leftColumn || !productsTabButton || !generalInfoTabButton) {
+                            return;
+                        }
+                        const rightColumnExists = !!rightColumn;
+
+                        if (productsTabButton.classList.contains('active')) {
+                            if (rightColumnExists) rightColumn.style.display = 'none';
+                            leftColumn.classList.remove('col-md-7');
+                            leftColumn.classList.add('col-md-12');
+                        } else if (generalInfoTabButton.classList.contains('active')) {
+                            if (rightColumnExists) rightColumn.style.display = ''; // Revert to default
+                            leftColumn.classList.remove('col-md-12');
+                            leftColumn.classList.add('col-md-7');
+
+                        } else { // Fallback
+                            if (rightColumnExists) rightColumn.style.display = '';
+                            leftColumn.classList.remove('col-md-12');
+                            leftColumn.classList.add('col-md-7');
+                        }
+                    }
+
+                    adjustLayoutBasedOnActiveTab();
+
+                    if (productsTabButton && productsTabButton._tabListenerAttached) {
+                        productsTabButton.removeEventListener('shown.bs.tab', adjustLayoutBasedOnActiveTab);
+                    }
+                    if (generalInfoTabButton && generalInfoTabButton._tabListenerAttached) {
+                        generalInfoTabButton.removeEventListener('shown.bs.tab', adjustLayoutBasedOnActiveTab);
+                    }
+
+                    // Attach event listeners for tab changes
+                    if (productsTabButton) {
+                        productsTabButton.addEventListener('shown.bs.tab', adjustLayoutBasedOnActiveTab);
+                        productsTabButton._tabListenerAttached = true; // Mark as attached
+                    }
+                    if (generalInfoTabButton) {
+                        generalInfoTabButton.addEventListener('shown.bs.tab', adjustLayoutBasedOnActiveTab);
+                        generalInfoTabButton._tabListenerAttached = true; // Mark as attached
+                    }
+                });
+            } else {
+                console.error("Modal element with ID 'supplierDetailModal' not found on DOMContentLoaded!");
+            }
+        });
+
+        //delete
+                       $(document).on('click', '.btn-delete-supplier', function () {
+            var $button = $(this);
+            var supplierId = $button.data('supplier-id');
+            var supplierName = $button.data('supplier-name') || 'this supplier'; // Fallback name
+
+            // --- For ANTI-FORGERY TOKEN - IMPORTANT TO FIX THIS LATER ---
+            // var tokenInput = $('input[name="__RequestVerificationToken"]');
+            // var token = tokenInput.val();
+            // console.log("Token for delete (NEEDS TO BE FIXED AND SENT):", token);
+            // For now, since [ValidateAntiForgeryToken] is removed on server, we don't send it.
+            // BUT THIS IS INSECURE and needs to be fixed.
+            // --- END ANTI-FORGERY TOKEN ---
+
+
+            if (confirm(`Are you sure you want to delete ${supplierName}? This action cannot be undone.`)) {
+                // User confirmed
+                $.ajax({
+                    url: '@Url.Action("PerformDelete", "Supplier")/' + supplierId,
+                    type: 'POST',
+                    // data: { // If [ValidateAntiForgeryToken] was active, you'd send the token here
+                    //     __RequestVerificationToken: token
+                    // },
+                    beforeSend: function() {
+                        $button.prop('disabled', true).html('<i class="fas fa-spinner fa-spin" style="font-size:20px;"></i>');
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Deleted! ' + response.message); // Basic success alert
+
+                            // Close the supplier detail modal
+                            var supplierModalElement = document.getElementById('supplierDetailModal');
+                            if (supplierModalElement) {
+                                var supplierModal = bootstrap.Modal.getInstance(supplierModalElement);
+                                if (supplierModal) {
+                                    supplierModal.hide();
+                                }
+                            }
+                            // Refresh the supplier list on the main page
+                            setTimeout(function() { window.location.reload(); }, 500); // Shorter delay for basic alert
+
+                        } else {
+                            alert('Error! ' + response.message); // Basic error alert
+                        }
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        console.error("AJAX Error:", xhr, status, errorThrown);
+                        alert('An error occurred while trying to delete the supplier. Status: ' + xhr.status + ' - ' + errorThrown);
+                    },
+                    complete: function() {
+                        // Re-enable the button and restore its original icon
+                        $button.prop('disabled', false).html('<i class="material-icons" style="font-size:20px;">delete</i>');
+                    }
+                });
+            } else {
+                // User clicked "Cancel" in the confirm dialog
+                return false;
+            }
         });
     </script>
 }

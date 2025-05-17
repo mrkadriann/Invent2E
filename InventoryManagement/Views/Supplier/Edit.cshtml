@@ -1,0 +1,270 @@
+﻿@model InventoryManagement.Models.AddSupplierViewModel
+
+@{
+    ViewData["Title"] = "Edit Supplier";
+}
+
+<link rel="stylesheet" href="~/css/add-supplier.css" asp-append-version="true" />
+
+<div class="add-supplier-container">
+    <div class="page-header">
+        <a asp-action="Index" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back To supplier list</span>
+        </a>
+        <h1 class="page-title-supplier">@ViewData["Title"]</h1> @* Dynamic title *@
+    </div>
+
+    <form asp-action="Edit" asp-route-id="@Model.SupplierId" method="post" enctype="multipart/form-data">
+        @* Changed asp-action, added asp-route-id *@
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="SupplierId" /> @* IMPORTANT: Hidden field for ID *@
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="add-supplier-form-layout">
+            @* LEFT COLUMN CARD *@
+            <div class="form-section-card">
+                <div class="profile-image-area">
+                    <div class="profile-image-preview-container">
+                        @* Show existing image by default *@
+                        <img id="profileImagePreview"
+                             src="@(Model.SupplierId > 0 && Model.HasExistingProfileImage ? Url.Action("GetSupplierImage", "Supplier", new { id = Model.SupplierId }) : "#")"
+                             alt="Profile Preview"
+                             onerror="this.style.display='none'; document.querySelector('.profile-image-placeholder').style.display='flex';"
+                             style="@(Model.SupplierId > 0 && Model.HasExistingProfileImage ? "display:block;" : "display:none;")" /> @* Ensure display:block if image exists *@
+
+                        <label for="profileImageUpload"
+                               class="profile-image-upload-button profile-image-placeholder"
+                               title="Upload new profile image"
+                               style="@(Model.SupplierId > 0 && Model.HasExistingProfileImage ? "display:none;" : "display:flex;")">
+                            @* Text for placeholder - JS will update this based on CompanyName too *@
+                            @((Model.SupplierId > 0 && Model.HasExistingProfileImage) ? "+" : (!string.IsNullOrEmpty(Model.CompanyName) ? Model.CompanyName.Substring(0, 1).ToUpper() : "+"))
+                        </label>
+                    </div>
+                    <input asp-for="ProfileImageFile" type="file" id="profileImageUpload" accept="image/*" />
+                    <span asp-validation-for="ProfileImageFile" class="text-danger"></span>
+                    <small class="form-text text-muted">Upload a new image to change the current one.</small>
+                </div>
+
+                <div class="form-group-supplier">
+                    <label asp-for="CompanyName"></label>
+                    <input asp-for="CompanyName" class="form-control" placeholder="Enter company name" />
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                </div>
+
+                <h4>Contact Persons</h4>
+                <div class="form-group-supplier">
+                    <label asp-for="PersonName">Main Contact Name</label>
+                    <input asp-for="PersonName" class="form-control" placeholder="Enter name" />
+                    <span asp-validation-for="PersonName" class="text-danger"></span>
+                </div>
+                <div class="form-row-supplier">
+                    <div class="form-group-supplier">
+                        <label asp-for="Department"></label>
+                        <input asp-for="Department" class="form-control" placeholder="e.g. Sales" />
+                        <span asp-validation-for="Department" class="text-danger"></span>
+                    </div>
+                    <div class="form-group-supplier">
+                        <label asp-for="PhoneNumber">Main Phone number</label>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group-supplier">
+                    <label asp-for="Email">Main Email</label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="Enter email address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group-supplier">
+                    <label asp-for="Address"></label>
+                    <textarea asp-for="Address" class="form-control" placeholder="Enter full address" rows="3"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-section-card">
+                    @* Or wherever you want to place this section *@
+                    <h4>Other Contact Persons</h4>
+                    <div id="otherContactsContainer">
+                        @if (Model.OtherContacts != null)
+                        {
+                            for (int i = 0; i < Model.OtherContacts.Count; i++)
+                            {
+                                <fieldset class="mb-3 p-3 border rounded contact-person-fieldset">
+                                    <legend class="w-auto px-2 h6">Additional Contact @(i + 1)</legend>
+                                    <input type="hidden" asp-for="OtherContacts[i].ContactId" />
+
+                                    <div class="form-group-supplier">
+                                        <label asp-for="OtherContacts[i].Name"></label>
+                                        <input asp-for="OtherContacts[i].Name" class="form-control" placeholder="Contact person's name" />
+                                        <span asp-validation-for="OtherContacts[i].Name" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-row-supplier">
+                                        <div class="form-group-supplier">
+                                            <label asp-for="OtherContacts[i].Email"></label>
+                                            <input asp-for="OtherContacts[i].Email" type="email" class="form-control" placeholder="Contact's email" />
+                                            <span asp-validation-for="OtherContacts[i].Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group-supplier">
+                                            <label asp-for="OtherContacts[i].Phone"></label>
+                                            <input asp-for="OtherContacts[i].Phone" class="form-control" placeholder="Contact's phone" />
+                                            <span asp-validation-for="OtherContacts[i].Phone" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    @* Optional: Add a "Remove" button for this contact (requires JS) *@
+                                    @* <button type="button" class="btn btn-danger btn-sm remove-contact-btn mt-2">Remove Contact</button> *@
+                                </fieldset>
+                            }
+                        }
+                    </div>
+                    @* Optional: Button to dynamically add a new contact form section (requires JS) *@
+                    @* <button type="button" id="addOtherContactBtn" class="btn btn-outline-info mt-2">Add Other Contact</button> *@
+                </div>
+            </div>
+
+            @* RIGHT COLUMN CARD *@
+            <div class="form-section-card">
+                <h4>Purchasing Info</h4>
+                <div class="form-group-supplier">
+                    <label asp-for="Currency"></label>
+                    <select asp-for="Currency" class="form-control">
+                        <option value="">Select Currency...</option>
+                        <option value="PHP">PHP - Philippine Peso</option>
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                    </select>
+                    <span asp-validation-for="Currency" class="text-danger"></span>
+                </div>
+                <div class="form-group-supplier">
+                    <label asp-for="PaymentMethod"></label>
+                    <select asp-for="PaymentMethod" class="form-control">
+                        <option value="">Select Payment Method...</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="GCash">GCash</option>
+                        <option value="COD">Cash on Delivery</option>
+                    </select>
+                    <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                </div>
+                <div class="form-group-supplier">
+                    <label asp-for="Courier"></label>
+                    <select asp-for="Courier" class="form-control">
+                        <option value="">Select Courier...</option>
+                        <option value="J&T Express">J&T Express</option>
+                        <option value="LBC">LBC</option>
+                        <option value="Ninja Van">Ninja Van</option>
+                        <option value="DHL">DHL</option>
+                    </select>
+                    <span asp-validation-for="Courier" class="text-danger"></span>
+                </div>
+
+                <div class="form-group-supplier">
+                    <label asp-for="PortalStatus">Portal Status</label>
+                    <select asp-for="PortalStatus" class="form-control">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                    <span asp-validation-for="PortalStatus" class="text-danger"></span>
+                </div>
+
+                <div class="form-actions-supplier">
+                    <a asp-action="Index" class="btn-supplier btn-supplier-cancel">Cancel</a>
+                    <input type="submit" value="Save Changes" class="btn-supplier btn-supplier-save" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            const imageUploadInput = $('#profileImageUpload'); // Your <input type="file">
+            const imagePreview = $('#profileImagePreview');   // Your <img> tag for preview
+            const imagePlaceholder = $('.profile-image-placeholder'); // Your placeholder label element
+            const companyNameInput = $('#CompanyName'); // ID for company name input
+
+            // Store the original src of the preview image (for Edit page, if an image already exists)
+            const originalImageSrc = imagePreview.attr('src');
+
+            function updatePlaceholderText() {
+                if (!imagePlaceholder.length) return;
+                var companyName = companyNameInput.val() || "";
+                var initial = companyName ? companyName.trim().substring(0, 1).toUpperCase() : '+';
+                imagePlaceholder.text(initial);
+            }
+
+            function showImagePreview(source) {
+                if (!imagePreview.length) return;
+                imagePreview.attr('src', source).css('display', 'block');
+                if (imagePlaceholder.length) imagePlaceholder.css('display', 'none');
+            }
+
+            function showPlaceholder() {
+                if (!imagePreview.length) return;
+                imagePreview.attr('src', '#').css('display', 'none');
+                if (imagePlaceholder.length) {
+                    updatePlaceholderText();
+                    imagePlaceholder.css('display', 'flex');
+                }
+            }
+
+            function revertToOriginalOrPlaceholder() {
+                if (originalImageSrc && originalImageSrc !== '#' && originalImageSrc !== '') {
+                    // Check if the original image can be loaded, otherwise show placeholder
+                    const tempImg = new Image();
+                    tempImg.onload = function() { showImagePreview(originalImageSrc); }
+                    tempImg.onerror = function() { showPlaceholder(); } // Fallback to placeholder if original image also fails
+                    tempImg.src = originalImageSrc;
+                } else {
+                    showPlaceholder();
+                }
+            }
+
+            // --- Initial Setup ---
+            // Razor's inline styles and `onerror` attribute on <img> handle the very initial state.
+            // This JS ensures dynamic parts like placeholder text are correct.
+            if (imagePlaceholder.length && imagePlaceholder.is(':visible')) {
+                updatePlaceholderText(); // Ensure placeholder text is correct if it's initially visible
+            } else if (imagePreview.length && imagePreview.is(':visible') && imagePlaceholder.length) {
+                imagePlaceholder.css('display', 'none'); // Ensure placeholder is hidden if image is visible
+            }
+            // Add pointer cursor to image preview and placeholder to indicate they are clickable
+            if(imagePreview.length) imagePreview.css('cursor', 'pointer');
+            if(imagePlaceholder.length) imagePlaceholder.css('cursor', 'pointer');
+
+
+            // --- Event Listener for File Input Change ---
+            if (imageUploadInput.length) {
+                imageUploadInput.on('change', function (event) {
+                    if (event.target.files && event.target.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            showImagePreview(e.target.result); // Show preview of newly selected file
+                        };
+                        reader.readAsDataURL(event.target.files[0]);
+                    } else {
+                        revertToOriginalOrPlaceholder();
+                    }
+                });
+            }
+
+            if (imagePreview.length && imageUploadInput.length) {
+                imagePreview.on('click', function() {
+                    imageUploadInput.click(); // Programmatically click the (possibly hidden) file input
+                });
+            }
+            if (companyNameInput.length && imagePlaceholder.length) {
+                companyNameInput.on('input', function() {
+                    // Only update placeholder text if the placeholder is currently visible
+                    if (imagePlaceholder.is(':visible')) {
+                        updatePlaceholderText();
+                    }
+                });
+            }
+        });
+    </script>
+}

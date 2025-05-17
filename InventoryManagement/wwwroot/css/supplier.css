@@ -368,3 +368,77 @@
     object-fit: contain; /* Or 'scale-down' if you don't want it cropped */
     background-color: #f0f0f0;
 }
+
+/* Define color and dimension variables for easy theming */
+/* Define color variables based on your images for easy theming */
+:root {
+    --supplier-tab-overall-bg: #172125; /* Background of the entire tab bar component */
+    --supplier-tab-active-bg: #224B4B; /* Dark teal background for the active tab */
+    --supplier-tab-active-text: #38BDAE; /* Bright teal/green text for the active tab */
+    --supplier-tab-inactive-text: #8899A1; /* Muted gray/blue text for inactive tabs */
+    --supplier-tab-hover-text: #A0B0B8; /* Slightly brighter text for inactive tab hover */
+    --supplier-tab-hover-bg: rgba(45, 75, 75, 0.2); /* Subtle background for inactive tab hover */
+
+    --supplier-tab-container-border-radius: 8px; /* Radius for the overall tab container */
+    --supplier-tab-button-border-radius: 6px; /* Radius for individual tab buttons */
+
+    --supplier-tab-container-padding: 4px; /* Padding inside the tab bar, around buttons */
+    --supplier-tab-buttons-gap: 4px; /* Space between tab buttons */
+    --supplier-tab-button-padding: 0.6rem 1.2rem; /* Padding inside each tab button */
+}
+
+/* Style for the tab container (ul) */
+#supplierTab.nav-tabs {
+    border-bottom: none; /* Remove Bootstrap's default bottom border */
+    background-color: var(--supplier-tab-overall-bg);
+    padding: var(--supplier-tab-container-padding);
+    border-radius: var(--supplier-tab-container-border-radius);
+    display: inline-flex; /* Makes the container wrap its content */
+    gap: var(--supplier-tab-buttons-gap); /* Creates space between nav-items if they are distinct elements, or helps space buttons */
+    margin-bottom: 0; /* Ensure no extra margin below the tab bar */
+}
+
+    /* Reset margin for list items if any conflict */
+    #supplierTab.nav-tabs .nav-item {
+        margin-bottom: 0;
+    }
+
+    #supplierTab.nav-tabs .nav-link {
+        border: none; /* Remove Bootstrap's default borders on links */
+        border-radius: var(--supplier-tab-button-border-radius);
+        padding: var(--supplier-tab-button-padding);
+        color: var(--supplier-tab-inactive-text);
+        background-color: transparent; /* Inactive tabs are transparent against the container's background */
+
+        font-weight: 500; /* Standard weight for inactive tabs */
+        line-height: 1.2; /* Adjust for text vertical centering with padding */
+        text-align: center;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        /* Override Bootstrap's potential negative margin used for border merging */
+        margin-bottom: 0;
+    }
+
+        /* Style for the ACTIVE tab button */
+        #supplierTab.nav-tabs .nav-link.active {
+            background-color: var(--supplier-tab-active-bg);
+            color: var(--supplier-tab-active-text);
+            font-weight: 600; /* Bolder text for active tab */
+        }
+
+        /* Hover effect for INACTIVE tab buttons */
+        #supplierTab.nav-tabs .nav-link:not(.active):hover {
+            color: var(--supplier-tab-hover-text);
+            background-color: var(--supplier-tab-hover-bg);
+        }
+
+        /* Focus style for accessibility (optional: customize as needed) */
+        #supplierTab.nav-tabs .nav-link:focus {
+            outline: none; /* Remove default browser outline */
+            /* Example: Add a subtle box-shadow for focus state */
+            /* box-shadow: 0 0 0 2px rgba(var(--supplier-tab-active-rgb, 56, 189, 174), 0.3); */
+        }
+
+        /* Remove Bootstrap's specific hover border if it appears */
+        #supplierTab.nav-tabs .nav-link:hover {
+            border-color: transparent; /* Ensure no border appears on hover */
+        }

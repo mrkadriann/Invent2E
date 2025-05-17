@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InventoryManagement.Models
 {
+
     public class AddProductViewModel
     {
         [Required(ErrorMessage = "Product Name is required.")]

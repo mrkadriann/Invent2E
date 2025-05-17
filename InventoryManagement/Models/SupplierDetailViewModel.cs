@@ -73,26 +73,18 @@ namespace InventoryManagement.Models
                 PrimaryContactAvatarColor = GetColorForInitial("?");
             }
 
-            // 3. Product Image URL Logic (Corrected)
             if (Supplier.Products != null)
             {
-                foreach (var p in Supplier.Products) // 'p' is a Product entity
+                foreach (var p in Supplier.Products) 
                 {
-                    string imageUrl = "/images/placeholder-product.png"; // Default to placeholder
+                    string imageUrl = "/images/placeholder-product.png";
 
-                    // Strategy:
-                    // 1. Try the explicitly set Product.PrimaryImage first.
-                    // 2. If not set, try finding the image with the lowest ImageOrder from Product.AllImages.
-                    // 3. If still nothing, default to placeholder.
-
-                    if (p.PrimaryImage != null) // Check the direct navigation property
+                    if (p.PrimaryImage != null)
                     {
-                        // Ensure SupplierController includes .ThenInclude(pr => pr.PrimaryImage)
                         imageUrl = $"/Image/GetImage/{p.PrimaryImage.ImageId}";
                     }
-                    else if (p.AllImages != null && p.AllImages.Any()) // Fallback to AllImages using ImageOrder
+                    else if (p.AllImages != null && p.AllImages.Any())
                     {
-                        // Ensure SupplierController includes .ThenInclude(pr => pr.AllImages)
                         ImageData bestOrderedImage = p.AllImages
                                                      .Where(img => img.ImageOrder.HasValue)
                                                      .OrderBy(img => img.ImageOrder)
@@ -101,15 +93,6 @@ namespace InventoryManagement.Models
                         {
                             imageUrl = $"/Image/GetImage/{bestOrderedImage.ImageId}";
                         }
-                        // Optional: If no ordered images, you could take p.AllImages.FirstOrDefault()
-                        // else
-                        // {
-                        //     ImageData anyImage = p.AllImages.FirstOrDefault();
-                        //     if (anyImage != null)
-                        //     {
-                        //         imageUrl = $"/Image/GetImage/{anyImage.ImageId}";
-                        //     }
-                        // }
                     }
 
                     SupplierProducts.Add(new ProductForView
@@ -127,7 +110,6 @@ namespace InventoryManagement.Models
             CurrencySymbol = GetCurrencySymbol(Supplier.Currency);
         }
 
-        // Helper methods (GetInitial, GetColorForInitial, GetCurrencySymbol, CalculateStockStatus) remain the same
         private static string GetInitial(string name, string fallback = "?")
         {
             return !string.IsNullOrWhiteSpace(name) ? name.Trim().Substring(0, 1).ToUpper() : fallback;
