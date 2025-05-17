@@ -2,8 +2,8 @@
 
 :root { /* You can remove this if these variables are globally defined in another linked CSS file */
     --primary-color: #00c77b; /* Main green from your theme */
-    --dark-bg: #141E22; /* Overall page background */
-    --card-bg: #1A262D; /* Background for form sections/cards */
+    --dark-bg: #141E22;
+    --card-bg: #1A262D;
     --input-bg: #0F171A; /* Slightly darker input background for contrast */
     --text-light: #ffffff;
     --text-gray: #8f8f8f; /* For placeholders */

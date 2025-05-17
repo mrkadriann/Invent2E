@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qQ6fpxo7wWGhHwE+P01lpjk23oPv6vweIxKevRIjJlc=",
+  "Hash": "pcAo2Pad/gTPiflt+RmiKnBuvRQVj34lZMlASx3/slw=",
   "Source": "InventoryManagement",
   "BasePath": "_content/InventoryManagement",
   "Mode": "Default",
@@ -962,12 +962,12 @@
       "OriginalItemSpec": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js"
     },
     {
-      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-5ol77gw103.gz",
+      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-4mhrfncbuq.gz",
       "SourceId": "InventoryManagement",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/InventoryManagement",
-      "RelativePath": "css/add-supplier#[.{fingerprint=5ol77gw103}]?.css.gz",
+      "RelativePath": "css/add-supplier#[.{fingerprint=4mhrfncbuq}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -976,8 +976,8 @@
       "RelatedAsset": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "8iuqfr3mkv",
-      "Integrity": "8IcpvO1PF5Zhq+COLGMjD2YqQLNlFMjb18FRrY3GDe8=",
+      "Fingerprint": "wtu2ymetzp",
+      "Integrity": "bF1V9ChpmqKy5ZJ/Jhns/bNqGVk4LHDFi5Gk7rCvPy0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css"
@@ -1522,8 +1522,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "5ol77gw103",
-      "Integrity": "i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI=",
+      "Fingerprint": "4mhrfncbuq",
+      "Integrity": "7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\add-supplier.css"
@@ -3109,7 +3109,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3162,7 +3162,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3199,7 +3199,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3246,7 +3246,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3307,7 +3307,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3352,7 +3352,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3383,13 +3383,13 @@
       ]
     },
     {
-      "Route": "css/add-supplier.5ol77gw103.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-5ol77gw103.gz",
+      "Route": "css/add-supplier.4mhrfncbuq.css",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-4mhrfncbuq.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000405844156"
+          "Quality": "0.000409332788"
         }
       ],
       "ResponseHeaders": [
@@ -3399,15 +3399,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2463"
+          "Value": "2442"
         },
         {
           "Name": "ETag",
-          "Value": "\"8IcpvO1PF5Zhq+COLGMjD2YqQLNlFMjb18FRrY3GDe8=\""
+          "Value": "\"bF1V9ChpmqKy5ZJ/Jhns/bNqGVk4LHDFi5Gk7rCvPy0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:56:58 GMT"
+          "Value": "Fri, 16 May 2025 15:14:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3427,13 +3427,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI=\""
+          "Value": "W/\"7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "5ol77gw103"
+          "Value": "4mhrfncbuq"
         },
         {
           "Name": "label",
@@ -3441,12 +3441,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI="
+          "Value": "sha256-7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8="
         }
       ]
     },
     {
-      "Route": "css/add-supplier.5ol77gw103.css",
+      "Route": "css/add-supplier.4mhrfncbuq.css",
       "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3456,7 +3456,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7716"
+          "Value": "7645"
         },
         {
           "Name": "Content-Type",
@@ -3464,11 +3464,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI=\""
+          "Value": "\"7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:56:58 GMT"
+          "Value": "Fri, 16 May 2025 15:14:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3478,7 +3478,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "5ol77gw103"
+          "Value": "4mhrfncbuq"
         },
         {
           "Name": "label",
@@ -3486,13 +3486,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI="
+          "Value": "sha256-7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8="
         }
       ]
     },
     {
-      "Route": "css/add-supplier.5ol77gw103.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-5ol77gw103.gz",
+      "Route": "css/add-supplier.4mhrfncbuq.css.gz",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-4mhrfncbuq.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3501,7 +3501,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2463"
+          "Value": "2442"
         },
         {
           "Name": "Content-Type",
@@ -3509,11 +3509,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8IcpvO1PF5Zhq+COLGMjD2YqQLNlFMjb18FRrY3GDe8=\""
+          "Value": "\"bF1V9ChpmqKy5ZJ/Jhns/bNqGVk4LHDFi5Gk7rCvPy0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:56:58 GMT"
+          "Value": "Fri, 16 May 2025 15:14:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3531,7 +3531,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "5ol77gw103"
+          "Value": "4mhrfncbuq"
         },
         {
           "Name": "label",
@@ -3539,18 +3539,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-8IcpvO1PF5Zhq+COLGMjD2YqQLNlFMjb18FRrY3GDe8="
+          "Value": "sha256-bF1V9ChpmqKy5ZJ/Jhns/bNqGVk4LHDFi5Gk7rCvPy0="
         }
       ]
     },
     {
       "Route": "css/add-supplier.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-5ol77gw103.gz",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-4mhrfncbuq.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000405844156"
+          "Quality": "0.000409332788"
         }
       ],
       "ResponseHeaders": [
@@ -3560,15 +3560,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2463"
+          "Value": "2442"
         },
         {
           "Name": "ETag",
-          "Value": "\"8IcpvO1PF5Zhq+COLGMjD2YqQLNlFMjb18FRrY3GDe8=\""
+          "Value": "\"bF1V9ChpmqKy5ZJ/Jhns/bNqGVk4LHDFi5Gk7rCvPy0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:56:58 GMT"
+          "Value": "Fri, 16 May 2025 15:14:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3588,13 +3588,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI=\""
+          "Value": "W/\"7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI="
+          "Value": "sha256-7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8="
         }
       ]
     },
@@ -3609,7 +3609,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7716"
+          "Value": "7645"
         },
         {
           "Name": "Content-Type",
@@ -3617,11 +3617,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI=\""
+          "Value": "\"7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:56:58 GMT"
+          "Value": "Fri, 16 May 2025 15:14:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3631,13 +3631,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-i69QI+WEIi/K/Dw/k6VuscxfxIAr3xiAJtHRgxpLrEI="
+          "Value": "sha256-7DwQ85v8/7RE/WdydHppultd/cVJEUGocDmHG1Bf/X8="
         }
       ]
     },
     {
       "Route": "css/add-supplier.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-5ol77gw103.gz",
+      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-4mhrfncbuq.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3646,7 +3646,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2463"
+          "Value": "2442"
         },
         {
           "Name": "Content-Type",
@@ -3654,11 +3654,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8IcpvO1PF5Zhq+COLGMjD2YqQLNlFMjb18FRrY3GDe8=\""
+          "Value": "\"bF1V9ChpmqKy5ZJ/Jhns/bNqGVk4LHDFi5Gk7rCvPy0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:56:58 GMT"
+          "Value": "Fri, 16 May 2025 15:14:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3676,7 +3676,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8IcpvO1PF5Zhq+COLGMjD2YqQLNlFMjb18FRrY3GDe8="
+          "Value": "sha256-bF1V9ChpmqKy5ZJ/Jhns/bNqGVk4LHDFi5Gk7rCvPy0="
         }
       ]
     },
@@ -3705,7 +3705,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:50:18 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3758,7 +3758,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:50:18 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3795,7 +3795,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:50:18 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3842,7 +3842,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:50:18 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3903,7 +3903,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:50:18 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3948,7 +3948,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 14:50:18 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4003,7 +4003,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 06:38:31 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4064,7 +4064,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 06:38:31 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4109,7 +4109,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 06:38:31 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4164,7 +4164,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 06:38:31 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4217,7 +4217,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 06:38:31 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4254,7 +4254,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 06:38:31 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5933,7 +5933,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5986,7 +5986,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6023,7 +6023,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6070,7 +6070,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6131,7 +6131,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6176,7 +6176,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 04:37:26 GMT"
+          "Value": "Fri, 16 May 2025 15:07:27 GMT"
         },
         {
           "Name": "Cache-Control",

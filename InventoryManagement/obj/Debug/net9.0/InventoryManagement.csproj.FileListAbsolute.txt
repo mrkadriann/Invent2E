@@ -234,4 +234,4 @@ C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\Invento
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\ref\InventoryManagement.dll
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\zfxkfnnz67-as3ivfemg3.gz
 C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\mx6a2ccs8i-pn9ewmtmx1.gz
-C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\mpl887pv2v-5ol77gw103.gz
+C:\Users\DELL\Source\Repos\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\mpl887pv2v-4mhrfncbuq.gz

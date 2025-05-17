@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\DELL\\source\\repos\\Invent2E\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\wwwroot\\css\\add-supplier.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\wwwroot\\css\\add-supplier.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\wwwroot\\css\\add-product.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\wwwroot\\css\\add-product.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\wwwroot\\css\\add-supplier.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\wwwroot\\css\\add-supplier.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\views\\supplier\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -133,12 +133,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|c:\\users\\dell\\source\\repos\\invent2e\\inventorymanagement\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{81A274D1-1A36-4218-B280-0952879522E0}|InventoryManagement\\InventoryManagement.csproj|solutionrelative:inventorymanagement\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DELL\\AppData\\Local\\Temp\\a2p02ovf..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DELL\\AppData\\Local\\Temp\\a2p02ovf..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -148,7 +142,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -156,13 +150,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "add-supplier.css",
               "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css",
               "RelativeDocumentMoniker": "InventoryManagement\\wwwroot\\css\\add-supplier.css",
-              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css*",
-              "RelativeToolTip": "InventoryManagement\\wwwroot\\css\\add-supplier.css*",
-              "ViewState": "AgIAAGwAAAAAAAAAAADgv7AAAAARAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css",
+              "RelativeToolTip": "InventoryManagement\\wwwroot\\css\\add-supplier.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-05-16T14:49:41.247Z",
               "EditorCaption": ""
@@ -177,8 +171,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\SupplierViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T03:48:42.23Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T03:48:42.23Z"
             },
             {
               "$type": "Document",
@@ -190,18 +183,17 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Supplier\\Create.cshtml",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAB4AAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-16T05:41:00.24Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T05:41:00.24Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "add-product.css",
               "DocumentMoniker": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
               "RelativeDocumentMoniker": "InventoryManagement\\wwwroot\\css\\add-product.css",
               "ToolTip": "C:\\Users\\DELL\\source\\repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
               "RelativeToolTip": "InventoryManagement\\wwwroot\\css\\add-product.css",
-              "ViewState": "AgIAAOYAAAAAAAAAAADwv/sAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAOkAAAAAAAAAAADwv9cAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-05-16T05:20:36.33Z",
               "EditorCaption": ""
@@ -216,8 +208,7 @@
               "RelativeToolTip": "InventoryManagement\\wwwroot\\css\\supplier.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEBAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-05-16T04:23:16.411Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T04:23:16.411Z"
             },
             {
               "$type": "Document",
@@ -229,8 +220,7 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Supplier\\_SupplierDetail.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAJEAAAB6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-16T07:19:16.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T07:19:16.669Z"
             },
             {
               "$type": "Document",
@@ -242,8 +232,7 @@
               "RelativeToolTip": "InventoryManagement\\wwwroot\\css\\site.css",
               "ViewState": "AgIAACgDAAAAAAAAAADwv1ADAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-05-16T01:25:02.523Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T01:25:02.523Z"
             },
             {
               "$type": "Document",
@@ -255,8 +244,7 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Supplier\\Index.cshtml",
               "ViewState": "AgIAABIAAAAAAAAAAAAAABMAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-16T03:45:47.422Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T03:45:47.422Z"
             },
             {
               "$type": "Document",
@@ -268,8 +256,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\ProductViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T12:48:44.604Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-14T12:48:44.604Z"
             },
             {
               "$type": "Document",
@@ -281,8 +268,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\Supplier.cs",
               "ViewState": "AgIAACYAAAAAAAAAAAA7wEgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T01:48:57.176Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T01:48:57.176Z"
             },
             {
               "$type": "Document",
@@ -294,8 +280,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\Product.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T11:31:50.359Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-14T11:31:50.359Z"
             },
             {
               "$type": "Document",
@@ -307,8 +292,7 @@
               "RelativeToolTip": "InventoryManagement\\Controllers\\SupplierController.cs",
               "ViewState": "AgIAALMAAAAAAAAAAAAuwLIAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T04:09:03.946Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T04:09:03.946Z"
             },
             {
               "$type": "Document",
@@ -320,8 +304,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\SupplierDetailViewModel.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAmwKsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T08:18:44.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T08:18:44.278Z"
             },
             {
               "$type": "Document",
@@ -333,8 +316,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\ProductDetailViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T05:16:28.304Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T05:16:28.304Z"
             },
             {
               "$type": "Document",
@@ -346,8 +328,7 @@
               "RelativeToolTip": "InventoryManagement\\Data\\InventoryDbContext.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAwwFEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T11:45:22.569Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-14T11:45:22.569Z"
             },
             {
               "$type": "Document",
@@ -359,8 +340,7 @@
               "RelativeToolTip": "InventoryManagement\\Controllers\\ProductsController.cs",
               "ViewState": "AgIAADYBAAAAAAAAAAAswFMBAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T04:58:11.813Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T04:58:11.813Z"
             },
             {
               "$type": "Document",
@@ -372,8 +352,7 @@
               "RelativeToolTip": "InventoryManagement\\Controllers\\ImageController.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwDEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T07:08:00.199Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T07:08:00.199Z"
             },
             {
               "$type": "Document",
@@ -385,8 +364,7 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Products\\_ProductDetailPartial.cshtml",
               "ViewState": "AgIAAF0AAAAAAAAAAAAAABkAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-16T05:14:39.53Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T05:14:39.53Z"
             },
             {
               "$type": "Document",
@@ -398,8 +376,7 @@
               "RelativeToolTip": "InventoryManagement\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T13:56:50.178Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T13:56:50.178Z"
             },
             {
               "$type": "Document",
@@ -411,8 +388,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T13:49:19.894Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-14T13:49:19.894Z"
             },
             {
               "$type": "Document",
@@ -424,8 +400,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\AddProductViewModel.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwCYAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T04:48:19.319Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T04:48:19.319Z"
             },
             {
               "$type": "Document",
@@ -437,8 +412,7 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Products\\AddProduct.cshtml",
               "ViewState": "AgIAAD8AAAAAAAAAAAAAAAIAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-15T06:10:05.706Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T06:10:05.706Z"
             },
             {
               "$type": "Document",
@@ -450,8 +424,7 @@
               "RelativeToolTip": "InventoryManagement\\Models\\AddSupplierViewModel.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAuwAEAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T05:22:46.965Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T05:22:46.965Z"
             },
             {
               "$type": "Document",
@@ -463,19 +436,18 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Products\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-05T11:20:33.77Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T11:20:33.77Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 24,
-              "Title": "SQLQuery2.sql ",
+              "Title": "a2p02ovf..sql",
               "DocumentMoniker": "C:\\Users\\DELL\\AppData\\Local\\Temp\\a2p02ovf..sql",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\a2p02ovf..sql",
-              "ToolTip": "SQLQuery2.sql *",
+              "ToolTip": "C:\\Users\\DELL\\AppData\\Local\\Temp\\a2p02ovf..sql",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\a2p02ovf..sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-05-16T07:05:24.347Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T07:05:24.347Z"
             },
             {
               "$type": "Document",
@@ -487,8 +459,7 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACQAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-16T03:55:09.38Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T03:55:09.38Z"
             },
             {
               "$type": "Document",
@@ -500,8 +471,7 @@
               "RelativeToolTip": "InventoryManagement\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T11:20:18.994Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T11:20:18.994Z"
             },
             {
               "$type": "Document",
@@ -513,8 +483,7 @@
               "RelativeToolTip": "InventoryManagement\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-16T04:48:14.176Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T04:48:14.176Z"
             },
             {
               "$type": "Document",
@@ -526,8 +495,7 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Shared\\Error.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-16T03:58:53.582Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T03:58:53.582Z"
             },
             {
               "$type": "Document",
@@ -539,8 +507,7 @@
               "RelativeToolTip": "InventoryManagement\\Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-16T03:52:03.075Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T03:52:03.075Z"
             },
             {
               "$type": "Document",
@@ -585,8 +552,7 @@
               "RelativeToolTip": "InventoryManagement\\wwwroot\\js\\site.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-05-05T12:46:43.15Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T12:46:43.15Z"
             }
           ]
         },
