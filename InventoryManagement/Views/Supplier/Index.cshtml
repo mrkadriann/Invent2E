@@ -399,18 +399,11 @@
         });
 
         //delete
-                       $(document).on('click', '.btn-delete-supplier', function () {
+        $(document).on('click', '.btn-delete-supplier', function () {
             var $button = $(this);
             var supplierId = $button.data('supplier-id');
             var supplierName = $button.data('supplier-name') || 'this supplier'; // Fallback name
 
-            // --- For ANTI-FORGERY TOKEN - IMPORTANT TO FIX THIS LATER ---
-            // var tokenInput = $('input[name="__RequestVerificationToken"]');
-            // var token = tokenInput.val();
-            // console.log("Token for delete (NEEDS TO BE FIXED AND SENT):", token);
-            // For now, since [ValidateAntiForgeryToken] is removed on server, we don't send it.
-            // BUT THIS IS INSECURE and needs to be fixed.
-            // --- END ANTI-FORGERY TOKEN ---
 
 
             if (confirm(`Are you sure you want to delete ${supplierName}? This action cannot be undone.`)) {
@@ -418,17 +411,13 @@
                 $.ajax({
                     url: '@Url.Action("PerformDelete", "Supplier")/' + supplierId,
                     type: 'POST',
-                    // data: { // If [ValidateAntiForgeryToken] was active, you'd send the token here
-                    //     __RequestVerificationToken: token
-                    // },
                     beforeSend: function() {
                         $button.prop('disabled', true).html('<i class="fas fa-spinner fa-spin" style="font-size:20px;"></i>');
                     },
                     success: function (response) {
                         if (response.success) {
-                            alert('Deleted! ' + response.message); // Basic success alert
+                            alert('Deleted! ' + response.message);
 
-                            // Close the supplier detail modal
                             var supplierModalElement = document.getElementById('supplierDetailModal');
                             if (supplierModalElement) {
                                 var supplierModal = bootstrap.Modal.getInstance(supplierModalElement);
@@ -436,7 +425,7 @@
                                     supplierModal.hide();
                                 }
                             }
-                            // Refresh the supplier list on the main page
+
                             setTimeout(function() { window.location.reload(); }, 500); // Shorter delay for basic alert
 
                         } else {

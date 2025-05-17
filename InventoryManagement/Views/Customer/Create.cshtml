@@ -1,0 +1,181 @@
+﻿@model InventoryManagement.Models.CustomerViewModel
+
+@{
+    ViewData["Title"] = "Customer Details"; // Matches the title in the screenshot
+}
+
+<link rel="stylesheet" href="~/css/add-customer.css" asp-append-version="true" />
+@* Ensure Material Icons are linked in your _Layout.cshtml or here if not already *@
+@* <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> *@
+
+
+<div class="add-customer-container">
+    <div class="page-header-customer">
+        <a asp-action="Index" asp-controller="Customer" class="back-link-customer">
+            <i class="material-icons">arrow_back</i>
+            <span>Back To customer list</span> @* Changed from product list to customer list *@
+        </a>
+        <h1 class="page-title-customer">@ViewData["Title"]</h1>
+    </div>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="add-customer-form-layout">
+            @* LEFT COLUMN CARD *@
+            <div class="form-section-card-customer">
+                <div class="customer-image-area">
+                    <label for="customerImageUpload" class="customer-image-preview-container">
+                        <img id="customerImagePreview" src="#" alt="Customer Preview" />
+                        <span id="customerImagePlaceholder" class="customer-image-placeholder">
+                            C @* Default Initial, can be dynamic *@
+                            <span style="font-size: 12px; position: absolute; top: 5px; right: 5px; background-color: rgba(0,0,0,0.5); border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;">+</span>
+                        </span>
+                    </label>
+                    <input asp-for="CustomerPictureFile" type="file" id="customerImageUpload" accept="image/*" />
+                    <span asp-validation-for="CustomerPictureFile" class="text-danger"></span>
+                </div>
+
+                <div class="form-row-customer">
+                    <div class="form-group-customer">
+                        <label asp-for="CustomerName">Name</label>
+                        <input asp-for="CustomerName" class="form-control" />
+                        <span asp-validation-for="CustomerName" class="text-danger"></span>
+                    </div>
+   
+                </div>
+
+                <div class="form-row-customer">
+                    <div class="form-group-customer">
+                        <label asp-for="CustomerType"></label>
+                        <select asp-for="CustomerType" class="form-control">
+                            <option value="">Select Type...</option>
+                            @if (ViewBag.CustomerTypes != null)
+                            {
+                                foreach (var type in (List<string>)ViewBag.CustomerTypes)
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="Retail">Retail</option>
+                                <option value="Wholesale">Wholesale</option>
+                            }
+                        </select>
+                        <span asp-validation-for="CustomerType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group-customer">
+                        <label asp-for="CustomerStatus">Status</label>
+                        <select asp-for="CustomerStatus" class="form-control">
+                            <option value="">Select Status...</option>
+                            @if (ViewBag.CustomerStatuses != null)
+                            {
+                                foreach (var status in (List<string>)ViewBag.CustomerStatuses)
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Pending">Pending</option>
+                            }
+                        </select>
+                        <span asp-validation-for="CustomerStatus" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group-customer">
+                    <label asp-for="CustomerRemark">Remarks</label>
+                    <textarea asp-for="CustomerRemark" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="CustomerRemark" class="text-danger"></span>
+                </div>
+            </div>
+
+            @* RIGHT COLUMN CARD *@
+            <div class="form-section-card-customer">
+                <h4>Contact Information</h4>
+                <div class="form-row-customer">
+                    <div class="form-group-customer">
+                        <label asp-for="PhoneNumber">Phone</label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group-customer">
+                        <label asp-for="CustomerEmail">Email</label>
+                        <input asp-for="CustomerEmail" type="email" class="form-control" />
+                        <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group-customer">
+                    <label asp-for="ShippingAddress">Shipping Address</label> @* Explicitly Shipping Address *@
+                    <input asp-for="ShippingAddress" class="form-control" />
+                    <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group-customer">
+                    <label asp-for="BillingAddress">Billing Address</label>
+                    <input asp-for="BillingAddress" class="form-control" />
+                    <span asp-validation-for="BillingAddress" class="text-danger"></span>
+                </div>
+
+                <div class="form-actions-customer" style="margin-top: auto;">
+                    @* Push buttons to bottom *@
+                    <a asp-action="Index" asp-controller="Customer" class="btn-customer btn-customer-cancel">Cancel</a>
+                    <input type="submit" value="Save" class="btn-customer btn-customer-save" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            function updateImagePreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#customerImagePreview').attr('src', e.target.result).show();
+                        $('#customerImagePlaceholder').hide(); // Hide the initial/plus
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    $('#customerImagePreview').hide().attr('src', '#');
+                    // Show placeholder if no file selected or if selection is cancelled
+                    var customerName = $('#CustomerName').val();
+                    var initial = customerName ? customerName.trim().substring(0, 1).toUpperCase() : 'C';
+                    $('#customerImagePlaceholder').contents().first()[0].nodeValue = initial + " ";
+                    $('#customerImagePlaceholder').show();
+                }
+            }
+
+            $('#customerImageUpload').on('change', function () {
+                updateImagePreview(this);
+            });
+
+            // Dynamic initial for placeholder if name is typed and no image is set
+            $('#CustomerName').on('input', function() {
+                var customerName = $(this).val();
+                var initial = customerName ? customerName.trim().substring(0, 1).toUpperCase() : 'C';
+                // Only update placeholder text if no image is currently displayed
+                if ($('#customerImagePreview').attr('src') === '#' || !$('#customerImagePreview').is(':visible')) {
+                    $('#customerImagePlaceholder').contents().first()[0].nodeValue = initial + " ";
+                    $('#customerImagePlaceholder').show(); // Ensure it's visible
+                }
+            });
+
+            // --- THIS BLOCK WAS REMOVED ---
+            // $('.customer-image-preview-container').on('click', function() {
+            //     $('#customerImageUpload').click();
+            // });
+            // --- END OF REMOVED BLOCK ---
+        });
+    </script>
+}

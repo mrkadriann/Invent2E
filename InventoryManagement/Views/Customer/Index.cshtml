@@ -1,0 +1,491 @@
+﻿@model InventoryManagement.Controllers.PaginatedList<InventoryManagement.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+    var defaultSort = ""; // Or your preferred default
+}
+<link rel="stylesheet" href="~/css/customer.css" asp-append-version="true" />
+
+<div class="customers-container">
+    <div class="customers-actions-row">
+        <div class="customers-title">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+        <div class="search-container" style="flex-grow: 1;">
+            <i class="material-icons search-icon">search</i>
+            <input type="text" id="topSearchInput"
+                   class="form-control search-input"
+                   placeholder="Search Name, Email, Phone..."
+                   value="@ViewData["CurrentSearchFilter"]">
+        </div>
+        <a asp-controller="Customer" asp-action="Create" class="btn btn-success add-customer-btn">
+            <i class="material-icons">add</i> Add Customer
+        </a>
+    </div>
+
+    <hr style="border-color: var(--border-color);" />
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="customers-content">
+        <form asp-controller="Customer" asp-action="Index" method="get" class="customers-sidebar">
+            <input type="hidden" name="sortOrder" value="@(ViewData["CurrentSort"] ?? defaultSort)" />
+            <input type="hidden" name="searchString" value="@ViewData["CurrentSearchFilter"]" id="hiddenSearchStringForForm" />
+            <input type="hidden" name="pageNumber" value="@Model.PageIndex" />
+
+            <div class="filter-section">
+                <h3>FILTER BY TYPE</h3>
+                <div class="select-container">
+                    <select name="typeFilter" class="form-select" onchange="this.form.submit();">
+                        <option value="" selected="@(string.IsNullOrEmpty(ViewData["CurrentTypeFilter"] as string))">All Types</option>
+                        @if (ViewBag.CustomerTypes != null)
+                        {
+                            var currentType = ViewData["CurrentTypeFilter"] as string;
+                            foreach (var typeText in (IEnumerable<string>)ViewBag.CustomerTypes)
+                            {
+                                <option value="@typeText" selected="@(typeText == currentType)">
+                                    @typeText
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>FILTER BY STATUS</h3>
+                <div class="select-container">
+                    <select name="statusFilter" class="form-select" onchange="this.form.submit();">
+                        <option value="" selected="@(string.IsNullOrEmpty(ViewData["CurrentStatusFilter"] as string))">All Statuses</option>
+                        @if (ViewBag.CustomerStatuses != null)
+                        {
+                            var currentStatus = ViewData["CurrentStatusFilter"] as string;
+                            foreach (var statusText in (IEnumerable<string>)ViewBag.CustomerStatuses)
+                            {
+                                <option value="@statusText" selected="@(statusText == currentStatus)">
+                                    @statusText
+                                </option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="Active" selected="@(ViewData["CurrentStatusFilter"] as string == "Active")">Active</option>
+                            <option value="Inactive" selected="@(ViewData["CurrentStatusFilter"] as string == "Inactive")">Inactive</option>
+                            <option value="Pending" selected="@(ViewData["CurrentStatusFilter"] as string == "Pending")">Pending</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <a asp-action="Index" asp-controller="Customer" class="btn btn-outline-secondary w-100 mt-2">
+                <i class="material-icons">refresh</i> Reset All
+            </a>
+        </form>
+
+        <div class="customers-main">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info mt-3" style="margin: 20px; background-color: var(--card-bg); border-color: var(--border-color); color: var(--text-light);">
+                    No customers found matching your criteria.
+                    @if (!string.IsNullOrEmpty(ViewData["CurrentSearchFilter"] as string) ||
+                         !string.IsNullOrEmpty(ViewData["CurrentTypeFilter"] as string) ||
+                         !string.IsNullOrEmpty(ViewData["CurrentStatusFilter"] as string))
+                    {
+                        <span>Try <a asp-action="Index" asp-controller="Customer" style="color: var(--primary-color);">clearing the filters</a>.</span>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="customer-list">
+                    @foreach (var customer in Model)
+                    {
+                        <div class="customer-card" data-customer-id="@customer.CustomerId" style="cursor: pointer;">
+                            <div class="customer-avatar-image-container">
+                                @if (customer.CustomerPicture != null && customer.CustomerPicture.Length > 0)
+                                {
+                                    <img src="@Url.Action("GetCustomerPicture", "Customer", new { id = customer.CustomerId })"
+                                         alt="@customer.CustomerName Profile" class="customer-profile-img"
+                                         onerror="this.onerror=null; this.src='/images/placeholder-customer.png';" />
+                                }
+                                else
+                                {
+                                    string avatarInitial = !string.IsNullOrEmpty(customer.CustomerName) ? customer.CustomerName.Substring(0, 1).ToUpper() : "C";
+                                    string avatarColor = GetAvatarColor(avatarInitial);
+                                    <div class="customer-avatar-initials" style="background-color: @avatarColor;">@avatarInitial</div>
+                                }
+                            </div>
+
+                            <div class="customer-name-type">
+                                <h3 class="customer-name">@customer.CustomerName</h3>
+                                <p class="customer-type">@customer.CustomerType</p>
+                            </div>
+
+                            <div class="customer-info-item">
+                                <span class="info-label">EMAIL</span>
+                                <span class="info-value">@(customer.Information?.CustomerEmail ?? "N/A")</span>
+                            </div>
+
+                            <div class="customer-info-item">
+                                <span class="info-label">PHONE</span>
+                                <span class="info-value">@(customer.Information?.PhoneNumber ?? "N/A")</span>
+                            </div>
+
+                            <div class="customer-info-item">
+                                <span class="info-label">RECEIVABLES</span>
+                                <span class="info-value">
+                                    @{
+                                        // Placeholder for Receivables - This data is not in your current Customer model
+                                        // You'll need to fetch this data and add it to your Customer model or a ViewModel
+                                        var receivables = "₱0.00"; // Example
+                                        if (customer.CustomerId % 2 == 0) receivables = "₱1,000.00"; // Just for varied display
+                                    }
+                                    @receivables
+                                </span>
+                            </div>
+
+                            <div class="customer-info-item customer-remarks">
+                                <span class="info-label">REMARKS</span>
+                                @if (string.IsNullOrWhiteSpace(customer.CustomerRemark))
+                                {
+                                    <span class="info-value">Add Remarks</span>
+                                }
+                                else
+                                {
+                                    <span class="info-value has-remark" title="@customer.CustomerRemark">@customer.CustomerRemark</span>
+                                }
+                            </div>
+
+                            <div class="dropdown ms-auto">
+                                <button class="more-options-btn-customer" type="button" id="dropdownMenuButton_@customer.CustomerId" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="material-icons">more_horiz</i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton_@customer.CustomerId"
+                                    style="background-color: var(--card-bg); border-color: var(--border-color);">
+                                    <li>
+                                        <a class="dropdown-item view-customer-details" href="#" data-customer-id="@customer.CustomerId"
+                                           style="color: var(--text-muted);">
+                                            <i class="material-icons" style="font-size: 18px; vertical-align: text-bottom; margin-right: 8px;">visibility</i> View Details
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-action="Edit" asp-controller="Customer" asp-route-id="@customer.CustomerId"
+                                           style="color: var(--text-muted);">
+                                            <i class="material-icons" style="font-size: 18px; vertical-align: text-bottom; margin-right: 8px;">edit</i> Edit
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider" style="border-color: var(--border-color);"></li>
+                                    <li>
+                                        <a class="dropdown-item btn-delete-customer" href="#" data-customer-id="@customer.CustomerId" data-customer-name="@customer.CustomerName"
+                                           style="color: var(--danger);">
+                                            <i class="material-icons" style="font-size: 18px; vertical-align: text-bottom; margin-right: 8px;">delete</i> Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Pagination Controls -->
+                
+                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Page navigation" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item @prevDisabled">
+                                <a asp-action="Index"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                                   asp-route-searchString="@ViewData["CurrentSearchFilter"]"
+                                   asp-route-typeFilter="@ViewData["CurrentTypeFilter"]"
+                                   asp-route-statusFilter="@ViewData["CurrentStatusFilter"]"
+                                   class="page-link" style="background-color: var(--card-bg); border-color: var(--border-color); color: var(--text-light);">«</a>
+                            </li>
+
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                                    <a asp-action="Index"
+                                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                       asp-route-pageNumber="@i"
+                                       asp-route-searchString="@ViewData["CurrentSearchFilter"]"
+                                       asp-route-typeFilter="@ViewData["CurrentTypeFilter"]"
+                                       asp-route-statusFilter="@ViewData["CurrentStatusFilter"]"
+                                       class="page-link"
+                                       style="background-color: @(i == Model.PageIndex ? "var(--primary-color)" : "var(--card-bg)");
+                                              border-color: var(--border-color);
+                                              color: @(i == Model.PageIndex ? "var(--dark-bg)" : "var(--text-light)");">@i</a>
+                                </li>
+                            }
+
+                            <li class="page-item @nextDisabled">
+                                <a asp-action="Index"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                                   asp-route-searchString="@ViewData["CurrentSearchFilter"]"
+                                   asp-route-typeFilter="@ViewData["CurrentTypeFilter"]"
+                                   asp-route-statusFilter="@ViewData["CurrentStatusFilter"]"
+                                   class="page-link" style="background-color: var(--card-bg); border-color: var(--border-color); color: var(--text-light);">»</a>
+                            </li>
+                        </ul>
+                    </nav>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Modal Placeholder (to be filled later as requested) -->
+<div class="modal fade" id="customerDetailModal" tabindex="-1" aria-labelledby="customerDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" id="customerDetailModalContent" style="background-color: transparent; border: none;">
+            <!-- Loading spinner or placeholder for customer details -->
+            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: var(--dark-bg); border-radius: 12px;">
+                <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@functions {
+    string GetAvatarColor(string initial)
+    {
+        if (string.IsNullOrEmpty(initial)) return "#cccccc";
+        int charCode = (int)initial[0];
+        var colors = new[] { "#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#6366f1", "#ec4899", "#f43f5e" };
+        return colors[charCode % colors.Length];
+    }
+}
+
+@section Scripts {
+    @{
+        // If you use client-side validation for any forms on this page (e.g., if filters had complex validation)
+        // await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // This function might be called after modal content is loaded if it has interactive elements
+        function initializeCustomerModalFeatures() {
+            console.log("Customer modal features could be initialized here if needed.");
+            // Example: If your modal had its own search or dynamic elements needing JS.
+        }
+
+        $(document).ready(function () {
+            // --- Search and Filter Form Handling ---
+            $('#topSearchInput').on('input change', function () {
+                $('#hiddenSearchStringForForm').val($(this).val());
+            });
+
+            $('.customers-sidebar').on('submit', function() {
+                // Ensure the top search input value is included in the form submission
+                $('#hiddenSearchStringForForm').val($('#topSearchInput').val());
+
+                // Optional: Prevent submission of empty filter values to keep URL clean
+                $(this).find('select, input[type="text"], input[type="number"]').each(function() {
+                    if (!$(this).val() && $(this).attr('name') !== 'searchString' && $(this).attr('name') !== 'sortOrder' && $(this).attr('name') !== 'pageNumber') {
+                        $(this).attr('name', ''); // Temporarily remove name if value is empty (except for persistent params)
+                    }
+                });
+            });
+
+            $('#topSearchInput').on('keypress', function(e) {
+                if (e.which == 13) { // Enter key pressed
+                    e.preventDefault(); // Prevent default form submission if it's inside a form
+                    $('#hiddenSearchStringForForm').val($(this).val());
+                    $('.customers-sidebar').submit(); // Submit the filter form
+                }
+            });
+
+            // --- Customer Detail Modal Opening ---
+            $(document).on('click', '.customer-card, .view-customer-details', function (e) {
+                var $clickedElement = $(this);
+                var customerId;
+
+                // Determine if the click should open the modal
+                if ($clickedElement.hasClass('customer-card')) {
+                    // If card is clicked, check if the actual target was an interactive element
+                    // (like a dropdown button, edit/delete button directly on card, etc.)
+                    // This prevents the modal from opening if an action *within* the card was intended.
+                    if ($(e.target).closest('.dropdown, .btn-delete-customer-on-card, .btn-edit-customer-on-card, a[asp-action="Edit"], input, select, textarea').length > 0) {
+                        // Allow if the specific target was a "view details" link, even if inside a dropdown
+                        if (!$(e.target).hasClass('view-customer-details') && !$(e.target).closest('.view-customer-details').length) {
+                           return; // Don't open modal
+                        }
+                    }
+                    customerId = $clickedElement.data('customer-id');
+                } else if ($clickedElement.hasClass('view-customer-details')) {
+                    // If a dedicated "view details" link was clicked
+                    customerId = $clickedElement.data('customer-id');
+                }
+
+
+                if (!customerId) {
+                    console.error("Customer ID not found for modal trigger.");
+                    return;
+                }
+                e.preventDefault(); // Prevent default action for links
+
+                console.log("Attempting to open modal for customer ID:", customerId);
+
+                var modalContent = $('#customerDetailModalContent');
+                var customerModalElement = document.getElementById('customerDetailModal');
+
+                if (!customerModalElement) {
+                    console.error("Modal element #customerDetailModal not found!");
+                    return;
+                }
+                var customerModal = bootstrap.Modal.getInstance(customerModalElement) || new bootstrap.Modal(customerModalElement);
+
+                // Show loading spinner
+                modalContent.html('<div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: var(--dark-bg); border-radius: 12px;"><div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                customerModal.show();
+
+                // AJAX call to get customer details partial view
+                $.ajax({
+                    url: '@Url.Action("GetCustomerDetailsPartial", "Customer")/' + customerId,
+                    type: 'GET',
+                    success: function (result) {
+                        modalContent.html(result);
+                        initializeCustomerModalFeatures(); // Initialize any JS features within the loaded modal content
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = `Error loading customer details. Status: ${xhr.status} ${error}.`;
+                        if(xhr.responseText) {
+                            // Try to parse if it's a JSON error from the server
+                            try {
+                                var errObj = JSON.parse(xhr.responseText);
+                                if (errObj && errObj.message) errorMessage = errObj.message;
+                            } catch (e) { // Or just show a snippet of the HTML error page
+                                errorMessage += ` Response: ${xhr.responseText.substring(0, 300)}`;
+                            }
+                        }
+                        modalContent.html(`<div class="p-4" style="background-color: var(--dark-bg); border-radius: 12px; color: var(--danger); text-align:center;">${errorMessage}</div>`);
+                        console.error("Error loading customer details partial:", status, error, xhr);
+                    }
+                });
+            });
+
+            // delete
+            $(document).on('click', '.btn-delete-customer', function () { // Changed class to '.btn-delete-customer'
+            var $button = $(this);
+            var customerId = $button.data('customer-id'); // Changed data attribute to 'customer-id'
+            var customerName = $button.data('customer-name') || 'this customer'; // Changed data attribute to 'customer-name'
+
+            // Check if customerId was found
+            if (typeof customerId === 'undefined') {
+                console.error("Customer ID not found on the delete button. Ensure 'data-customer-id' attribute is set.");
+                alert("Error: Could not get customer ID for deletion.");
+                return;
+            }
+
+            if (confirm(`Are you sure you want to delete customer: ${customerName}? This action cannot be undone.`)) {
+                // User confirmed
+                $.ajax({
+                    url: '@Url.Action("DeleteConfirmed", "Customer")/' + customerId, // Changed controller to "Customer" and action to "DeleteConfirmed"
+                    type: 'POST',
+                    // If your "DeleteConfirmed" action in CustomerController expects the ID in the body:
+                    data: {
+                        id: customerId
+                    },
+                    beforeSend: function() {
+                        // Store original HTML to restore it properly
+                        if (!$button.data('original-html')) {
+                             $button.data('original-html', $button.html());
+                        }
+                        $button.prop('disabled', true).html('<i class="fas fa-spinner fa-spin" style="font-size:20px;"></i>'); // Assuming Font Awesome for spinner
+                    },
+                    success: function (response) {
+                        if (response && response.success) { // Check if response and response.success exist
+                            alert('Deleted! ' + response.message);
+
+                            // Close the customer detail modal if it's open
+                            var customerModalElement = document.getElementById('customerDetailModal'); // Changed modal ID
+                            if (customerModalElement) {
+                                var customerModal = bootstrap.Modal.getInstance(customerModalElement);
+                                if (customerModal && $(customerModalElement).hasClass('show')) { // Check if modal is currently shown
+                                    customerModal.hide();
+                                    // Wait for modal to hide completely before reloading page
+                                    $(customerModalElement).one('hidden.bs.modal', function () {
+                                        window.location.reload();
+                                    });
+                                    return; // Important to prevent immediate reload below if modal was open
+                                }
+                            }
+                            setTimeout(function() { window.location.reload(); }, 300); // Adjusted delay slightly
+
+                        } else {
+                            alert('Deleted Successfully!');
+                             window.location.reload();
+                             
+                        }
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        console.error("AJAX Error deleting customer:", xhr.responseText, status, errorThrown);
+                        var errorMessage = 'An error occurred while trying to delete the customer.';
+                        if(xhr.status === 404) {
+                            errorMessage = 'Delete endpoint not found. Please check the URL.';
+                        } else if (xhr.responseText) {
+                            try {
+                                var errData = JSON.parse(xhr.responseText);
+                                if (errData && errData.message) errorMessage = errData.message;
+                            } catch(e) { /* ignore parsing error */ }
+                        }
+                        alert(errorMessage + ` (Status: ${xhr.status})`);
+                    },
+                    complete: function() {
+                        // Re-enable the button and restore its original icon ONLY IF it wasn't a success that reloads page
+                        // Check if the button is still part of the DOM (it might be gone if modal closed and page reloaded)
+                        if ($button.closest('body').length) {
+                             if (!$button.prop('disabled') || ($button.data('original-html') && $button.html().includes('fa-spinner'))) { // check if it's still showing spinner
+                                $button.prop('disabled', false).html($button.data('original-html') || '<i class="material-icons" style="font-size:20px;">delete</i>');
+                             }
+                        }
+                    }
+                });
+            } else {
+                // User clicked "Cancel" in the confirm dialog
+                return false;
+            }
+        });
+
+            // --- Bootstrap Alert Initialization (for TempData messages) ---
+            var alertList = document.querySelectorAll('.alert[data-bs-dismiss="alert"]');
+            alertList.forEach(function (alert) {
+                if (!bootstrap.Alert.getInstance(alert)) { // Check if already initialized
+                    new bootstrap.Alert(alert);
+                }
+            });
+
+            // --- Optional: Handle modal shown/hidden events for cleanup or re-initialization ---
+            var customerDetailModalElement = document.getElementById('customerDetailModal');
+            if (customerDetailModalElement) {
+                customerDetailModalElement.addEventListener('shown.bs.modal', function () {
+                    console.log("Customer detail modal has been shown.");
+                });
+
+                customerDetailModalElement.addEventListener('hidden.bs.modal', function () {
+                    console.log("Customer detail modal has been hidden.");
+                });
+            }
+        });
+    </script>
+}

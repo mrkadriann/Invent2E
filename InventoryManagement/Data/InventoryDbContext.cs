@@ -19,6 +19,10 @@ namespace InventoryManagement.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<SupplierContact> SupplierContacts { get; set; }
 
+        //Customer
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerInformation> CustomerInformations { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -76,6 +80,15 @@ namespace InventoryManagement.Data
             modelBuilder.Entity<Supplier>()
                 .HasIndex(s => s.CompanyName)
                 .IsUnique();
+
+            // Customer
+            modelBuilder.Entity<Customer>()
+               .HasOne(c => c.Information)
+               .WithOne(ci => ci.Customer)
+               .HasForeignKey<CustomerInformation>(ci => ci.CustomerId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+
         }
     }
 }

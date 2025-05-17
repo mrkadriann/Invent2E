@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\InventoryManagement.1g1tv63wlh.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\Customer.css",
+      "PackagePath": "staticwebassets\\css\\Customer.css"
+    },
+    {
+      "Id": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-customer.css",
+      "PackagePath": "staticwebassets\\css\\add-customer.css"
+    },
+    {
       "Id": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
       "PackagePath": "staticwebassets\\css\\add-product.css"
     },
