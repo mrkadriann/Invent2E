@@ -15,6 +15,7 @@ namespace InventoryManagement.Data
         public DbSet<ImageData> Images { get; set; }
         public DbSet<Description> Descriptions { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<AdjustmentLog> AdjustmentLogs { get; set; }
 
         //Supplier
         public DbSet<Supplier> Suppliers { get; set; }
@@ -69,6 +70,13 @@ namespace InventoryManagement.Data
             modelBuilder.Entity<Quantity>()
                 .Property(q => q.Qty)
                 .HasDefaultValue(0);
+
+            modelBuilder.Entity<AdjustmentLog>()
+               .HasOne(al => al.Product)          
+               .WithMany()                       
+               .HasForeignKey(al => al.ProductId) 
+               .HasPrincipalKey(p => p.ItemId)
+               .OnDelete(DeleteBehavior.Restrict);
 
             // Supplier
             modelBuilder.Entity<Supplier>()

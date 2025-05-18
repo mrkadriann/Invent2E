@@ -117,6 +117,9 @@ namespace InventoryManagement.Models
         public int ItemId { get; set; }
         [Column("quantity")]
         public int Qty {  get; set; }
+        [Required]
+        [Column("last_updated")] 
+        public DateTime LastUpdated { get; set; }
 
         [ForeignKey("ItemId")]
         public virtual Product Product { get; set; }

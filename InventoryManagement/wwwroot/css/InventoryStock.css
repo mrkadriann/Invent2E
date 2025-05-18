@@ -1,0 +1,287 @@
+﻿body {
+    background-color: rgb(117, 116, 116); /* This is the grey page background */
+}
+
+.bed {
+    border-radius: 15px;
+    width: 70%; /* This matches the screenshot's form width */
+    background-color: rgba(20, 29, 31, 1); /* Dark background for the form */
+    padding: 20px; /* Increased padding for more internal space like the screenshot */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */ /* We'll let content flow */
+    align-items: stretch; /* Make children like form elements stretch */
+    overflow-y: auto; /* Good for longer forms */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Optional: subtle shadow */
+}
+
+.title {
+    color: rgba(255, 255, 255, 1);
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+
+.content-texts {
+    color: rgba(255, 255, 255, 1);
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Item Container Styles */
+.ItemContainer {
+    background-color: rgba(26, 38, 45, 1);
+    border-radius: 8px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.ImageHolder {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+.ItemDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.ItemName {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.ItemStock {
+    font-size: 0.85rem;
+    margin: 0;
+    opacity: 0.8;
+}
+
+    .ItemStock i {
+        margin-right: 5px;
+        font-size: 13px;
+    }
+
+.ItemStatus {
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Adjustment Type Styles */
+.AdjustmentTypeContainer .form-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.bg-input {
+    background-color: rgba(20, 29, 31, 1);
+}
+
+.AdjustmentTypeContainer .bg-input {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+    .AdjustmentTypeContainer .bg-input:hover {
+        border-color: rgba(0, 223, 114, 1); /* Green outline on hover */
+    }
+
+.btn-toggle {
+    border: 1px solid rgba(143, 143, 143, 1);
+    background-color: transparent;
+    color: rgba(255, 255, 255, 1);
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    transition: border-color 0.2s, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    text-align: left;
+}
+
+    .btn-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+input[type="radio"]:checked + .btn-toggle {
+    border-color: rgba(0, 223, 114, 1);
+    background-color: rgba(0, 223, 114, 0.1);
+}
+
+.btn-toggle i.bi-circle {
+    font-size: 1.2rem;
+    color: rgba(143, 143, 143, 1);
+    transition: color 0.2s;
+}
+
+input[type="radio"]:checked + .btn-toggle i.bi-circle {
+    color: rgba(0, 223, 114, 1);
+}
+
+.toggle-text {
+    flex-grow: 1;
+}
+
+.d-flex.gap-2 {
+    gap: 0.5rem;
+}
+
+/* Date Container Styles */
+.DateContainer .form-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.DateContainer .bg-input {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+    .DateContainer .bg-input:hover {
+        border-color: rgba(0, 223, 114, 1); /* Green outline on hover */
+    }
+
+.DateContainer .form-control {
+    background-color: rgba(20, 29, 31, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 1);
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+    .DateContainer .form-control:focus {
+        border-color: rgba(0, 223, 114, 1);
+        box-shadow: none;
+    }
+
+    .DateContainer .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .DateContainer .form-control::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
+
+.DateContainer select.form-control option {
+    background-color: rgba(20, 29, 31, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Quantity Container Styles */
+.AvailableQuantityContainer .form-label,
+.NewQuantityContainer .form-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.AvailableQuantityContainer .input-group,
+.NewQuantityContainer .input-group {
+    background-color: rgba(20, 29, 31, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+    .AvailableQuantityContainer .input-group:hover,
+    .NewQuantityContainer .input-group:hover {
+        border-color: rgba(0, 223, 114, 1);
+    }
+
+.AvailableQuantityContainer .form-control,
+.NewQuantityContainer .form-control {
+    background-color: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    font-size: 0.9rem;
+    width: 60px;
+    text-align: center;
+}
+
+    .AvailableQuantityContainer .form-control:focus,
+    .NewQuantityContainer .form-control:focus {
+        border: none;
+        box-shadow: none;
+    }
+
+.AvailableQuantityContainer .input-group:focus-within,
+.NewQuantityContainer .input-group:focus-within {
+    border-color: rgba(0, 223, 114, 1);
+}
+
+.AvailableQuantityContainer .btn,
+.NewQuantityContainer .btn {
+    padding: 0 8px;
+}
+
+    .AvailableQuantityContainer .btn i,
+    .NewQuantityContainer .btn i {
+        font-size: 1.2rem;
+    }
+
+    /* Button Hover and Active States */
+    .AvailableQuantityContainer .btn:hover,
+    .NewQuantityContainer .btn:hover,
+    .AvailableQuantityContainer .btn:active,
+    .NewQuantityContainer .btn:active,
+    .AvailableQuantityContainer .btn:focus,
+    .NewQuantityContainer .btn:focus {
+        background-color: rgba(0, 223, 114, 0.1);
+        border-color: rgba(0, 223, 114, 1);
+        color: rgba(255, 255, 255, 1);
+    }
+
+        .AvailableQuantityContainer .btn:hover i,
+        .NewQuantityContainer .btn:hover i,
+        .AvailableQuantityContainer .btn:active i,
+        .NewQuantityContainer .btn:active i,
+        .AvailableQuantityContainer .btn:focus i,
+        .NewQuantityContainer .btn:focus i {
+            color: rgba(255, 255, 255, 1);
+        }
+
+/* Description Container Styles */
+.DescriptionContainer .form-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.DescriptionContainer .form-control {
+    background-color: rgba(20, 29, 31, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 1);
+    font-size: 0.9rem;
+}
+
+    .DescriptionContainer .form-control:focus {
+        border-color: rgba(0, 223, 114, 1);
+        box-shadow: none;
+    }
+
+    .DescriptionContainer .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+/* Flex utility for side-by-side layout */
+.flex-1 {
+    flex: 1;
+}

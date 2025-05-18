@@ -124,10 +124,10 @@ function openAdjustStockModal(productId) {
 
     // You could implement a separate modal or redirect to a page
     // For demonstration purposes, just show a simple alert
-    alert('Stock adjustment functionality will be implemented separately.');
+    //alert('Stock adjustment functionality will be implemented separately.');
 
     // In a real implementation, you might do something like:
-    /*
+    
     $.ajax({
         url: '/Products/GetAdjustStockForm/' + productId,
         type: 'GET',
@@ -136,7 +136,7 @@ function openAdjustStockModal(productId) {
             $('#adjustStockModal').modal('show');
         }
     });
-    */
+    
 }
 
 // Functions for edit and delete

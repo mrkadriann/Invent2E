@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InventoryManagement.Models;
-using InventoryManagement.Data;     // For InventoryDbContext
-using Microsoft.EntityFrameworkCore; // For Include, ToListAsync, etc.
-using System.Linq;                 // For LINQ methods (Where, OrderBy, etc.)
-using System.Threading.Tasks;      // For async operations
+using InventoryManagement.Data;
+using Microsoft.EntityFrameworkCore; 
+using System.Linq;
+using System.Threading.Tasks;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering; // For SelectListItem
-using System.IO;                         // For MemoryStream
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.IO;
+using System.Security.Claims;
 
 namespace InventoryManagement.Controllers
 {
@@ -15,7 +16,7 @@ namespace InventoryManagement.Controllers
         private const string DefaultSortOrder = "NameAsc";
         private readonly InventoryDbContext _context;
 
-        public ProductsController(InventoryDbContext context) // Constructor Injection
+        public ProductsController(InventoryDbContext context)
         {
             _context = context;
         }
@@ -172,7 +173,7 @@ namespace InventoryManagement.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await RepopulateDropdownsForViewModel(model); // Corrected method name
+                await RepopulateDropdownsForViewModel(model);
                 return View(model);
             }
 
@@ -182,7 +183,7 @@ namespace InventoryManagement.Controllers
                 //Supplier = model.SelectedSupplierName ?? "N/A",
                 SupplierId = model.SelectedSupplierId,
                 CategoryId = model.SelectedProductCategoryId,
-                AllImages = new List<ImageData>() // Initialize collection
+                AllImages = new List<ImageData>()
             };
 
             var description = new Description
@@ -195,30 +196,30 @@ namespace InventoryManagement.Controllers
                 Color = model.Color ?? string.Empty,
                 WholesalePrice = model.WholesalePrice ?? 0,
                 RetailPrice = model.RetailPrice ?? 0,
-                Profit = model.Profit ?? 0 // Corrected missing '='
+                Profit = model.Profit ?? 0
             };
-            product.Description = description; // Assign to navigation property (lowercase 'product')
+            product.Description = description;
 
             var quantity = new Quantity
             {
-                Product = product, // Link back (lowercase 'product')
+                Product = product,
                 Qty = model.QuantityInStock
             };
-            product.Quantity = quantity; // Assign to navigation property (lowercase 'product')
+            product.Quantity = quantity;
 
             if (model.ImageFiles != null && model.ImageFiles.Count > 0)
             {
                 byte imageOrderCounter = 1; 
                 foreach (var formFile in model.ImageFiles)
                 {
-                    if (formFile.Length > 0) // Corrected 'FormFile.lenght' to 'formFile.Length'
+                    if (formFile.Length > 0) 
                     {
                         using (var memoryStream = new MemoryStream())
                         {
-                            await formFile.CopyToAsync(memoryStream); // Corrected 'CopyToAysnc'
+                            await formFile.CopyToAsync(memoryStream);
                             var imageData = new ImageData
                             {
-                                Product = product, // Link back to the product
+                                Product = product,
                                 ImageDt = memoryStream.ToArray(),
                                 ImageOrder = imageOrderCounter++
                             };
@@ -288,9 +289,172 @@ namespace InventoryManagement.Controllers
                                     })
                                     .ToListAsync();
             model.Suppliers.Insert(0, new SelectListItem { Value = "", Text = "Select Supplier...." });
+        }
 
-            // DimensionUnits and WeightUnits are initialized in AddProductViewModel's constructor
-            // and should persist on the model if it's returned to the view.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdjustQuantity(AdjustmentViewModel model)
+        {
+            // --- Start Validation Logic (same as before) ---
+            if (model.AdjustmentTypeValue == "Quantity")
+            {
+                if (!model.AdjustedQuantity.HasValue)
+                {
+                    ModelState.AddModelError(nameof(model.AdjustedQuantity), "New Quantity is required for a quantity adjustment.");
+                }
+                else if (model.AdjustedQuantity < 0)
+                {
+                    ModelState.AddModelError(nameof(model.AdjustedQuantity), "New Quantity cannot be negative.");
+                }
+            }
+            else if (model.AdjustmentTypeValue == "Value")
+            {
+                if (!model.AdjustmentValueAmount.HasValue)
+                {
+                    ModelState.AddModelError(nameof(model.AdjustmentValueAmount), "Adjustment Value Amount is required for a value adjustment.");
+                }
+            }
+
+            if (string.IsNullOrEmpty(model.Reason) || model.Reason == "") // Check for empty string from "Select Reason..."
+            {
+                ModelState.AddModelError(nameof(model.Reason), "Adjustment reason is required.");
+            }
+            // --- End Validation Logic ---
+
+            if (!ModelState.IsValid)
+            {
+                // Repopulate reasons if they were lost or not part of the model by default on POST
+                //if (model.AdjustmentReasons == null || !model.AdjustmentReasons.Any())
+                //{
+                //    model.AdjustmentReasons = new List<SelectListItem>
+                //     {
+                //        new SelectListItem { Value = "", Text = "Select Reason..." },
+                //        new SelectListItem { Value = "Stock Count", Text = "Stock Count" },
+                //        new SelectListItem { Value = "Damaged Goods", Text = "Damaged Goods" },
+                //        new SelectListItem { Value = "Returned Goods", Text = "Returned Goods" },
+                //        new SelectListItem { Value = "Promotion", Text = "Promotion" },
+                //        new SelectListItem { Value = "Other", Text = "Other" }
+                //     };
+                //}
+                // Return to the same page with validation errors
+                return View("AdjustStockPage", model);
+            }
+
+            var product = await _context.Products
+                                        .Include(p => p.Quantity)
+                                        .FirstOrDefaultAsync(p => p.ItemId == model.ProductId);
+
+            if (product == null)
+            {
+                ModelState.AddModelError("", "Product not found. Adjustment cannot be saved.");
+                // Repopulate reasons for the view
+                //if (model.AdjustmentReasons == null || !model.AdjustmentReasons.Any())
+                //{
+                //    model.AdjustmentReasons = new List<SelectListItem> { /* ... as above ... */ };
+                //}
+                return View("AdjustStockPage", model);
+            }
+
+            // --- Start Logging and Update Logic (same as before) ---
+            var adjustmentLog = new AdjustmentLog
+            {
+                ProductId = product.ItemId,
+                AdjustmentDate = model.Date,
+                Reason = model.Reason,
+                Description = model.Description,
+                AdjustmentType = model.AdjustmentTypeValue,
+                LogTimestamp = DateTime.UtcNow
+            };
+            // User ID
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            adjustmentLog.UserId = !string.IsNullOrEmpty(userIdClaim) ? userIdClaim : (User.Identity?.IsAuthenticated == true && !string.IsNullOrEmpty(User.Identity.Name) ? User.Identity.Name : "System/Unknown");
+
+            if (product.Quantity == null)
+            {
+                product.Quantity = new Quantity { ItemId = product.ItemId, Qty = 0, LastUpdated = DateTime.UtcNow };
+                _context.Quantities.Add(product.Quantity);
+            }
+            adjustmentLog.OldQuantity = product.Quantity.Qty;
+
+            if (model.AdjustmentTypeValue == "Quantity" && model.AdjustedQuantity.HasValue)
+            {
+                product.Quantity.Qty = model.AdjustedQuantity.Value;
+                adjustmentLog.NewQuantity = model.AdjustedQuantity.Value;
+            }
+            else if (model.AdjustmentTypeValue == "Value" && model.AdjustmentValueAmount.HasValue)
+            {
+                TempData["WarningMessage"] = "Value adjustment processing is a placeholder. Define business logic.";
+                // Actual value adjustment logic would go here
+            }
+            product.Quantity.LastUpdated = DateTime.UtcNow;
+            _context.AdjustmentLogs.Add(adjustmentLog);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = $"Stock for '{product.ItemName}' adjusted successfully. Log ID: {adjustmentLog.LogId}";
+                return RedirectToAction(nameof(Index)); // Or RedirectToAction("ProductDetail", new { id = product.ItemId });
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine($"DB Update Error: {ex.Message}");
+                ModelState.AddModelError("", "An error occurred while saving the adjustment. Please check the details and try again.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"General Error in AdjustQuantity: {ex.Message}");
+                ModelState.AddModelError("", "An unexpected error occurred. Please try again or contact support.");
+            }
+
+            //if (model.AdjustmentReasons == null || !model.AdjustmentReasons.Any())
+            //{
+            //    model.AdjustmentReasons = new List<SelectListItem> { /* ... as above ... */ };
+            //}
+            return View("AdjustStockPage", model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AdjustStockPage(int productId)
+        {
+            var product = await _context.Products
+                                        .Include(p => p.Quantity)
+                                        .Include(p => p.PrimaryImage)
+                                        .FirstOrDefaultAsync(p => p.ItemId == productId);
+
+            if (product == null)
+            {
+                TempData["ErrorMessage"] = "Product not found.";
+                return RedirectToAction(nameof(Index)); // Or a specific error page
+            }
+
+            var viewModel = new AdjustmentViewModel
+            {
+                ProductId = product.ItemId,
+                ProductName = product.ItemName,
+                CurrentStockQuantity = product.Quantity?.Qty ?? 0,
+                StockStatus = CalculateStockStatus(product.Quantity?.Qty),
+                AdjustedQuantity = product.Quantity?.Qty ?? 0,
+                Date = DateTime.Today,
+                AdjustmentTypeValue = "Quantity",
+                ProductImageUrl = product.PrimaryImageId.HasValue && product.PrimaryImage != null ?
+                                   $"/Image/GetImage/{product.PrimaryImage.ImageId}" : "/images/placeholder-sm.jpg"
+            };
+
+            //if (viewModel.AdjustmentReasons == null || !viewModel.AdjustmentReasons.Any())
+            //{
+            //    viewModel.AdjustmentReasons = new List<SelectListItem>
+            //     {
+            //        new SelectListItem { Value = "", Text = "Select Reason..." },
+            //        new SelectListItem { Value = "Stock Count", Text = "Stock Count" },
+            //        new SelectListItem { Value = "Damaged Goods", Text = "Damaged Goods" },
+            //        new SelectListItem { Value = "Returned Goods", Text = "Returned Goods" },
+            //        new SelectListItem { Value = "Promotion", Text = "Promotion" },
+            //        new SelectListItem { Value = "Other", Text = "Other" }
+            //     };
+            //}
+
+
+            return View(viewModel);
         }
 
         private string CalculateStockStatus(int? qty)
@@ -306,7 +470,6 @@ namespace InventoryManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProductDetail(int id)
         {
-            // Fetch product with all related data
             var product = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Description)
@@ -320,7 +483,6 @@ namespace InventoryManagement.Controllers
                 return NotFound();
             }
 
-            // Create a view model with all the necessary details
             var viewModel = new ProductDetailViewModel
             {
                 Id = product.ItemId,
