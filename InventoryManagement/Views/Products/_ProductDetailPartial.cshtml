@@ -12,14 +12,10 @@
                 <button type="button" class="btn btn-outline-success btn-sm" onclick="editProduct(@Model.Id)">
                     Edit
                 </button>
-                <button type="button" class="btn btn-outline-success btn-sm" onclick="duplicateProduct(@Model.Id)">
-                    Duplicate
+                <button type="button" class="btn btn-outline-success btn-sm" onclick="openDeleteConfirmation(@Model.Id)">
+                    Delete
                 </button>
             </div>
-            <div class="action-divider"></div>
-            <button type="button" class="btn-icon">
-                <i class="fas fa-ellipsis-h"></i>
-            </button>
         </div>
     </div>
 </div>
@@ -31,12 +27,6 @@
             <span class="dot-separator"></span>
             <p class="product-meta">@Model.Category</p>
         </div>
-    </div>
-
-    <!-- Navigation buttons (You’ll handle functionality yourself) -->
-    <div class="product-nav-buttons">
-        <button class="nav-btn">&lt;</button>
-        <button class="nav-btn">&gt;</button>
     </div>
 </div>
 <div class="product-gallery-content">
@@ -140,12 +130,33 @@
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-3 shadow">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmLabel">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this product? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button id="confirmDeleteBtn" type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="antiforgeryform" style="display:none">
+    @Html.AntiForgeryToken()
+</form>
+
 <script>
     function changeMainImage(imageUrl) {
-        // Change the main image
         document.getElementById('mainProductImage').src = imageUrl;
 
-        // Update active thumbnail
         document.querySelectorAll('.thumbnail').forEach(thumb => {
             thumb.classList.remove('active');
             if (thumb.querySelector('img').src === imageUrl) {
@@ -153,145 +164,67 @@
             }
         });
     }
+
+    let productIdToDelete = null;
+    let deleteModal = null;
+
+    function openDeleteConfirmation(productId) {
+        productIdToDelete = productId;
+        deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+        deleteModal.show();
+    }
+
+    $(document).on('click', '#confirmDeleteBtn', function () {
+        if (!productIdToDelete) return;
+
+        $.ajax({
+            url: `/Products/PerformDelete/${productIdToDelete}`,
+            type: 'POST',
+            headers: {
+                'RequestVerificationToken': document.querySelector('#antiforgeryform input[name="__RequestVerificationToken"]').value
+            },
+            success: function (response) {
+                if (response.success) {
+                    // 1. Hide delete confirmation modal
+                    deleteModal.hide();
+
+                    // 2. Hide product detail modal (adjust ID if needed)
+                    const detailModalEl = document.getElementById('productDetailModal');
+                    if (detailModalEl) {
+                        const detailModal = bootstrap.Modal.getInstance(detailModalEl);
+                        detailModal?.hide();
+                    }
+
+                    // 3. Show success notification with refresh button
+                    showNotification('success', response.message, true);
+                } else {
+                    showNotification('danger', response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                showNotification('danger', "Unexpected error: " + error);
+            }
+        });
+    });
+
+    function showNotification(type, message, withRefreshButton = false) {
+        if ($('#notification-container').length === 0) {
+            $('body').append('<div id="notification-container" class="custom-notification-container"></div>');
+        }
+
+        const notificationId = 'notification-' + new Date().getTime();
+
+        const refreshButton = withRefreshButton
+            ? `<button class="btn btn-light btn-sm ms-3" onclick="location.reload()">Refresh</button>`
+            : '';
+
+        const notification = `
+            <div id="${notificationId}" class="custom-notification alert alert-${type} d-flex justify-content-between align-items-center">
+                <span>${message}</span>
+                <div>${refreshButton}</div>
+            </div>
+        `;
+
+        $('#notification-container').html(notification); //Replace existing notification
+    }
 </script>
-
-@*             @model InventoryManagement.Models.ProductDetailViewModel *@
-@* <div class="product-detail-header"> *@
-@*     <div class="product-title-area"> *@
-@*         <h2 id="productName">@Model.Name</h2> *@
-@*         <p>Product ID: @Model.ProductId</p> *@
-@*         <p>@Model.Category</p> *@
-@*     </div> *@
-@*     <div class="product-detail-actions"> *@
-@*         <div class="product-navigation"> *@
-@*             <div class="nav-arrow" id="prevProduct"> *@
-@*                 <i class="bi bi-chevron-left"></i> *@
-@*             </div> *@
-@*             <div class="nav-arrow" id="nextProduct"> *@
-@*                 <i class="bi bi-chevron-right"></i> *@
-@*             </div> *@
-@*         </div> *@
-@*         <button type="button" class="btn btn-outline-secondary btn-sm" onclick="editProduct(@Model.Id)"> *@
-@*             Edit *@
-@*         </button> *@
-@*         <button type="button" class="btn btn-outline-secondary btn-sm" onclick="duplicateProduct(@Model.Id)"> *@
-@*             Duplicate *@
-@*         </button> *@
-@*         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
-@*     </div> *@
-@* </div> *@
-@* <div class="product-detail-content"> *@
-@*     <div class="product-detail-gallery"> *@
-@*         <div class="main-image-container"> *@
-@*             <img id="mainProductImage" src="@Model.ImageUrl" alt="@Model.Name"> *@
-@*         </div> *@
-@*         <div class="thumbnail-gallery"> *@
-@*             <!-- Always include primary image as first thumbnail --> *@
-@*             <div class="thumbnail active" onclick="changeMainImage('@Model.ImageUrl')"> *@
-@*                 <img src="@Model.ImageUrl" alt="@Model.Name thumbnail"> *@
-@*             </div> *@
-@*             @if (Model.AdditionalImages != null && Model.AdditionalImages.Any()) *@
-@*             { *@
-@*                 foreach (var imgUrl in Model.AdditionalImages) *@
-@*                 { *@
-@*                     <div class="thumbnail" onclick="changeMainImage('@imgUrl')"> *@
-@*                         <img src="@imgUrl" alt="@Model.Name thumbnail"> *@
-@*                     </div> *@
-@*                 } *@
-@*             } *@
-@*         </div> *@
-@*     </div> *@
-@*     <div class="product-detail-info"> *@
-@*         <div class="product-detail-stock-info"> *@
-@*             <h3>Stocks</h3> *@
-@*             <div class="stock-quantity"> *@
-@*                 <p>QUANTITY ON HAND</p> *@
-@*                 <div class="stock-number"> *@
-@*                     <span>@Model.Stock</span> *@
-@*                     <span class="stock-status @Model.StockStatus?.ToLowerInvariant()">@Model.StockStatus</span> *@
-@*                 </div> *@
-@*             </div> *@
-@*             <button type="button" class="adjust-stock-btn" onclick="openAdjustStockModal(@Model.Id)"> *@
-@*                 Adjust Stocks *@
-@*             </button> *@
-@*         </div> *@
-
-@*         <div class="product-information"> *@
-@*             <h3>Product Information</h3> *@
-@*             <div class="info-grid"> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">CATEGORY:</div> *@
-@*                     <div class="info-value">@Model.Category</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">PRODUCT ID:</div> *@
-@*                     <div class="info-value">@Model.ProductId</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">HEIGHT/W:</div> *@
-@*                     <div class="info-value">@Model.Height</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">WIDTH:</div> *@
-@*                     <div class="info-value">@Model.Width</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">WEIGHT:</div> *@
-@*                     <div class="info-value">@Model.Weight</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">COLOR:</div> *@
-@*                     <div class="info-value">@Model.Color</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">SUPPLIER:</div> *@
-@*                     <div class="info-value">@Model.Supplier</div> *@
-@*                 </div> *@
-@*             </div> *@
-@*         </div> *@
-
-@*         <div class="sales-information"> *@
-@*             <h3>Sales Information</h3> *@
-@*             <div class="info-grid"> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">PRICE:</div> *@
-@*                     <div class="info-value">₱@Model.Price.ToString("N0")</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">Wholesale Price:</div> *@
-@*                     <div class="info-value">₱@Model.WholesalePrice.ToString("N0")</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">Retail Price:</div> *@
-@*                     <div class="info-value">₱@Model.RetailPrice.ToString("N0")</div> *@
-@*                 </div> *@
-@*                 <div class="info-row"> *@
-@*                     <div class="info-label">Profit:</div> *@
-@*                     <div class="info-value">₱@Model.Profit.ToString("N0")</div> *@
-@*                 </div> *@
-@*             </div> *@
-@*         </div> *@
-
-@*         @if (!string.IsNullOrEmpty(Model.Description)) *@
-@*         { *@
-@*             <div class="product-description"> *@
-@*                 <h3>DESCRIPTION:</h3> *@
-@*                 <p>@Model.Description</p> *@
-@*             </div> *@
-@*         } *@
-@*     </div> *@
-@* </div> *@
-@* <script> *@
-@*     function changeMainImage(imageUrl) { *@
-@*         // Change the main image *@
-@*         document.getElementById('mainProductImage').src = imageUrl; *@
-
-@*         // Update active thumbnail *@
-@*         document.querySelectorAll('.thumbnail').forEach(thumb => { *@
-@*             thumb.classList.remove('active'); *@
-@*             if (thumb.querySelector('img').src === imageUrl) { *@
-@*                 thumb.classList.add('active'); *@
-@*             } *@
-@*         }); *@
-@*     } *@
-@* </script> *@

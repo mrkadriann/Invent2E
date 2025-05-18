@@ -24,19 +24,6 @@ function initProductModalEnhancements() {
             //});
         }
     });
-
-    // Reset modal content when closed
-    $('#productDetailModal').on('hidden.bs.modal', function () {
-        setTimeout(function () {
-            $('#productDetailContent').html(`
-                <div class="loader-container">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-            `);
-        }, 300);
-    });
 }
 
 // Enhanced function to open the product detail popup
@@ -44,14 +31,6 @@ function openProductDetailPopup(productId) {
     // Show the modal with loading state
     $('#productDetailModal').modal('show');
 
-    // Reset the content to show the loader with proper styling
-    $('#productDetailContent').html(`
-        <div class="loader-container">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-    `);
 
     // Fetch the product details
     $.ajax({
@@ -62,7 +41,7 @@ function openProductDetailPopup(productId) {
             $('#productDetailContent').html(response);
 
             // Store the current product ID for navigation
-            $('#productDetailContent').attr('data-product-id', productId);
+            //$('#productDetailContent').attr('data-product-id', productId);
 
             // Initialize thumbnail functionality
             initializeThumbnails();
@@ -70,22 +49,12 @@ function openProductDetailPopup(productId) {
         error: function () {
             // Handle error with styled message
             $('#productDetailContent').html(`
-                <div class="product-detail-header">
-                    <div class="product-title-area">
-                        <h2>Error Loading Product</h2>
-                    </div>
-                    <div class="product-detail-actions">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                </div>
-                <div class="product-detail-content" style="justify-content: center; min-height: 200px;">
-                    <div style="text-align: center; padding: 40px;">
-                        <p>Failed to load product details. Please try again.</p>
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
+                <div class="text-center p-5">
+                    <h4 class="text-danger">Failed to load product details.</h4>
+                    <button class="btn btn-outline-secondary mt-3" data-bs-dismiss="modal">Close</button>
                 </div>
             `);
-        }
+        },
     });
 }
 
@@ -170,12 +139,40 @@ function openAdjustStockModal(productId) {
     */
 }
 
-// Functions for edit and duplicate
+// Functions for edit and delete
 function editProduct(productId) {
     window.location.href = '/Products/Edit/' + productId;
 }
 
-function duplicateProduct(productId) {
-    window.location.href = '/Products/Duplicate/' + productId;
+function deleteProduct(button) {
+    const productId = $(button).data('product-id');
+
+    if (!productId) {
+        alert("No product ID found on button.");
+        return;
+    }
+
+    if (!confirm("Are you sure you want to delete this product? This action cannot be undone.")) {
+        return;
+    }
+
+    $.ajax({
+        url: `/Products/PerformDelete/${productId}`,
+        type: 'POST',
+        success: function (response) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+            if (modal) modal.hide();
+
+            if (response.success) {
+                showNotification('success', response.message, true); // Show with refresh button
+            } else {
+                showNotification('danger', response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("An unexpected error occurred while trying to delete the product. Details: " + error);
+        }
+    });
 }
+
 

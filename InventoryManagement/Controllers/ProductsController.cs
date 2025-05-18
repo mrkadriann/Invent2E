@@ -355,5 +355,48 @@ namespace InventoryManagement.Controllers
 
             return PartialView("_ProductDetailPartial", viewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PerformDelete(int id)
+        {
+            var product = await _context.Products
+                .Include(p => p.Supplier)
+                .Include(p => p.Quantity)
+                .Include(p => p.Description)
+                .FirstOrDefaultAsync(p => p.ItemId == id);
+
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Product not found or already deleted." });
+            }
+
+            try
+            {
+                // Remove related Quantity if present
+                if (product.Quantity != null)
+                {
+                    _context.Quantities.Remove(product.Quantity);
+                }
+
+                // Remove related Quantity rows
+                if (product.Quantity != null)
+                {
+                    _context.Quantities.Remove(product.Quantity);
+                }
+
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+
+                return Json(new { success = true, message = $"Product '{product.ItemName}' deleted successfully." });
+            }
+            catch (DbUpdateException ex)
+            {
+                var baseMessage = ex.GetBaseException().Message;
+                return Json(new { success = false, message = $"Unable to delete product. DB error: {baseMessage}" });
+            }
+        }
+
     }
 }
+
+
