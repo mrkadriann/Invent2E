@@ -1,0 +1,12 @@
+﻿# Ignore SQL Server database files
+*.mdf
+*.ldf
+
+# Ignore Visual Studio working folders
+.vs/
+*.user
+*.suo
+
+# Ignore build output
+bin/
+obj/

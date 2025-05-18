@@ -1,0 +1,199 @@
+﻿@model InventoryManagement.Models.User
+@{
+    ViewData["Title"] = "Register";
+    var showVerification = TempData["ShowVerificationForm"] != null;
+    var email = TempData["Email"] as string;
+    var message = TempData["Message"] as string;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Form</title>
+    <link rel="stylesheet" href="@Url.Content("~/css/login.css")" />
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="illustration-section register">
+            <img src="@Url.Content("~/images/login.png")" alt="Data center illustration" />
+        </div>
+
+        <div class="login-section register">
+            <div class="login-header">
+                <h1>Register</h1>
+            </div>
+            <div class="login-subheader">
+                Let's get you all set up so you can verify your personal account and begin setting up your work profile
+            </div>
+            @if (!showVerification)
+            {
+                <form asp-action="Register" method="post" onsubmit="return showSpinnerAndSubmit(this)">
+                    <div class="form-container">
+                        <label class="form-label">Company Name*</label>
+                        <input asp-for="CompanyName" placeholder="Enter your company name" required />
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+
+                    <div class="group-form">
+                        <div class="form-container">
+                            <label class="form-label">Email*</label>
+                            <input asp-for="Email" type="email" placeholder="Enter your email" required />
+                            <span asp-validation-for="Email" class="text-danger fs-6"></span>
+                        </div>
+                        <div class="form-container">
+                            <label class="form-label">Phone Number*</label>
+                            <input asp-for="Phone"
+                                   type="tel"
+                                   pattern="^09\d{9}$"
+                                   maxlength="11"
+                                   minlength="11"
+                                   class="form-control"
+                                   placeholder="e.g. 09123456789"
+                                   required />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="group-form">
+                        <div class="form-container">
+                            <label class="form-label">Password*</label>
+                            <input asp-for="Password" type="password" placeholder="minimum 8 characters" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-container">
+                            <label class="form-label">Confirm Password*</label>
+                            <input asp-for="ConfirmPassword" type="password" placeholder="Repeat your password" required />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-footer terms">
+                        <input asp-for="Terms" type="checkbox" />
+                        <label for="terms">
+                            I agree to all terms, <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">privacy policies, and fees</a>
+                        </label>
+                    </div>
+                    <span asp-validation-for="Terms" class="text-danger"></span>
+
+
+
+                    <button type="submit" class="login-btn">Register</button>
+
+                    <div class="signup-text">
+                        Already have an account? <a href="login" class="signup-link">Login</a>
+                    </div>
+                </form>
+            }
+
+            <!-- Bootstrap 5 Privacy Policy Modal -->
+            <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content bg-dark text-light">
+                        <div class="modal-header bg-success text-white">
+                            <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Welcome to the Inventory Management System.</p>
+                            <p>Your privacy is important to us. This privacy policy explains how we collect, use, and protect your personal information.</p>
+
+                            <h6 class="text-success">Information We Collect</h6>
+                            <ul>
+                                <li>Personal information such as your name, email address, phone number, and company details.</li>
+                                <li>Usage data and analytics to improve the system and user experience.</li>
+                            </ul>
+
+                            <h6 class="text-success">How We Use Your Information</h6>
+                            <p>We use the information to:</p>
+                            <ul>
+                                <li>Verify your identity and account registration.</li>
+                                <li>Provide and maintain our services.</li>
+                                <li>Communicate important updates and notices.</li>
+                            </ul>
+
+                            <h6 class="text-success">Data Protection</h6>
+                            <p>We take appropriate security measures to protect your data against unauthorized access or disclosure.</p>
+
+                            <h6 class="text-success">Your Rights</h6>
+                            <p>You can request to view, update, or delete your personal information by contacting our support team.</p>
+
+                            <h6 class="text-success">Contact Us</h6>
+                            <p>
+                                If you have any questions about this privacy policy, please contact us at
+                                <a href="mailto:support@inventorysystem.com" class="text-info">support@inventorysystem.com</a>.
+                            </p>
+                        </div>
+                        <div class="modal-footer border-top-0">
+                            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            @if (showVerification)
+            {
+                <hr />
+                <div class="form-container">
+                    <label class="form-label">Enter Verification Code</label>
+                    <form asp-action="VerifyCode" method="post">
+                        <input type="hidden" name="email" value="@email" />
+                        <p class="text-info mt-2">@message</p>
+                        <input type="text" name="code" placeholder="Enter the 6-digit code" required />
+                        <button type="submit" class="login-btn mt-2">Verify Email</button>
+                    </form>
+                </div>
+            }
+
+
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const form = document.querySelector("form");
+                const termsCheckbox = document.querySelector('input[name="terms"]');
+                const roleValidationMessage = document.querySelector('span[asp-validation-for="Role"]');
+
+                form.addEventListener("submit", function (event) {
+                    if (!termsCheckbox.checked) {
+                        event.preventDefault();
+                        if (roleValidationMessage) {
+                            roleValidationMessage.textContent = "You must agree to the terms and conditions.";
+                        }
+                    } else {
+                        if (roleValidationMessage) {
+                            roleValidationMessage.textContent = "";
+                        }
+                    }
+                });
+            });
+
+             function showSpinnerAndSubmit(form) {
+                document.getElementById("fullscreenSpinner").classList.remove("d-none");
+
+                setTimeout(() => {
+                    form.submit();
+                }, 3000);
+
+                return false;
+            }
+
+        </script>
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+
+    <div id="fullscreenSpinner" class="spinner-overlay d-none">
+        <div class="spinner-content">
+            <div class="spinner-border text-light spinner-lg" role="status"></div>
+            <div class="spinner-text">Creating your account, please wait...</div>
+        </div>
+    </div>
+</body>
+</html>
+    

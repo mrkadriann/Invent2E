@@ -6,7 +6,7 @@ namespace InventoryManagement.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Products");
+            return RedirectToAction("Login", "Account");
         }
     }
 }

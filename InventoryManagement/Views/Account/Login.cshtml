@@ -1,0 +1,202 @@
+﻿@model InventoryManagement.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    var forgotActive = TempData["ForgotPassword"] != null;
+    var step = TempData["Step"]?.ToString();
+    var resetEmail = TempData["ResetEmail"]?.ToString();
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="@Url.Content("~/css/login.css")" />
+</head>
+<body style="overflow: hidden;">
+    <div class="container login-container">
+        <div class="login-section">
+            <div class="login-header">
+                @if (!forgotActive)
+                {
+                    <h1>@ViewData["Title"]</h1>
+                }
+                else
+                {
+                    <h4>Forgot Password</h4>
+                }
+            </div>
+            <div class="login-subheader">
+                See your growth and get support!
+            </div>
+            <hr>
+
+            @* Show login form only if forgot password is not active *@
+            @if (!forgotActive)
+            {
+                <form asp-action="Login" method="post" onsubmit="return showSpinnerAndSubmit(this)">
+                    @Html.AntiForgeryToken()
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        var message = ViewData.ModelState[string.Empty]?.Errors.FirstOrDefault()?.ErrorMessage;
+                        if (!string.IsNullOrEmpty(message))
+                        {
+                            <div class="text-danger mb-2">@message</div>
+                        }
+                    }
+
+                    <div class="form-container">
+                        <label class="form-label" asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" placeholder="example@gmail.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-container">
+                        <label class="form-label" asp-for="Password"></label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-footer">
+                        <a href="@Url.Action("ForgotPassword")" class="forgot-password">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+
+                    <div class="signup-text">
+                        Not registered yet? <a href="register" class="signup-link">Create a new account</a>
+                    </div>
+                </form>
+            }
+
+            @* Forgot Password Section *@
+            @if (forgotActive)
+            {
+                <div id="forgot-password-section" style="margin-top: 20px;">
+                    @if (TempData["ForgotPasswordError"] != null)
+                    {
+                        <div class="text-danger">@TempData["ForgotPasswordError"]</div>
+                    }
+
+                    @* STEP 1: Email Form *@
+                    @if (string.IsNullOrEmpty(step))
+                    {
+                        <form asp-action="SendResetCode" method="post">
+                            <div class="form-container">
+                                <label for="forgotEmail" class="form-label">Enter your email</label>
+                                <input type="email" name="email" class="form-control" placeholder="example@gmail.com" required />
+                            </div>
+                            <button type="submit" class="login-btn mt-2">Send Verification Code</button>
+                        </form>
+                    }
+
+                    @* STEP 2: Verification Code Form *@
+                    @if (step == "CodeSent")
+                    {
+                        @* Show error if present *@
+                        if (TempData["CodeVerificationError"] != null)
+                        {
+                            <div class="text-danger">@TempData["CodeVerificationError"]</div>
+                        }
+                        <form asp-action="VerifyResetCode" method="post">
+                            <input type="hidden" name="email" value="@resetEmail" />
+                            <div class="form-container">
+                                <label for="verificationCode" class="form-label">Enter Verification Code</label>
+                                <input type="text" name="code" class="form-control" placeholder="6-digit code" required />
+                            </div>
+                            <button type="submit" class="login-btn mt-2">Verify Code</button>
+                        </form>
+                    }
+
+                    @* STEP 3: New Password Form *@
+                    @if (step == "CodeVerified")
+                    {
+                        <form asp-action="ResetPassword" method="post">
+                            <input type="hidden" name="email" value="@resetEmail" />
+                            <div class="form-container">
+                                <label for="newPassword" class="form-label">New Password</label>
+                                <input type="password" name="newPassword" class="form-control" placeholder="New Password" required />
+                            </div>
+                            <button type="submit" class="login-btn mt-2">Reset Password</button>
+                        </form>
+                    }
+                </div>
+            }
+            @if (TempData["PasswordResetSuccess"] != null)
+            {
+                <div id="customModal" class="custom-modal">
+                    <div class="custom-modal-content">
+                        <div class="custom-modal-header">
+                            <h5 class="custom-modal-title">Success</h5>
+                            <span class="custom-modal-close" onclick="closeModal()">&times;</span>
+                        </div>
+                        <div class="custom-modal-body">
+                            @TempData["PasswordResetSuccess"]
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (TempData["RegisterSuccess"] != null)
+            {
+                <div id="customModal" class="custom-modal">
+                    <div class="custom-modal-content">
+                        <div class="custom-modal-header">
+                            <h5 class="custom-modal-title">Success</h5>
+                            <span class="custom-modal-close" onclick="closeModal()">&times;</span>
+                        </div>
+                        <div class="custom-modal-body">
+                            @TempData["RegisterSuccess"]
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="illustration-section">
+            <img src="@Url.Content("~/images/login.png")" alt="Data center illustration" />
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            document.getElementById("customModal").style.display = "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("customModal");
+            modal.style.display = "block";
+
+            setTimeout(() => {
+                closeModal();
+            }, 3000);
+        });
+
+        function showSpinnerAndSubmit(form) {
+            document.getElementById("fullscreenSpinner").classList.remove("d-none");
+
+            setTimeout(() => {
+                form.submit();
+            }, 3000);
+
+            return false;
+        }
+    </script>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+
+    <div id="fullscreenSpinner" class="spinner-overlay d-none">
+        <div class="spinner-content">
+            <div class="spinner-border text-light spinner-lg" role="status"></div>
+            <div class="spinner-text">Logging in, please wait...</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -14,6 +14,7 @@ namespace InventoryManagement.Data
         public DbSet<Quantity> Quantities { get; set; }
         public DbSet<ImageData> Images { get; set; }
         public DbSet<Description> Descriptions { get; set; }
+        public DbSet<User> Users { get; set; }
 
         //Supplier
         public DbSet<Supplier> Suppliers { get; set; }

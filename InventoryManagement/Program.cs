@@ -13,6 +13,15 @@ builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 // Retrieve the connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// Configure session state
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // Register DbContext
 builder.Services.AddDbContext<InventoryDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -34,6 +43,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
