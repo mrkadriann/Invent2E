@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\css\\Customer.css"
     },
     {
+      "Id": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\InventoryStock.css",
+      "PackagePath": "staticwebassets\\css\\InventoryStock.css"
+    },
+    {
       "Id": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-customer.css",
       "PackagePath": "staticwebassets\\css\\add-customer.css"
     },
@@ -25,6 +29,14 @@
       "PackagePath": "staticwebassets\\css\\add-supplier.css"
     },
     {
+      "Id": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\edit-product.css",
+      "PackagePath": "staticwebassets\\css\\edit-product.css"
+    },
+    {
+      "Id": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
       "Id": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -35,6 +47,10 @@
     {
       "Id": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\images\\login.png",
+      "PackagePath": "staticwebassets\\images\\login.png"
     },
     {
       "Id": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\images\\logo.png",

@@ -12,9 +12,9 @@
 
         <div class="right-actions">
             <div class="action-buttons">
-                <button type="button" class="btn btn-outline-success btn-sm" onclick="editProduct(@Model.Id)">
+                <a asp-controller="Products" asp-action="EditProduct" asp-route-id="@Model.Id" class="btn btn-outline-success btn-sm">
                     Edit
-                </button>
+                </a>
                 <button type="button" class="btn btn-outline-success btn-sm" onclick="openDeleteConfirmation(@Model.Id)">
                     Delete
                 </button>

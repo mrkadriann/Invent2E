@@ -392,7 +392,6 @@ C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\scopedcss\bundle\In
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\scopedcss\projectbundle\InventoryManagement.bundle.scp.css
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\bpw1g0kypc-1vyn5f6tb3.gz
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\gdwj84cwpc-hoevwtl3w5.gz
-C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\mpl887pv2v-c02e98xu2y.gz
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\eqw0idx41s-jui0xa6z8w.gz
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\w6ld8qzrrg-r2shpopx4m.gz
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\zfxkfnnz67-yrgowgux7v.gz
@@ -475,5 +474,9 @@ C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\refint\InventoryMan
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\InventoryManagement.pdb
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\InventoryManagement.genruntimeconfig.cache
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\ref\InventoryManagement.dll
-C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\bxda5t2l43-ag2a8camgj.gz
 C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\mx6a2ccs8i-zd1ze1p6o9.gz
+C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\mpl887pv2v-3derpnllru.gz
+C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\xu6h68o311-4ru0fjs8b9.gz
+C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\dzc8rcsxqc-exryooq3ei.gz
+C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\bxda5t2l43-q2ihtd0n16.gz
+C:\Users\novam\Invent2E\InventoryManagement\obj\Debug\net9.0\compressed\tjb804sork-a921znq9tk.gz

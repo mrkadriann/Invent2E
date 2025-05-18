@@ -28,6 +28,7 @@ C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\boots
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+C:\Users\novam\Invent2E\InventoryManagement\wwwroot\css\login.css
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\jquery\dist\jquery.min.js
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\css\CreateProduct.css
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\favicon.ico
@@ -61,10 +62,12 @@ C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\boots
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\jquery\LICENSE.txt
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+C:\Users\novam\Invent2E\InventoryManagement\wwwroot\css\edit-product.css
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\jquery\dist\jquery.min.map
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\css\Customer.css
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+C:\Users\novam\Invent2E\InventoryManagement\wwwroot\css\InventoryStock.css
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\css\supplier.css
 C:\Users\novam\Invent2E\InventoryManagement\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
 wwwroot\css\add-customer.css
@@ -72,9 +75,13 @@ wwwroot\css\add-product.css
 wwwroot\css\add-supplier.css
 wwwroot\css\CreateProduct.css
 wwwroot\css\Customer.css
+wwwroot\css\edit-product.css
+wwwroot\css\InventoryStock.css
+wwwroot\css\login.css
 wwwroot\css\site.css
 wwwroot\css\supplier.css
 wwwroot\favicon.ico
+wwwroot\images\login.png
 wwwroot\images\logo.png
 wwwroot\images\products\adidas-forum.jpg
 wwwroot\images\products\aliodas-shirt.jpg

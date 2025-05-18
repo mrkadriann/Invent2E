@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InventoryManagement.Models;
 using InventoryManagement.Data;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -119,7 +119,7 @@ namespace InventoryManagement.Controllers
                            $"/Image/GetImage/{p.PrimaryImage.ImageId}" : "/images/placeholder.jpg"
             }).ToList();
 
-            var viewModel = new ProductViewModel 
+            var viewModel = new ProductViewModel
             {
                 Products = productViewModels,
                 TotalProducts = productViewModels.Count(),
@@ -209,10 +209,10 @@ namespace InventoryManagement.Controllers
 
             if (model.ImageFiles != null && model.ImageFiles.Count > 0)
             {
-                byte imageOrderCounter = 1; 
+                byte imageOrderCounter = 1;
                 foreach (var formFile in model.ImageFiles)
                 {
-                    if (formFile.Length > 0) 
+                    if (formFile.Length > 0)
                     {
                         using (var memoryStream = new MemoryStream())
                         {
@@ -229,7 +229,7 @@ namespace InventoryManagement.Controllers
                 }
             }
 
-            _context.Products.Add(product); 
+            _context.Products.Add(product);
 
             try
             {
@@ -245,7 +245,7 @@ namespace InventoryManagement.Controllers
                     {
                         product.PrimaryImageId = primaryImg.ImageId;
                         _context.Products.Update(product);
-                        await _context.SaveChangesAsync(); 
+                        await _context.SaveChangesAsync();
                     }
                 }
 
@@ -558,7 +558,411 @@ namespace InventoryManagement.Controllers
             }
         }
 
+        // GET: Products/Edit/5
+        public async Task<IActionResult> EditProduct(int id)
+        {
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Description)
+                .Include(p => p.Quantity)
+                .Include(p => p.Supplier)
+                .Include(p => p.AllImages)
+                .Include(p => p.PrimaryImage)
+                .FirstOrDefaultAsync(p => p.ItemId == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new EditProductViewModel
+            {
+                ItemId = product.ItemId,
+                ItemName = product.ItemName,
+                SelectedProductCategoryId = product.CategoryId,
+                SelectedSupplierId = product.SupplierId,
+                ProductDescriptionText = product.Description?.DescriptionText,
+                QuantityInStock = product.Quantity?.Qty ?? 0,
+                Color = product.Description?.Color,
+                WholesalePrice = product.Description?.WholesalePrice,
+                RetailPrice = product.Description?.RetailPrice,
+                Profit = product.Description?.Profit,
+                PrimaryImageId = product.PrimaryImageId
+            };
+
+            // Parse dimensions if they exist
+            if (!string.IsNullOrEmpty(product.Description?.Height))
+            {
+                var heightParts = product.Description.Height.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (heightParts.Length >= 1 && double.TryParse(heightParts[0], out double heightValue))
+                {
+                    viewModel.HeightValue = heightValue;
+                    if (heightParts.Length >= 2)
+                        viewModel.HeightUnit = heightParts[1];
+                }
+            }
+
+            if (!string.IsNullOrEmpty(product.Description?.Width))
+            {
+                var widthParts = product.Description.Width.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (widthParts.Length >= 1 && double.TryParse(widthParts[0], out double widthValue))
+                {
+                    viewModel.WidthValue = widthValue;
+                    if (widthParts.Length >= 2)
+                        viewModel.WidthUnit = widthParts[1];
+                }
+            }
+
+            if (!string.IsNullOrEmpty(product.Description?.Weight))
+            {
+                var weightParts = product.Description.Weight.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (weightParts.Length >= 1 && double.TryParse(weightParts[0], out double weightValue))
+                {
+                    viewModel.WeightValue = weightValue;
+                    if (weightParts.Length >= 2)
+                        viewModel.WeightUnit = weightParts[1];
+                }
+            }
+
+            // Add existing images
+            if (product.AllImages != null && product.AllImages.Any())
+            {
+                viewModel.ExistingImages = product.AllImages
+                    .Select(img => new ProductImageViewModel
+                    {
+                        ImageId = img.ImageId,
+                        ImageUrl = $"/Image/GetImage/{img.ImageId}",
+                        ImageOrder = img.ImageOrder,
+                        IsPrimary = img.ImageId == product.PrimaryImageId
+                    })
+                    .OrderBy(img => img.ImageOrder)
+                    .ToList();
+            }
+
+            // Populate dropdowns
+            viewModel.ProductCategories = await _context.Categories
+                .Select(c => new SelectListItem
+                {
+                    Value = c.CategoryId.ToString(),
+                    Text = c.CategoryName,
+                    Selected = c.CategoryId == product.CategoryId
+                })
+                .OrderBy(c => c.Text)
+                .ToListAsync();
+
+            viewModel.Suppliers = await _context.Suppliers
+                .OrderBy(s => s.CompanyName)
+                .Select(s => new SelectListItem
+                {
+                    Value = s.SupplierId.ToString(),
+                    Text = s.CompanyName,
+                    Selected = s.SupplierId == product.SupplierId
+                })
+                .ToListAsync();
+
+            viewModel.ProductCategories.Insert(0, new SelectListItem { Value = "", Text = "Select Category..." });
+            viewModel.Suppliers.Insert(0, new SelectListItem { Value = "", Text = "Select Supplier..." });
+
+            return View(viewModel);
+        }
+
+        // POST: Products/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProduct(int id, EditProductViewModel model)
+        {
+            // Parse deleted image IDs
+            var deletedIds = (model.DeletedImageIds ?? "")
+                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(id => int.TryParse(id, out var parsedId) ? parsedId : (int?)null)
+                .Where(id => id.HasValue)
+                .Select(id => id.Value)
+                .ToList();
+
+            // Add this debugging code at the beginning
+            System.Diagnostics.Debug.WriteLine($"EditProduct POST called with id: {id}, model.ItemId: {model.ItemId}");
+            System.Diagnostics.Debug.WriteLine($"ModelState.IsValid: {ModelState.IsValid}");
+
+
+            // Log any ModelState errors
+            if (!ModelState.IsValid)
+            {
+                foreach (var error in ModelState)
+                {
+                    System.Diagnostics.Debug.WriteLine($"ModelState Error - Key: {error.Key}, Errors: {string.Join(", ", error.Value.Errors.Select(e => e.ErrorMessage))}");
+                }
+            }
+
+            if (id != model.ItemId)
+            {
+                System.Diagnostics.Debug.WriteLine($"ID mismatch: URL id={id}, model.ItemId={model.ItemId}");
+                return NotFound();
+            }
+
+            // Validate required fields
+            if (!model.SelectedProductCategoryId.HasValue || model.SelectedProductCategoryId <= 0)
+            {
+                ModelState.AddModelError("SelectedProductCategoryId", "Please select a valid category.");
+            }
+
+            if (!model.SelectedSupplierId.HasValue || model.SelectedSupplierId <= 0)
+            {
+                ModelState.AddModelError("SelectedSupplierId", "Please select a valid supplier.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                System.Diagnostics.Debug.WriteLine("ModelState is invalid, returning to view");
+                await RepopulateDropdownsForEditViewModel(model);
+                await RepopulateExistingImages(model, id);
+                return View(model);
+            }
+
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("Starting database update");
+
+                // Start a new transaction for better control
+                using var transaction = await _context.Database.BeginTransactionAsync();
+
+                // Load the product with all related entities
+                var product = await _context.Products
+                    .Include(p => p.Description)
+                    .Include(p => p.Quantity)
+                    .Include(p => p.AllImages)
+                    .FirstOrDefaultAsync(p => p.ItemId == id);
+
+                if (product == null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Product with id {id} not found");
+                    return NotFound();
+                }
+
+                if (deletedIds.Contains(product.PrimaryImageId ?? -1))
+                {
+                    System.Diagnostics.Debug.WriteLine("Primary image is being deleted, resetting PrimaryImageId");
+                    product.PrimaryImageId = null;
+                }
+
+                // Delete images from DB
+                if (deletedIds.Any())
+                {
+                    var imagesToDelete = product.AllImages.Where(img => deletedIds.Contains(img.ImageId)).ToList();
+                    _context.Images.RemoveRange(imagesToDelete);
+                    foreach (var img in imagesToDelete)
+                    {
+                        product.AllImages.Remove(img);
+                    }
+                }
+
+                // USE this updated product.AllImages (already modified in memory)
+                if (!product.AllImages.Any() && (model.NewImageFiles == null || !model.NewImageFiles.Any()))
+                {
+                    ModelState.AddModelError("", "Product must have at least one image.");
+
+                    await RepopulateDropdownsForEditViewModel(model);
+
+                    // uild image list from in-memory state, not from DB
+                    model.ExistingImages = product.AllImages
+                        .Select(img => new ProductImageViewModel
+                        {
+                            ImageId = img.ImageId,
+                            ImageUrl = $"/Image/GetImage/{img.ImageId}",
+                            ImageOrder = img.ImageOrder,
+                            IsPrimary = img.ImageId == product.PrimaryImageId
+                        })
+                        .OrderBy(img => img.ImageOrder ?? 255)
+                        .ToList();
+
+                    return View(model);
+                }
+
+                System.Diagnostics.Debug.WriteLine($"Found product: {product.ItemName}");
+
+                // Update product basic information
+                product.ItemName = model.ItemName;
+                product.CategoryId = model.SelectedProductCategoryId.Value;
+                product.SupplierId = model.SelectedSupplierId.Value;
+
+                // Handle Description - Update or Create
+                if (product.Description == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("Creating new description");
+                    product.Description = new Description
+                    {
+                        ItemId = product.ItemId
+                    };
+                    _context.Descriptions.Add(product.Description);
+                }
+
+                // Update description fields
+                product.Description.DescriptionText = model.ProductDescriptionText ?? string.Empty;
+                product.Description.Height = model.HeightValue.HasValue ? $"{model.HeightValue} {model.HeightUnit}" : string.Empty;
+                product.Description.Width = model.WidthValue.HasValue ? $"{model.WidthValue} {model.WidthUnit}" : string.Empty;
+                product.Description.Weight = model.WeightValue.HasValue ? $"{model.WeightValue} {model.WeightUnit}" : string.Empty;
+                product.Description.Color = model.Color ?? string.Empty;
+                product.Description.WholesalePrice = model.WholesalePrice ?? 0;
+                product.Description.RetailPrice = model.RetailPrice ?? 0;
+                product.Description.Profit = model.Profit ?? 0;
+
+                // Handle Quantity - Update or Create
+                if (product.Quantity == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("Creating new quantity");
+                    product.Quantity = new Quantity
+                    {
+                        ItemId = product.ItemId,
+                        Qty = model.QuantityInStock,
+                        LastUpdated = DateTime.UtcNow
+                    };
+                    _context.Quantities.Add(product.Quantity);
+                }
+                else
+                {
+                    product.Quantity.Qty = model.QuantityInStock;
+                    product.Quantity.LastUpdated = DateTime.UtcNow;
+                }
+
+                // Handle new images
+                if (model.NewImageFiles != null && model.NewImageFiles.Count > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Processing {model.NewImageFiles.Count} new images");
+                    byte imageOrderCounter = 1;
+                    if (product.AllImages.Any())
+                    {
+                        imageOrderCounter = (byte)(product.AllImages.Max(img => img.ImageOrder ?? 0) + 1);
+                    }
+
+                    foreach (var formFile in model.NewImageFiles)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            using (var memoryStream = new MemoryStream())
+                            {
+                                await formFile.CopyToAsync(memoryStream);
+                                var imageData = new ImageData
+                                {
+                                    ItemId = product.ItemId,
+                                    ImageDt = memoryStream.ToArray(),
+                                    ImageOrder = imageOrderCounter++
+                                };
+                                _context.Images.Add(imageData);
+                                product.AllImages.Add(imageData);
+                            }
+                        }
+                    }
+                }
+
+                // Handle primary image
+                if (model.PrimaryImageId.HasValue && !deletedIds.Contains(model.PrimaryImageId.Value))
+                {
+                    var selectedImage = product.AllImages.FirstOrDefault(img => img.ImageId == model.PrimaryImageId.Value);
+                    if (selectedImage != null)
+                    {
+                        product.PrimaryImageId = selectedImage.ImageId;
+                    }
+                }
+
+                else if (!product.PrimaryImageId.HasValue && product.AllImages.Any())
+                {
+                    var firstImage = product.AllImages.OrderBy(img => img.ImageOrder ?? 255).First();
+                    product.PrimaryImageId = firstImage.ImageId;
+                }
+
+                // Mark entities as modified explicitly
+                _context.Entry(product).State = EntityState.Modified;
+                if (product.Description != null)
+                {
+                    _context.Entry(product.Description).State = product.Description.ItemId == 0 ? EntityState.Added : EntityState.Modified;
+                }
+                if (product.Quantity != null)
+                {
+                    _context.Entry(product.Quantity).State = product.Quantity.ItemId == 0 ? EntityState.Added : EntityState.Modified;
+                }
+
+                // Save all changes
+                System.Diagnostics.Debug.WriteLine("Saving changes to database");
+                int changesSaved = await _context.SaveChangesAsync();
+                System.Diagnostics.Debug.WriteLine($"Changes saved: {changesSaved}");
+
+                await transaction.CommitAsync();
+                System.Diagnostics.Debug.WriteLine("Transaction committed");
+
+                TempData["SuccessMessage"] = "Product updated successfully!";
+                System.Diagnostics.Debug.WriteLine("Redirecting to Index");
+
+                // Try different redirect approaches
+                return RedirectToAction("Index", "Products");
+            }
+            catch (Exception ex)
+            {
+                // Enhanced error logging
+                System.Diagnostics.Debug.WriteLine($"Error updating product: {ex}");
+                var inner = ex.InnerException;
+                while (inner != null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Inner exception: {inner.Message}");
+                    inner = inner.InnerException;
+                }
+
+                // Add error to ModelState
+                ModelState.AddModelError("", $"Unable to save changes: {ex.Message}");
+
+                // Repopulate the view model
+                await RepopulateDropdownsForEditViewModel(model);
+
+                return View(model);
+            }
+        }
+
+        private async Task RepopulateDropdownsForEditViewModel(EditProductViewModel model)
+        {
+            model.ProductCategories = await _context.Categories
+                .Select(c => new SelectListItem
+                {
+                    Value = c.CategoryId.ToString(),
+                    Text = c.CategoryName,
+                    Selected = c.CategoryId == model.SelectedProductCategoryId
+                })
+                .OrderBy(c => c.Text)
+                .ToListAsync();
+            model.ProductCategories.Insert(0, new SelectListItem { Value = "", Text = "Select Category..." });
+
+            model.Suppliers = await _context.Suppliers
+                .OrderBy(s => s.CompanyName)
+                .Select(s => new SelectListItem
+                {
+                    Value = s.SupplierId.ToString(),
+                    Text = s.CompanyName,
+                    Selected = s.SupplierId == model.SelectedSupplierId
+                })
+                .ToListAsync();
+            model.Suppliers.Insert(0, new SelectListItem { Value = "", Text = "Select Supplier..." });
+        }
+
+        private async Task RepopulateExistingImages(EditProductViewModel model, int productId)
+        {
+            var product = await _context.Products
+                .Include(p => p.AllImages)
+                .FirstOrDefaultAsync(p => p.ItemId == productId);
+
+            if (product?.AllImages != null && product.AllImages.Any())
+            {
+                model.ExistingImages = product.AllImages
+                    .Select(img => new ProductImageViewModel
+                    {
+                        ImageId = img.ImageId,
+                        ImageUrl = $"/Image/GetImage/{img.ImageId}",
+                        ImageOrder = img.ImageOrder,
+                        IsPrimary = img.ImageId == product.PrimaryImageId
+                    })
+                    .OrderBy(img => img.ImageOrder ?? 255)
+                    .ToList();
+            }
+            else
+            {
+                model.ExistingImages = new List<ProductImageViewModel>();
+            }
+        }
     }
 }
-
-

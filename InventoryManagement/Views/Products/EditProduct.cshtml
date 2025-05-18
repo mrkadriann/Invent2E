@@ -1,0 +1,296 @@
+﻿@model InventoryManagement.Models.EditProductViewModel
+
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/edit-product.css" />
+}
+
+<div class="container-fluid dark-theme">
+    <div class="back-link mb-4">
+        <a asp-action="Index" class="text-decoration-none">
+            <i class="fas fa-arrow-left me-2"></i>Back to product list
+        </a>
+    </div>
+
+    <h1 class="text-center">Edit Product</h1>
+
+    <div class="product-form-container">
+        @if (ViewData.ModelState.IsValid == false)
+        {
+            <div class="alert alert-warning">
+                <h5>Validation Errors:</h5>
+                <ul>
+                    @foreach (var modelState in ViewData.ModelState.Values)
+                    {
+                        foreach (var error in modelState.Errors)
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+
+        <form asp-action="EditProduct" asp-controller="Products" method="post" enctype="multipart/form-data" asp-route-id="@Model.ItemId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ItemId" />
+            <input type="hidden" asp-for="PrimaryImageId" />
+
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6 pe-md-3">
+                    <div class="form-group mb-4">
+                        <label asp-for="ItemName" class="form-label">Product Name</label>
+                        <input asp-for="ItemName" class="form-control dark-input" />
+                        <span asp-validation-for="ItemName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label asp-for="SelectedProductCategoryId" class="form-label">Product Category</label>
+                        <div class="select-wrapper">
+                            <select asp-for="SelectedProductCategoryId" class="form-select dark-select" asp-items="Model.ProductCategories"></select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                        <span asp-validation-for="SelectedProductCategoryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Height</label>
+                            <div class="input-with-select">
+                                <input asp-for="HeightValue" class="form-control dark-input" placeholder="0.00" />
+                                <div class="select-wrapper tight">
+                                    <select asp-for="HeightUnit" class="form-select dark-select unit-select">
+                                        <option value="cm">cm</option>
+                                        <option value="in">in</option>
+                                        <option value="m">m</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down select-arrow small"></i>
+                                </div>
+                            </div>
+                            <span asp-validation-for="HeightValue" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Width</label>
+                            <div class="input-with-select">
+                                <input asp-for="WidthValue" class="form-control dark-input" placeholder="0.00" />
+                                <div class="select-wrapper tight">
+                                    <select asp-for="WidthUnit" class="form-select dark-select unit-select">
+                                        <option value="cm">cm</option>
+                                        <option value="in">in</option>
+                                        <option value="m">m</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down select-arrow small"></i>
+                                </div>
+                            </div>
+                            <span asp-validation-for="WidthValue" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Weight</label>
+                            <div class="input-with-select">
+                                <input asp-for="WeightValue" class="form-control dark-input" placeholder="0.00" />
+                                <div class="select-wrapper tight">
+                                    <select asp-for="WeightUnit" class="form-select dark-select unit-select">
+                                        <option value="kg">kg</option>
+                                        <option value="lb">lb</option>
+                                        <option value="g">g</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down select-arrow small"></i>
+                                </div>
+                            </div>
+                            <span asp-validation-for="WeightValue" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Color</label>
+                            <input asp-for="Color" class="form-control dark-input" />
+                            <span asp-validation-for="Color" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label asp-for="SelectedSupplierId" class="form-label">Supplier</label>
+                        <div class="select-wrapper">
+                            <select asp-for="SelectedSupplierId" class="form-select dark-select" asp-items="Model.Suppliers"></select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                        <span asp-validation-for="SelectedSupplierId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="form-label">Quantity Stocks</label>
+                        <div class="quantity-input-wrapper">
+                            <input asp-for="QuantityInStock" class="form-control dark-input" />
+                            <button type="button" class="btn btn-sm quantity-btn">
+                                <i class="fas fa-cubes"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="QuantityInStock" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6 ps-md-3">
+                    <div class="form-group mb-4">
+                        <label class="form-label">Product Description</label>
+                        <textarea asp-for="ProductDescriptionText" class="form-control dark-textarea" rows="6"></textarea>
+                        <span asp-validation-for="ProductDescriptionText" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="form-label">Add Images</label>
+                        <div class="image-upload-area">
+                            <div class="image-grid">
+                                @if (Model.ExistingImages != null && Model.ExistingImages.Any())
+                                {
+                                    @foreach (var image in Model.ExistingImages)
+                                    {
+                                        <div class="image-thumbnail" data-image-id="@image.ImageId">
+                                            <img src="@image.ImageUrl" class="thumbnail-img @(Model.PrimaryImageId == image.ImageId ? "primary-image" : "")" />
+                                            <button type="button" class="btn-delete-image" data-image-id="@image.ImageId">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    }
+                                }
+                                <div class="image-upload-card">
+                                    <label for="NewImageFiles" class="upload-label">
+                                        <i class="fas fa-plus"></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <input type="hidden" name="DeletedImageIds" id="DeletedImageIds" />
+                            <input asp-for="NewImageFiles" type="file" class="d-none" multiple accept="image/*" />
+                            <span asp-validation-for="NewImageFiles" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Wholesale Price</label>
+                            <div class="price-input-wrapper">
+                                <span class="currency-symbol">₱</span>
+                                <input asp-for="WholesalePrice" class="form-control dark-input price-input" placeholder="0.00" />
+                            </div>
+                            <span asp-validation-for="WholesalePrice" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Retail Price</label>
+                            <div class="price-input-wrapper">
+                                <span class="currency-symbol">₱</span>
+                                <input asp-for="RetailPrice" class="form-control dark-input price-input" placeholder="0.00" />
+                            </div>
+                            <span asp-validation-for="RetailPrice" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="form-label">Profit</label>
+                        <div class="price-input-wrapper">
+                            <span class="currency-symbol">₱</span>
+                            <input asp-for="Profit" class="form-control dark-input price-input" placeholder="0.00 (auto-calculated or manual)" readonly />
+                        </div>
+                        <span asp-validation-for="Profit" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-end mt-5">
+                        <a asp-action="Index" class="btn btn-cancel me-2">Cancel</a>
+                        <button type="submit" class="btn btn-save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            // Profit Calculation
+            function calculateProfit() {
+                var wholesale = parseFloat($("#WholesalePrice").val()) || 0;
+                var retail = parseFloat($("#RetailPrice").val()) || 0;
+                var profit = retail - wholesale;
+                $("#Profit").val(profit.toFixed(2));
+            }
+
+            $("#WholesalePrice, #RetailPrice").on("input", calculateProfit);
+            calculateProfit(); // Calculate on page load
+
+            let tempImageCounter = 0;
+            const tempImageMap = new Map();
+
+            // Handle file input
+            $("#NewImageFiles").on("change", function () {
+                fileDialogOpen = false;
+
+                const files = this.files;
+                if (files && files.length > 0) {
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const imgElement = $(`
+                                <div class="image-thumbnail">
+                                    <img src="${e.target.result}" class="thumbnail-img" />
+                                    <button type="button" class="btn-delete-image" data-temp-file="${i}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            `);
+                            imgElement.insertBefore(".image-upload-card");
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+            });
+
+            // Handle image deletion
+            const deletedImageIds = new Set();
+
+            $(document).on('click', '.btn-delete-image', function () {
+                const imageId = $(this).data('image-id');
+                if (imageId) {
+                    deletedImageIds.add(imageId);
+                    $('#DeletedImageIds').val(Array.from(deletedImageIds).join(','));
+                }
+
+                $(this).closest('.image-thumbnail').remove();
+            });
+
+            // Set primary image
+            $(document).on('click', '.thumbnail-img', function () {
+                if (!$(this).hasClass('primary-image')) {
+                    $('.thumbnail-img').removeClass('primary-image');
+                    $(this).addClass('primary-image');
+                    const imageId = $(this).closest('.image-thumbnail').data('image-id');
+                    $('#PrimaryImageId').val(imageId);
+                }
+            });
+
+            // Require at least 1 image before submit
+            $('form').on('submit', function (e) {
+                const remainingImages = $('.image-thumbnail').length;
+                const newImages = $('#NewImageFiles')[0].files;
+                const deletedIds = $('#DeletedImageIds').val().split(',').filter(id => id.trim() !== '');
+
+                if (remainingImages === 0 && (!newImages || newImages.length === 0) && deletedIds.length > 0) {
+                    e.preventDefault();
+                    alert("You must have at least one product image.");
+                }
+            });
+        });
+    </script>
+}
