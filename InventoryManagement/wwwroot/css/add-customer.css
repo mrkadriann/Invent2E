@@ -1,6 +1,6 @@
 ﻿/* wwwroot/css/add-customer.css */
 
-:root { /* Ensure these are consistent with your site.css or define them here */
+:root { 
     --primary-color: #00c77b;
     --dark-bg: #141E22;
     --card-bg: #1A262D;
@@ -12,14 +12,14 @@
     --danger: #ef4444;
 }
 
-body { /* Assuming this is handled by your global styles */
+body { 
     background-color: var(--dark-bg);
     color: var(--text-light);
     font-family: 'Poppins', sans-serif;
 }
 
 .add-customer-container {
-    max-width: 1100px; /* Adjusted width based on screenshot */
+    max-width: 1100px;
     margin: 30px auto;
     padding: 20px;
 }
@@ -28,7 +28,7 @@ body { /* Assuming this is handled by your global styles */
     margin-bottom: 30px;
     display: flex;
     align-items: center;
-    position: relative; /* For absolute positioning of title if needed */
+    position: relative; 
 }
 
 .back-link-customer {
@@ -39,7 +39,7 @@ body { /* Assuming this is handled by your global styles */
     align-items: center;
 }
 
-    .back-link-customer i.material-icons { /* Using Material Icons for back arrow */
+    .back-link-customer i.material-icons {
         margin-right: 8px;
         font-size: 20px;
     }
@@ -49,13 +49,12 @@ body { /* Assuming this is handled by your global styles */
     }
 
 .page-title-customer {
-    font-size: 22px; /* Adjusted size */
+    font-size: 22px;
     font-weight: 600;
     color: var(--text-light);
     text-align: center;
     flex-grow: 1;
-    /* If back link is short, title will naturally center.
-       If back link is long, you might need absolute positioning for perfect center. */
+
 }
 
 
@@ -66,8 +65,8 @@ body { /* Assuming this is handled by your global styles */
 
 .form-section-card-customer {
     background-color: var(--card-bg);
-    padding: 30px; /* Increased padding */
-    border-radius: 12px; /* More rounded corners */
+    padding: 30px;
+    border-radius: 12px;
     border: 1px solid var(--border-color);
     flex: 1;
     display: flex;
@@ -75,7 +74,7 @@ body { /* Assuming this is handled by your global styles */
     gap: 20px;
 }
 
-    .form-section-card-customer h4 { /* For titles like "Contact Information" */
+    .form-section-card-customer h4 {
         font-size: 1rem;
         font-weight: 600;
         color: var(--text-light);
@@ -92,7 +91,7 @@ body { /* Assuming this is handled by your global styles */
     .form-group-customer label {
         display: block;
         margin-bottom: 8px;
-        font-size: 0.75rem; /* Smaller label text */
+        font-size: 0.75rem;
         color: var(--text-muted);
         font-weight: 500;
         text-transform: uppercase;
@@ -102,12 +101,12 @@ body { /* Assuming this is handled by your global styles */
         background-color: var(--input-bg);
         border: 1px solid var(--border-color);
         border-radius: 6px;
-        padding: 12px 15px; /* Adjusted padding */
+        padding: 12px 15px;
         color: var(--text-light);
         font-size: 14px;
         width: 100%;
         box-sizing: border-box;
-        height: 48px; /* Consistent height for inputs */
+        height: 48px;
     }
 
         .form-group-customer .form-control::placeholder {
@@ -122,8 +121,8 @@ body { /* Assuming this is handled by your global styles */
         }
 
     .form-group-customer textarea.form-control {
-        height: auto; /* Allow textarea to grow based on rows */
-        min-height: 100px; /* Minimum height for remarks */
+        height: auto;
+        min-height: 100px;
     }
 
     .form-group-customer select.form-control {
@@ -155,17 +154,17 @@ body { /* Assuming this is handled by your global styles */
 }
 
 .customer-image-preview-container {
-    width: 64px; /* Size of the circle avatar */
+    width: 64px;
     height: 64px;
     border-radius: 50%;
     background-color: var(--input-bg);
-    border: 2px dashed var(--border-color); /* Dashed border for placeholder */
+    border: 2px dashed var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
-    cursor: pointer; /* Make the whole area clickable */
+    cursor: pointer;
 }
 
 #customerImagePreview {
@@ -175,11 +174,11 @@ body { /* Assuming this is handled by your global styles */
     display: none;
 }
 
-.customer-image-placeholder { /* The '+' icon or initial text */
+.customer-image-placeholder {
     color: var(--primary-color);
-    font-size: 24px; /* Size of the plus icon */
+    font-size: 24px;
     font-weight: bold;
-    display: flex; /* To show if no image */
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -200,10 +199,10 @@ body { /* Assuming this is handled by your global styles */
 }
 
 .btn-customer {
-    padding: 10px 28px; /* Adjusted padding */
+    padding: 10px 28px;
     border-radius: 6px;
     font-size: 14px;
-    font-weight: 600; /* Bolder text */
+    font-weight: 600;
     cursor: pointer;
     border: none;
     transition: background-color 0.2s ease, opacity 0.2s ease;
@@ -214,27 +213,27 @@ body { /* Assuming this is handled by your global styles */
 
 .btn-customer-cancel {
     background-color: transparent;
-    color: var(--text-light); /* Text color for cancel */
-    border: 1px solid var(--border-color); /* Border for cancel */
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
 }
 
     .btn-customer-cancel:hover {
-        background-color: var(--card-bg); /* Darken slightly on hover */
+        background-color: var(--card-bg);
         border-color: var(--text-muted);
     }
 
 .btn-customer-save {
     background-color: var(--primary-color);
-    color: var(--dark-bg); /* Contrast text for save button */
+    color: var(--dark-bg);
 }
 
     .btn-customer-save:hover {
-        opacity: 0.85; /* Slight fade on hover */
+        opacity: 0.85;
     }
 
 .text-danger {
     color: var(--danger) !important;
     font-size: 0.8rem;
     margin-top: 4px;
-    display: block; /* Ensure it takes its own line */
+    display: block;
 }

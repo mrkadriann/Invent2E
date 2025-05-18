@@ -68,7 +68,6 @@
                 </div>
             </div>
 
-            @* <button type="submit" class="btn btn-primary w-100 mt-3">Apply Filters</button> *@
             <a asp-action="Index" asp-controller="Supplier" class="btn btn-outline-secondary w-100 mt-2">
                 <i class="material-icons">refresh</i> Reset All
             </a>
@@ -129,8 +128,6 @@
                                     }
                                 </div>
                                 <div class="supplier-payables">
-                                    @* <span class="payables-label">PAYABLES</span>
-                                    <span class="payables-amount">@supplier.TotalPayables?.ToString("C")</span> *@
                                 </div>
                             </div>
                             <div class="supplier-card-secondary-info">
@@ -185,7 +182,6 @@
 
 @section Scripts {
     <script>
-        // Function to initialize product search within the supplier detail modal
                function initializeProductSearchInModal() {
             const productSearchInput = document.getElementById('productSearchSupplierModal');
 
@@ -205,22 +201,19 @@
                 const noProductsInitialMessage = productListContainer.querySelector('.no-products-initial-message');
                 const noProductsSearchMessage = productListContainer.querySelector('.no-products-search-message');
 
-                // Initial state of messages based on products loaded into the modal
                 const initialProductItems = productListContainer.querySelectorAll('.supplier-product-item');
                 if (noProductsInitialMessage) {
                     noProductsInitialMessage.style.display = (initialProductItems.length === 0) ? 'block' : 'none';
                 }
                 if (noProductsSearchMessage) {
-                    noProductsSearchMessage.style.display = 'none'; // Always hide search-specific message initially
+                    noProductsSearchMessage.style.display = 'none';
                 }
 
                 productSearchInput.addEventListener('input', function () {
                     const searchTerm = this.value.toLowerCase().trim();
-                    // Query for items fresh each time in case list is dynamically updated
                     const currentProductItems = productListContainer.querySelectorAll('.supplier-product-item');
                     let visibleProductsCount = 0;
 
-                    // Hide all informational messages before re-evaluating
                     if (noProductsInitialMessage) noProductsInitialMessage.style.display = 'none';
                     if (noProductsSearchMessage) noProductsSearchMessage.style.display = 'none';
 
@@ -233,35 +226,24 @@
                         if (productIdElement && productIdElement.textContent.toLowerCase().includes('id:')) {
                             productIdText = productIdElement.textContent.toLowerCase().split('id:')[1]?.trim() || '';
                         }
-
-                        // Condition for an item to be visible:
-                        // 1. Search term is empty (show all)
-                        // OR 2. Product name matches OR 3. Product ID matches
                         const isMatch = searchTerm === "" || productName.includes(searchTerm) || productIdText.includes(searchTerm);
 
                         if (isMatch) {
-                            item.classList.remove('d-none'); // Make item visible
+                            item.classList.remove('d-none');
                             visibleProductsCount++;
                         } else {
-                            item.classList.add('d-none'); // Hide item
+                            item.classList.add('d-none');
                         }
                     });
 
-                    // After filtering, decide which (if any) informational message to show
                     if (searchTerm === "") {
-                        // Search is empty (cleared by user or initially empty)
                         if (currentProductItems.length === 0 && noProductsInitialMessage) {
-                            // And the list of products is actually empty
                             noProductsInitialMessage.style.display = 'block';
                         }
-                        // If currentProductItems.length > 0, all are shown, so no message needed.
                     } else {
-                        // Search term is present
                         if (visibleProductsCount === 0 && currentProductItems.length > 0 && noProductsSearchMessage) {
-                            // Items existed in the list, but none matched the current search term.
                             noProductsSearchMessage.style.display = 'block';
                         }
-                        // If visibleProductsCount > 0, matches were found, so no message needed.
                     }
                 });
             } else {

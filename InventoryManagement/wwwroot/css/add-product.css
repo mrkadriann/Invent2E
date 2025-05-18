@@ -1,19 +1,19 @@
 ﻿/* wwwroot/css/add-product.css */
 
-:root { /* Re-declare if not globally available or for specificity, or import from main CSS */
+:root {
     --primary-color: #00c77b;
     --dark-bg: #141E22;
-    --card-bg: #1A262D; /* Used for form sections */
+    --card-bg: #1A262D;
     --text-light: #ffffff;
     --text-gray: #8f8f8f;
     --text-muted: #9ca3af;
     --border-color: #334155;
-    --input-bg: #141E22; /* Slightly different from card for contrast if needed */
+    --input-bg: #141E22;
 }
 
 .add-product-page-container {
     padding: 20px;
-    max-width: 1200px; /* Adjust as needed */
+    max-width: 1200px;
     margin: 0 auto;
     color: var(--text-light);
 }
@@ -41,11 +41,11 @@
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 30px;
-    text-align: center; /* As per screenshot */
+    text-align: center;
 }
 
 .add-product-form {
-    background-color: var(--card-bg); /* Main form background from screenshot */
+    background-color: var(--card-bg);
     padding: 30px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
@@ -53,20 +53,20 @@
 
 .form-layout {
     display: flex;
-    gap: 30px; /* Space between columns */
+    gap: 30px;
 }
 
 .form-column {
-    flex: 1; /* Each column takes equal space */
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between form groups within a column */
+    gap: 20px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Space between label and input */
+    gap: 8px;
 }
 
 .form-label {
@@ -79,14 +79,14 @@
 .form-select-custom,
 .form-select-unit,
 .form-select-currency {
-    background-color: var(--input-bg); /* Darker input background */
+    background-color: var(--input-bg);
     border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 10px 12px;
     color: var(--text-light);
     font-size: 14px;
     width: 100%;
-    box-sizing: border-box; /* Important for width calculations */
+    box-sizing: border-box;
 }
 
     .form-control-custom::placeholder {
@@ -103,7 +103,7 @@
 select.form-select-custom,
 select.form-select-unit,
 select.form-select-currency {
-    appearance: none; /* Remove default arrow */
+    appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%238f8f8f' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
@@ -113,11 +113,11 @@ select.form-select-currency {
 
 .form-row {
     display: flex;
-    gap: 20px; /* Space between inputs in a row */
+    gap: 20px;
 }
 
 .half-width {
-    flex: 1; /* Each takes half of the available width in a form-row */
+    flex: 1;
 }
 
 .input-with-unit,
@@ -129,20 +129,19 @@ select.form-select-currency {
     .input-with-unit .form-control-custom {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        border-right: none; /* For currency on left */
+        border-right: none; 
     }
 
     .input-with-unit .form-select-unit,
     .input-with-unit .form-select-currency {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        padding: 10px 8px; /* Smaller padding for unit/currency */
-        width: auto; /* Adjust width as needed, e.g., 70px */
+        padding: 10px 8px;
+        width: auto;
         min-width: 65px;
     }
-    /* For currency on left, input on right */
     .input-with-unit .form-select-currency {
-        border-right: 1px solid var(--border-color); /* Add border if it was removed */
+        border-right: 1px solid var(--border-color); 
     }
 
         .input-with-unit .form-select-currency + .form-control-custom {
@@ -157,7 +156,7 @@ select.form-select-currency {
 }
 
     .input-with-icon .form-control-custom {
-        padding-right: 35px; /* Space for icon */
+        padding-right: 35px;
     }
 
     .input-with-icon .input-icon {
@@ -169,14 +168,13 @@ select.form-select-currency {
     }
 
 
-/* Image Upload Styles */
 .image-upload-container {
     display: flex;
     gap: 15px;
 }
 
 .image-upload-box {
-    width: 100px; /* Adjust size as needed */
+    width: 100px; 
     height: 100px;
     border: 2px dashed var(--border-color);
     border-radius: 4px;
@@ -186,15 +184,14 @@ select.form-select-currency {
     cursor: pointer;
     position: relative;
     background-color: var(--input-bg);
-    overflow: hidden; /* To contain the preview image */
-}
+    overflow: hidden;
 
     .image-upload-box:hover {
         border-color: var(--primary-color);
     }
 
 .image-upload-input {
-    display: none; /* Hide the actual file input */
+    display: none;
 }
 
 .image-upload-label {
@@ -212,7 +209,7 @@ select.form-select-currency {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none; /* Initially hidden */
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -222,7 +219,7 @@ select.form-select-currency {
 .form-actions {
     margin-top: 30px;
     display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
+    justify-content: flex-end;
     gap: 15px;
 }
 
@@ -249,12 +246,12 @@ select.form-select-currency {
 
 .btn-save {
     background-color: #00DF72;
-    color: var(--dark-bg); /* Or white if contrast is better */
+    color: var(--dark-bg);
     padding: 0px 40px;
 }
 
     .btn-save:hover {
-        background-color: #00a365; /* Slightly darker shade of primary */
+        background-color: #00a365;
     }
 
 .text-danger {
@@ -263,7 +260,6 @@ select.form-select-currency {
     margin-top: 0.25rem;
 }
 
-/* Make textarea resizable only vertically */
 textarea.form-control-custom {
     resize: vertical;
     min-height: 80px;

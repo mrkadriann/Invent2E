@@ -1,19 +1,17 @@
 ﻿@model InventoryManagement.Models.CustomerViewModel
 
 @{
-    ViewData["Title"] = "Customer Details"; // Matches the title in the screenshot
+    ViewData["Title"] = "Customer Details";
 }
 
 <link rel="stylesheet" href="~/css/add-customer.css" asp-append-version="true" />
-@* Ensure Material Icons are linked in your _Layout.cshtml or here if not already *@
-@* <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> *@
 
 
 <div class="add-customer-container">
     <div class="page-header-customer">
         <a asp-action="Index" asp-controller="Customer" class="back-link-customer">
             <i class="material-icons">arrow_back</i>
-            <span>Back To customer list</span> @* Changed from product list to customer list *@
+            <span>Back To customer list</span>
         </a>
         <h1 class="page-title-customer">@ViewData["Title"]</h1>
     </div>
@@ -29,8 +27,8 @@
                     <label for="customerImageUpload" class="customer-image-preview-container">
                         <img id="customerImagePreview" src="#" alt="Customer Preview" />
                         <span id="customerImagePlaceholder" class="customer-image-placeholder">
-                            C @* Default Initial, can be dynamic *@
-                            <span style="font-size: 12px; position: absolute; top: 5px; right: 5px; background-color: rgba(0,0,0,0.5); border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;">+</span>
+                            + @* Default Initial, can be dynamic *@
+                            @* <span style="font-size: 12px; position: absolute; top: 5px; right: 5px; background-color: rgba(0,0,0,0.5); border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;">+</span> *@
                         </span>
                     </label>
                     <input asp-for="CustomerPictureFile" type="file" id="customerImageUpload" accept="image/*" />
@@ -112,7 +110,7 @@
                 </div>
 
                 <div class="form-group-customer">
-                    <label asp-for="ShippingAddress">Shipping Address</label> @* Explicitly Shipping Address *@
+                    <label asp-for="ShippingAddress">Shipping Address</label>
                     <input asp-for="ShippingAddress" class="form-control" />
                     <span asp-validation-for="ShippingAddress" class="text-danger"></span>
                 </div>
@@ -123,7 +121,7 @@
                 </div>
 
                 <div class="form-actions-customer" style="margin-top: auto;">
-                    @* Push buttons to bottom *@
+
                     <a asp-action="Index" asp-controller="Customer" class="btn-customer btn-customer-cancel">Cancel</a>
                     <input type="submit" value="Save" class="btn-customer btn-customer-save" />
                 </div>
@@ -170,12 +168,6 @@
                     $('#customerImagePlaceholder').show(); // Ensure it's visible
                 }
             });
-
-            // --- THIS BLOCK WAS REMOVED ---
-            // $('.customer-image-preview-container').on('click', function() {
-            //     $('#customerImageUpload').click();
-            // });
-            // --- END OF REMOVED BLOCK ---
         });
     </script>
 }

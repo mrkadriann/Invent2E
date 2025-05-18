@@ -5,14 +5,12 @@
 }
 
 <link rel="stylesheet" href="~/css/add-supplier.css" asp-append-version="true" />
-@* Optional: Link to Font Awesome if you want to use an icon for the back button *@
-@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" /> *@
 
 
 <div class="add-supplier-container">
     <div class="page-header">
         <a asp-action="Index" class="back-link">
-            <i class="fas fa-arrow-left"></i> @* Font Awesome icon, or use an SVG or text arrow ← *@
+            <i class="fas fa-arrow-left"></i>
             <span>Back To supplier list</span>
         </a>
         <h1 class="page-title-supplier">Supplier Info</h1>
@@ -26,17 +24,16 @@
             @* LEFT COLUMN CARD *@
             <div class="form-section-card">
                 <div class="profile-image-area">
-                    <div class="profile-image-preview-container">
+                    <label for="profileImageUpload" class="profile-image-preview-container">
                         <img id="profileImagePreview" src="#" alt="Profile Preview" />
-                        <label for="profileImageUpload" class="profile-image-upload-button profile-image-placeholder" title="Upload profile image">
+                        <span id="profileImagePlaceholder" class="profile-image-placeholder-text">
                             +
-                        </label>
-                    </div>
+                        </span>
+                    </label>
                     <input asp-for="ProfileImageFile" type="file" id="profileImageUpload" accept="image/*" />
-                    @* Optional text label if you prefer it over just the + button
-                    <label for="profileImageUpload" class="custom-file-label-supplier">Upload Image</label> *@
                     <span asp-validation-for="ProfileImageFile" class="text-danger"></span>
                 </div>
+                @* --- END OF MODIFIED IMAGE INPUT AREA --- *@
 
                 <div class="form-group-supplier">
                     <label asp-for="CompanyName"></label>
@@ -46,7 +43,7 @@
 
                 <h4>Contact Persons</h4>
                 <div class="form-group-supplier">
-                    <label asp-for="PersonName">Name</label> @* Main contact person name is used here as per screenshot logic *@
+                    <label asp-for="PersonName">Name</label>
                     <input asp-for="PersonName" class="form-control" placeholder="Enter name" />
                     <span asp-validation-for="PersonName" class="text-danger"></span>
                 </div>
@@ -88,7 +85,6 @@
                     </div>
                 </div>
                 <div class="form-group-supplier">
-                    @* Address seems to belong to main supplier info, moved here *@
                     <label asp-for="Address"></label>
                     <textarea asp-for="Address" class="form-control" placeholder="Enter full address" rows="3"></textarea>
                     <span asp-validation-for="Address" class="text-danger"></span>
@@ -100,7 +96,6 @@
                 <h4>Purchasing Info</h4>
                 <div class="form-group-supplier">
                     <label asp-for="Currency"></label>
-                    @* Consider making this a select list if you have predefined currencies *@
                     <select asp-for="Currency" class="form-control">
                         <option value="">Select Currency...</option>
                         <option value="PHP">PHP - Philippine Peso</option>
@@ -111,7 +106,6 @@
                 </div>
                 <div class="form-group-supplier">
                     <label asp-for="PaymentMethod"></label>
-                    @* Consider making this a select list *@
                     <select asp-for="PaymentMethod" class="form-control">
                         <option value="">Select Payment Method...</option>
                         <option value="Bank Transfer">Bank Transfer</option>
@@ -121,18 +115,8 @@
                     </select>
                     <span asp-validation-for="PaymentMethod" class="text-danger"></span>
                 </div>
-
-                @* The screenshot shows an "Email" field under Purchasing Info - not sure if this is supplier's main email or a specific purchasing email. I'll assume it's a general field. Your model has a main Email, so I'm not adding a new one here unless you clarify. If it's an address for POs for example, then it's fine.*@
-                @*
-                <div class="form-group-supplier">
-                    <label>Email (Purchasing)</label> <!- If different from main email ->
-                    <input type="email" class="form-control" placeholder="Enter purchasing email" />
-                </div>
-                *@
-
                 <div class="form-group-supplier">
                     <label asp-for="Courier"></label>
-                    @* Consider making this a select list *@
                     <select asp-for="Courier" class="form-control">
                         <option value="">Select Courier...</option>
                         <option value="J&T Express">J&T Express</option>
@@ -168,28 +152,47 @@
     }
     <script>
         $(document).ready(function () {
-            $('#profileImageUpload').on('change', function (event) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#profileImagePreview').attr('src', e.target.result).show();
-                    $('.profile-image-placeholder').hide(); // Hide initial/icon
-                }
-                if (event.target.files.length > 0) {
+            const $profileImageUpload = $('#profileImageUpload');
+            const $profileImagePreview = $('#profileImagePreview');
+            const $profileImagePlaceholderText = $('#profileImagePlaceholder');
+            const $companyNameInput = $('#CompanyName');
+
+            function updatePlaceholderInitial() {
+                var companyName = $companyNameInput.val();
+                var initial = companyName ? companyName.trim().substring(0, 1).toUpperCase() : '+';
+                $profileImagePlaceholderText.text(initial);
+            }
+
+            $profileImageUpload.on('change', function (event) {
+                if (event.target.files && event.target.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $profileImagePreview.attr('src', e.target.result).show();
+                        $profileImagePlaceholderText.hide();
+                    }
                     reader.readAsDataURL(event.target.files[0]);
                 } else {
-                     $('#profileImagePreview').hide();
-                     $('.profile-image-placeholder').show(); // Show initial/icon if no file
+                    $profileImagePreview.attr('src', '#').hide();
+                    updatePlaceholderInitial();
+                    $profileImagePlaceholderText.show();
                 }
             });
 
-            // Optional: Update placeholder initial based on Company Name input
-            $('#CompanyName').on('input', function() {
-                var companyName = $(this).val();
-                var initial = companyName ? companyName.trim().substring(0, 1).toUpperCase() : 'L';
-                if ($('#profileImagePreview').attr('src') === '#' || !$('#profileImagePreview').is(':visible')) {
-                    $('.profile-image-placeholder').text(initial).show();
+            $companyNameInput.on('input', function() {
+                if ($profileImagePreview.attr('src') === '#' || !$profileImagePreview.is(':visible')) {
+                    updatePlaceholderInitial();
+                    $profileImagePlaceholderText.show(); // Ensure it's visible
                 }
             });
+
+            if ($profileImagePreview.attr('src') && $profileImagePreview.attr('src') !== '#') {
+                $profileImagePreview.show();
+                $profileImagePlaceholderText.hide();
+            } else {
+                $profileImagePreview.hide();
+                $profileImagePlaceholderText.show();
+                updatePlaceholderInitial();
+            }
         });
     </script>
 }
