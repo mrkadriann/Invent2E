@@ -288,11 +288,7 @@ body {
 .search-container {
     position: relative;
     flex: 1;
-<<<<<<< HEAD
-    margin-left: 73px;
-=======
     margin-left: 71px;
->>>>>>> origin/tunay/pseudomain
     margin-right: 450px;
 }
 

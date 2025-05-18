@@ -137,11 +137,6 @@ namespace InventoryManagement.Controllers
             return View(viewModel);
         }
 
-<<<<<<< HEAD
-        public ActionResult Add()
-        {
-            return View("CreateProduct");
-=======
         // GET: Products/AddProduct
         public async Task<IActionResult> AddProduct()
         {
@@ -359,7 +354,6 @@ namespace InventoryManagement.Controllers
             }
 
             return PartialView("_ProductDetailPartial", viewModel);
->>>>>>> origin/tunay/pseudomain
         }
     }
 }

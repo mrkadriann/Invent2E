@@ -1,0 +1,444 @@
+﻿.suppliers-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Or calc(100vh - heightOfNavbar) if navbar is fixed */
+    padding: 0; /* Assuming parent content-area has padding */
+}
+
+.suppliers-actions-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Matches image */
+    gap: 20px; /* Matches image */
+}
+
+.suppliers-title h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+.suppliers-actions-row .search-container {
+    min-width: 300px; /* Give search bar ample space */
+}
+
+.add-supplier-btn {
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+
+.suppliers-content {
+    display: flex;
+    flex: 1; /* Take remaining vertical space */
+    gap: 20px;
+    /* If the page itself should not scroll, but sidebar/main scroll independently: */
+    max-height: calc(100vh - 64px - 20px - (28px + 20px + 20px) - 20px); /* Approx: navbar - padding_top - (h1 + action_row_margin_bottom + action_row_padding) - padding_bottom */
+    /* A simpler approach if suppliers-container is already within a padded content-area */
+    /* max-height: calc(100% - (height_of_suppliers_actions_row_including_margin)); */
+}
+
+.suppliers-sidebar {
+    width: 260px; /* Matches image width */
+    background-color: var(--card-bg); /* #1e293b */
+    border-radius: 8px;
+    padding: 20px;
+    flex-shrink: 0;
+    height: fit-content; /* Adjusts to content */
+    max-height: 100%; /* Ensure it doesn't overflow .suppliers-content */
+    overflow-y: auto; /* Scroll if content is too tall */
+}
+
+    .suppliers-sidebar .filter-section h3 {
+        font-size: 12px;
+        color: var(--text-gray); /* #8f8f8f */
+        margin-bottom: 10px;
+        font-weight: 500; /* Semibold */
+        text-transform: uppercase;
+    }
+
+.search-container-sidebar {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-input-sidebar {
+    padding-left: 38px; /* Space for icon */
+    background-color: var(--dark-bg); /* #101827 */
+    border: 1px solid var(--border-color); /* #334155 */
+    border-radius: 4px;
+    color: var(--text-light);
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+}
+
+    .search-input-sidebar::placeholder {
+        color: var(--text-gray);
+        text-transform: uppercase;
+    }
+
+.search-container-sidebar .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted); /* #9ca3af */
+    font-size: 20px;
+}
+
+.filter-status-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 8px;
+}
+
+.btn-filter {
+    padding: 8px 5px; /* Adjusted padding */
+    font-size: 13px;
+    background-color: var(--dark-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+    .btn-filter:hover {
+        background-color: var(--nav-hover-bg); /* #283548 */
+        color: var(--text-light);
+    }
+
+    .btn-filter.active {
+        background-color: var(--primary-color); /* #00c77b */
+        color: var(--text-light); /* White text on active */
+        border-color: var(--primary-color);
+    }
+
+/* For inputs in "TOTAL ITEM RANGE" that don't have a currency symbol */
+.form-control-standalone {
+    border-radius: 4px !important; /* Override default input-group styling */
+}
+
+.suppliers-sidebar .form-control::placeholder {
+    color: var(--text-gray); /* #8f8f8f */
+    font-size: 13px;
+}
+
+
+.suppliers-main {
+    flex: 1;
+    max-height: 100%; /* Ensure it doesn't overflow .suppliers-content */
+    padding-right: 5px; /* Small space for scrollbar to not touch cards */
+}
+
+.supplier-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Space between supplier cards */
+}
+
+.supplier-card {
+    background-color: var(--card-bg); /* #1e293b */
+    border-radius: 8px;
+    padding: 16px 20px;
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Space between main and secondary info sections */
+    border: 1px solid var(--border-color); /* #334155 */
+}
+
+.supplier-card-main-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.supplier-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* background-color: #8b5cf6; Example purple, can be dynamic */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    flex-shrink: 0;
+    text-transform: uppercase;
+}
+
+.supplier-details {
+    flex: 1; /* Takes available space */
+    min-width: 150px;
+}
+
+.supplier-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 2px;
+    color: var(--text-light);
+}
+
+.supplier-subname {
+    font-size: 13px;
+    color: var(--text-muted); /* #9ca3af */
+    margin: 0;
+}
+
+.supplier-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--text-muted);
+    min-width: 200px; /* Ensure enough space */
+    margin-left: auto; /* Push it towards payables if space allows */
+    margin-right: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .contact-item i.material-icons {
+        font-size: 16px;
+        color: var(--text-gray);
+    }
+
+.supplier-payables {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    min-width: 100px;
+    margin-left: auto; /* Pushes to the right before more-options */
+}
+
+.payables-label {
+    font-size: 11px;
+    color: var(--text-gray);
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.payables-amount {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.more-options-btn-supplier {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0 5px;
+    margin-left: 10px; /* Space from payables */
+    align-self: flex-start; /* Align to top of the flex row */
+}
+
+    .more-options-btn-supplier i.material-icons {
+        font-size: 24px;
+    }
+
+    .more-options-btn-supplier:hover {
+        color: var(--text-light);
+    }
+
+.supplier-card-secondary-info {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Space between items */
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+    .supplier-card-secondary-info i.material-icons {
+        font-size: 18px;
+        color: var(--text-gray);
+        margin-right: 6px; /* Space between icon and text */
+    }
+
+.supplier-address,
+.supplier-product-count {
+    display: flex;
+    align-items: center;
+}
+
+.supplier-address {
+    flex: 2; /* Allow address to take more space */
+    min-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    .supplier-address span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+.supplier-product-count {
+    flex: 1;
+    min-width: 120px; /* Give some fixed space */
+}
+
+.supplier-portal-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto; /* Pushes status to the far right */
+}
+
+.portal-status-label {
+    font-size: 11px;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.status-badge {
+    padding: 3px 10px;
+    border-radius: 12px; /* Pill shape */
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize; /* 'Active', 'Inactive' */
+}
+
+    .status-badge.status-active {
+        background-color: rgba(139, 92, 246, 0.15); /* Light purple background (hex: #8b5cf6) */
+        color: #a78bfa; /* Brighter Purple text to match image */
+    }
+
+    .status-badge.status-inactive {
+        background-color: rgba(107, 114, 128, 0.15); /* Light gray background (var --text-muted with alpha) */
+        color: #9ca3af; /* Gray text (var --text-muted) */
+    }
+
+/* Ensure material icons are vertically aligned with text */
+.material-icons {
+    vertical-align: middle;
+}
+
+.supplier-avatar-image-container {
+    width: 50px; /* Or your desired size */
+    height: 50px; /* Or your desired size */
+    border-radius: 50%; /* Makes it circular */
+    overflow: hidden; /* Clips the image to the circle */
+    margin-right: 15px;
+    flex-shrink: 0; /* Prevent shrinking if container is flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0; /* Fallback background */
+}
+
+.supplier-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Scales the image to cover the container, cropping if necessary */
+}
+
+.supplier-avatar-initials { /* Style for the fallback initials div */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em; /* Adjust as needed */
+    font-weight: bold;
+    color: white;
+    border-radius: 50%; /* Keep it circular */
+}
+
+/* Optional: if you use a static placeholder image */
+.supplier-profile-img.placeholder {
+    object-fit: contain; /* Or 'scale-down' if you don't want it cropped */
+    background-color: #f0f0f0;
+}
+
+/* Define color and dimension variables for easy theming */
+/* Define color variables based on your images for easy theming */
+:root {
+    --supplier-tab-overall-bg: #172125; /* Background of the entire tab bar component */
+    --supplier-tab-active-bg: #224B4B; /* Dark teal background for the active tab */
+    --supplier-tab-active-text: #38BDAE; /* Bright teal/green text for the active tab */
+    --supplier-tab-inactive-text: #8899A1; /* Muted gray/blue text for inactive tabs */
+    --supplier-tab-hover-text: #A0B0B8; /* Slightly brighter text for inactive tab hover */
+    --supplier-tab-hover-bg: rgba(45, 75, 75, 0.2); /* Subtle background for inactive tab hover */
+
+    --supplier-tab-container-border-radius: 8px; /* Radius for the overall tab container */
+    --supplier-tab-button-border-radius: 6px; /* Radius for individual tab buttons */
+
+    --supplier-tab-container-padding: 4px; /* Padding inside the tab bar, around buttons */
+    --supplier-tab-buttons-gap: 4px; /* Space between tab buttons */
+    --supplier-tab-button-padding: 0.6rem 1.2rem; /* Padding inside each tab button */
+}
+
+/* Style for the tab container (ul) */
+#supplierTab.nav-tabs {
+    border-bottom: none; /* Remove Bootstrap's default bottom border */
+    background-color: var(--supplier-tab-overall-bg);
+    padding: var(--supplier-tab-container-padding);
+    border-radius: var(--supplier-tab-container-border-radius);
+    display: inline-flex; /* Makes the container wrap its content */
+    gap: var(--supplier-tab-buttons-gap); /* Creates space between nav-items if they are distinct elements, or helps space buttons */
+    margin-bottom: 0; /* Ensure no extra margin below the tab bar */
+}
+
+    /* Reset margin for list items if any conflict */
+    #supplierTab.nav-tabs .nav-item {
+        margin-bottom: 0;
+    }
+
+    #supplierTab.nav-tabs .nav-link {
+        border: none; /* Remove Bootstrap's default borders on links */
+        border-radius: var(--supplier-tab-button-border-radius);
+        padding: var(--supplier-tab-button-padding);
+        color: var(--supplier-tab-inactive-text);
+        background-color: transparent; /* Inactive tabs are transparent against the container's background */
+
+        font-weight: 500; /* Standard weight for inactive tabs */
+        line-height: 1.2; /* Adjust for text vertical centering with padding */
+        text-align: center;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        /* Override Bootstrap's potential negative margin used for border merging */
+        margin-bottom: 0;
+    }
+
+        /* Style for the ACTIVE tab button */
+        #supplierTab.nav-tabs .nav-link.active {
+            background-color: var(--supplier-tab-active-bg);
+            color: var(--supplier-tab-active-text);
+            font-weight: 600; /* Bolder text for active tab */
+        }
+
+        /* Hover effect for INACTIVE tab buttons */
+        #supplierTab.nav-tabs .nav-link:not(.active):hover {
+            color: var(--supplier-tab-hover-text);
+            background-color: var(--supplier-tab-hover-bg);
+        }
+
+        /* Focus style for accessibility (optional: customize as needed) */
+        #supplierTab.nav-tabs .nav-link:focus {
+            outline: none; /* Remove default browser outline */
+            /* Example: Add a subtle box-shadow for focus state */
+            /* box-shadow: 0 0 0 2px rgba(var(--supplier-tab-active-rgb, 56, 189, 174), 0.3); */
+        }
+
+        /* Remove Bootstrap's specific hover border if it appears */
+        #supplierTab.nav-tabs .nav-link:hover {
+            border-color: transparent; /* Ensure no border appears on hover */
+        }
