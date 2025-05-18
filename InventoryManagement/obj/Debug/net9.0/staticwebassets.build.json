@@ -1,10 +1,6 @@
 {
   "Version": 1,
-<<<<<<< HEAD
   "Hash": "Le/FAHkh0EGltouWDHHax1mg5J7SlYFS2LtVAEzD8KQ=",
-=======
-  "Hash": "Lixmv2uovylTLe8ZhvfWu3BRoYqpcRk39Nv3ubmbOJU=",
->>>>>>> origin/tunay/pseudomain
   "Source": "InventoryManagement",
   "BasePath": "_content/InventoryManagement",
   "Mode": "Default",
@@ -504,16 +500,12 @@
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\bpw1g0kypc-1vyn5f6tb3.gz",
-=======
-      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\bpw1g0kypc-pvbys0iy28.gz",
->>>>>>> origin/tunay/pseudomain
       "SourceId": "InventoryManagement",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/InventoryManagement",
-      "RelativePath": "css/add-customer#[.{fingerprint=pvbys0iy28}]?.css.gz",
+      "RelativePath": "css/add-customer#[.{fingerprint=1vyn5f6tb3}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -522,8 +514,8 @@
       "RelatedAsset": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-customer.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "0dyy93abkj",
-      "Integrity": "dNdyEGdxbisWYIF1t9i4FTqJyk+tkyJayoKcHbGA4vE=",
+      "Fingerprint": "xtu5w8cxz4",
+      "Integrity": "VWubHzKvWpMAK+5Yo1X9ylGMb8Q+yp5jBDuPKUNkKy8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-customer.css"
@@ -760,16 +752,12 @@
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-hoevwtl3w5.gz",
-=======
-      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-g2yw5r9ea7.gz",
->>>>>>> origin/tunay/pseudomain
       "SourceId": "InventoryManagement",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/InventoryManagement",
-      "RelativePath": "css/add-product#[.{fingerprint=g2yw5r9ea7}]?.css.gz",
+      "RelativePath": "css/add-product#[.{fingerprint=hoevwtl3w5}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -778,8 +766,8 @@
       "RelatedAsset": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "bzigai57de",
-      "Integrity": "6VmwmAl5X3nODv1cwg2Hrz59YU9LyjI0raz0sV3IQVc=",
+      "Fingerprint": "h6pqi73jkh",
+      "Integrity": "B0CxHShRk8areoL3x5YorGENuuv1OSIPF8YDoe4GFMQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css"
@@ -1016,16 +1004,12 @@
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-c02e98xu2y.gz",
-=======
-      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-usghz4a64s.gz",
->>>>>>> origin/tunay/pseudomain
       "SourceId": "InventoryManagement",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/InventoryManagement",
-      "RelativePath": "css/add-supplier#[.{fingerprint=usghz4a64s}]?.css.gz",
+      "RelativePath": "css/add-supplier#[.{fingerprint=c02e98xu2y}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1034,8 +1018,8 @@
       "RelatedAsset": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "8e4yna926b",
-      "Integrity": "wDmmZ06+uT4fPlrg+wpfQAM9m+kQAyvSAhiOPIXj7gg=",
+      "Fingerprint": "axxj4luy74",
+      "Integrity": "gnWM9jteMuO2KN8+LPIdBBInhwxH6kb20oPQ/ZphxmQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css"
@@ -1419,16 +1403,12 @@
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-r2shpopx4m.gz",
-=======
-      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-q52azctp4x.gz",
->>>>>>> origin/tunay/pseudomain
       "SourceId": "InventoryManagement",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/InventoryManagement",
-      "RelativePath": "css/Customer#[.{fingerprint=q52azctp4x}]?.css.gz",
+      "RelativePath": "css/Customer#[.{fingerprint=r2shpopx4m}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1437,8 +1417,8 @@
       "RelatedAsset": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\Customer.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "d86i6812bn",
-      "Integrity": "DWZOeJII97U8W6cyLgE8cRz83Xo9svI54PnvV1NcrrA=",
+      "Fingerprint": "lk5od85hbz",
+      "Integrity": "NQ+oIB3OGSB8Sq4a5I99+BpRy+ftJNfh1Oboct6TOmM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\Customer.css"
@@ -1486,16 +1466,12 @@
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-<<<<<<< HEAD
       "Identity": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-yrgowgux7v.gz",
-=======
-      "Identity": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-hrp92ade7u.gz",
->>>>>>> origin/tunay/pseudomain
       "SourceId": "InventoryManagement",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/InventoryManagement",
-      "RelativePath": "css/supplier#[.{fingerprint=hrp92ade7u}]?.css.gz",
+      "RelativePath": "css/supplier#[.{fingerprint=yrgowgux7v}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1504,8 +1480,8 @@
       "RelatedAsset": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\supplier.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "10v6n3bhp9",
-      "Integrity": "j8o4ICjyS/qRINgGTY5vXaiH6rrnTt+dA7LCzcVeu3U=",
+      "Fingerprint": "4nr3xao8ee",
+      "Integrity": "UKhzbOT6G4vKc7RQTAtRNFuKF/wbGGzk8MKJTFFR3aw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\supplier.css"
@@ -1588,8 +1564,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "pvbys0iy28",
-      "Integrity": "pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU=",
+      "Fingerprint": "1vyn5f6tb3",
+      "Integrity": "w45Afq8jVN3C9KdWWFdhKGbRFbl7HjHGJCGr/vj+33c=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\add-customer.css"
@@ -1609,8 +1585,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "g2yw5r9ea7",
-      "Integrity": "iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs=",
+      "Fingerprint": "hoevwtl3w5",
+      "Integrity": "ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\add-product.css"
@@ -1630,8 +1606,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "usghz4a64s",
-      "Integrity": "st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk=",
+      "Fingerprint": "c02e98xu2y",
+      "Integrity": "rFrcIwm99QNX0F10Hd+gI0wDfpCpwu6MnQBwB4dWxDc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\add-supplier.css"
@@ -1672,8 +1648,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "q52azctp4x",
-      "Integrity": "khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow=",
+      "Fingerprint": "r2shpopx4m",
+      "Integrity": "Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Customer.css"
@@ -1714,8 +1690,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "hrp92ade7u",
-      "Integrity": "UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss=",
+      "Fingerprint": "yrgowgux7v",
+      "Integrity": "7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\supplier.css"
@@ -3235,18 +3211,13 @@
   ],
   "Endpoints": [
     {
-<<<<<<< HEAD
       "Route": "css/add-customer.1vyn5f6tb3.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\bpw1g0kypc-1vyn5f6tb3.gz",
-=======
-      "Route": "css/add-customer.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\bpw1g0kypc-pvbys0iy28.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000677048070"
+          "Quality": "0.000505305710"
         }
       ],
       "ResponseHeaders": [
@@ -3256,23 +3227,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1476"
+          "Value": "1978"
         },
         {
           "Name": "ETag",
-          "Value": "\"dNdyEGdxbisWYIF1t9i4FTqJyk+tkyJayoKcHbGA4vE=\""
+          "Value": "\"VWubHzKvWpMAK+5Yo1X9ylGMb8Q+yp5jBDuPKUNkKy8=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -3288,24 +3255,27 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU=\""
+          "Value": "W/\"w45Afq8jVN3C9KdWWFdhKGbRFbl7HjHGJCGr/vj+33c=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "1vyn5f6tb3"
+        },
+        {
+          "Name": "label",
+          "Value": "css/add-customer.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU="
+          "Value": "sha256-w45Afq8jVN3C9KdWWFdhKGbRFbl7HjHGJCGr/vj+33c="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/add-customer.1vyn5f6tb3.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-customer.css",
-=======
-      "Route": "css/add-customer.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-customer.css",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3314,7 +3284,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5340"
+          "Value": "6432"
         },
         {
           "Name": "Content-Type",
@@ -3322,160 +3292,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU=\""
+          "Value": "\"w45Afq8jVN3C9KdWWFdhKGbRFbl7HjHGJCGr/vj+33c=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU="
-        }
-      ]
-    },
-    {
-      "Route": "css/add-customer.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\bpw1g0kypc-pvbys0iy28.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1476"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"dNdyEGdxbisWYIF1t9i4FTqJyk+tkyJayoKcHbGA4vE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-dNdyEGdxbisWYIF1t9i4FTqJyk+tkyJayoKcHbGA4vE="
-        }
-      ]
-    },
-    {
-      "Route": "css/add-customer.pvbys0iy28.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\bpw1g0kypc-pvbys0iy28.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000677048070"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1476"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"dNdyEGdxbisWYIF1t9i4FTqJyk+tkyJayoKcHbGA4vE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "pvbys0iy28"
-        },
-        {
-          "Name": "label",
-          "Value": "css/add-customer.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU="
-        }
-      ]
-    },
-    {
-      "Route": "css/add-customer.pvbys0iy28.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-customer.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5340"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -3485,7 +3306,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "pvbys0iy28"
+          "Value": "1vyn5f6tb3"
         },
         {
           "Name": "label",
@@ -3493,18 +3314,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-pazLwi5Iry0PmZx4BIjii8yHJ4TtdVRzkUDl6HJf+jU="
+          "Value": "sha256-w45Afq8jVN3C9KdWWFdhKGbRFbl7HjHGJCGr/vj+33c="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/add-customer.1vyn5f6tb3.css.gz",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\bpw1g0kypc-1vyn5f6tb3.gz",
-=======
-      "Route": "css/add-customer.pvbys0iy28.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\bpw1g0kypc-pvbys0iy28.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3513,7 +3329,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1476"
+          "Value": "1978"
         },
         {
           "Name": "Content-Type",
@@ -3521,15 +3337,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dNdyEGdxbisWYIF1t9i4FTqJyk+tkyJayoKcHbGA4vE=\""
+          "Value": "\"VWubHzKvWpMAK+5Yo1X9ylGMb8Q+yp5jBDuPKUNkKy8=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -3547,7 +3359,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "pvbys0iy28"
+          "Value": "1vyn5f6tb3"
         },
         {
           "Name": "label",
@@ -3555,7 +3367,6 @@
         },
         {
           "Name": "integrity",
-<<<<<<< HEAD
           "Value": "sha256-VWubHzKvWpMAK+5Yo1X9ylGMb8Q+yp5jBDuPKUNkKy8="
         }
       ]
@@ -3694,24 +3505,17 @@
         {
           "Name": "integrity",
           "Value": "sha256-VWubHzKvWpMAK+5Yo1X9ylGMb8Q+yp5jBDuPKUNkKy8="
-=======
-          "Value": "sha256-dNdyEGdxbisWYIF1t9i4FTqJyk+tkyJayoKcHbGA4vE="
->>>>>>> origin/tunay/pseudomain
         }
       ]
     },
     {
       "Route": "css/add-product.css",
-<<<<<<< HEAD
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-hoevwtl3w5.gz",
-=======
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-g2yw5r9ea7.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000686813187"
+          "Quality": "0.000509424350"
         }
       ],
       "ResponseHeaders": [
@@ -3721,19 +3525,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1455"
+          "Value": "1962"
         },
         {
           "Name": "ETag",
-          "Value": "\"6VmwmAl5X3nODv1cwg2Hrz59YU9LyjI0raz0sV3IQVc=\""
+          "Value": "\"B0CxHShRk8areoL3x5YorGENuuv1OSIPF8YDoe4GFMQ=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -3753,13 +3553,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs=\""
+          "Value": "W/\"ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs="
+          "Value": "sha256-ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0="
         }
       ]
     },
@@ -3774,7 +3574,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5423"
+          "Value": "6540"
         },
         {
           "Name": "Content-Type",
@@ -3782,15 +3582,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs=\""
+          "Value": "\"ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -3800,17 +3596,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs="
+          "Value": "sha256-ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0="
         }
       ]
     },
     {
       "Route": "css/add-product.css.gz",
-<<<<<<< HEAD
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-hoevwtl3w5.gz",
-=======
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-g2yw5r9ea7.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3819,7 +3611,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1455"
+          "Value": "1962"
         },
         {
           "Name": "Content-Type",
@@ -3827,15 +3619,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6VmwmAl5X3nODv1cwg2Hrz59YU9LyjI0raz0sV3IQVc=\""
+          "Value": "\"B0CxHShRk8areoL3x5YorGENuuv1OSIPF8YDoe4GFMQ=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -3853,23 +3641,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-6VmwmAl5X3nODv1cwg2Hrz59YU9LyjI0raz0sV3IQVc="
+          "Value": "sha256-B0CxHShRk8areoL3x5YorGENuuv1OSIPF8YDoe4GFMQ="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/add-product.hoevwtl3w5.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-hoevwtl3w5.gz",
-=======
-      "Route": "css/add-product.g2yw5r9ea7.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-g2yw5r9ea7.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000686813187"
+          "Quality": "0.000509424350"
         }
       ],
       "ResponseHeaders": [
@@ -3879,19 +3662,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1455"
+          "Value": "1962"
         },
         {
           "Name": "ETag",
-          "Value": "\"6VmwmAl5X3nODv1cwg2Hrz59YU9LyjI0raz0sV3IQVc=\""
+          "Value": "\"B0CxHShRk8areoL3x5YorGENuuv1OSIPF8YDoe4GFMQ=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -3911,13 +3690,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs=\""
+          "Value": "W/\"ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "g2yw5r9ea7"
+          "Value": "hoevwtl3w5"
         },
         {
           "Name": "label",
@@ -3925,18 +3704,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs="
+          "Value": "sha256-ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/add-product.hoevwtl3w5.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
-=======
-      "Route": "css/add-product.g2yw5r9ea7.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-product.css",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3945,7 +3719,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5423"
+          "Value": "6540"
         },
         {
           "Name": "Content-Type",
@@ -3953,15 +3727,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs=\""
+          "Value": "\"ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -3971,7 +3741,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "g2yw5r9ea7"
+          "Value": "hoevwtl3w5"
         },
         {
           "Name": "label",
@@ -3979,18 +3749,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-iArEJR0h6CHyKAGFYfMk0FqGTlXLQk+iCIRm+NT0jEs="
+          "Value": "sha256-ESAq8spspHxwK7GfBMQEhVW3QoAeDljzMpdm/0aYXe0="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/add-product.hoevwtl3w5.css.gz",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-hoevwtl3w5.gz",
-=======
-      "Route": "css/add-product.g2yw5r9ea7.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\gdwj84cwpc-g2yw5r9ea7.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3999,7 +3764,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1455"
+          "Value": "1962"
         },
         {
           "Name": "Content-Type",
@@ -4007,15 +3772,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6VmwmAl5X3nODv1cwg2Hrz59YU9LyjI0raz0sV3IQVc=\""
+          "Value": "\"B0CxHShRk8areoL3x5YorGENuuv1OSIPF8YDoe4GFMQ=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -4033,7 +3794,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "g2yw5r9ea7"
+          "Value": "hoevwtl3w5"
         },
         {
           "Name": "label",
@@ -4041,23 +3802,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-6VmwmAl5X3nODv1cwg2Hrz59YU9LyjI0raz0sV3IQVc="
+          "Value": "sha256-B0CxHShRk8areoL3x5YorGENuuv1OSIPF8YDoe4GFMQ="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/add-supplier.c02e98xu2y.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-c02e98xu2y.gz",
-=======
-      "Route": "css/add-supplier.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-usghz4a64s.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000680735194"
+          "Quality": "0.000412881916"
         }
       ],
       "ResponseHeaders": [
@@ -4067,23 +3823,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1468"
+          "Value": "2421"
         },
         {
           "Name": "ETag",
-          "Value": "\"wDmmZ06+uT4fPlrg+wpfQAM9m+kQAyvSAhiOPIXj7gg=\""
+          "Value": "\"gnWM9jteMuO2KN8+LPIdBBInhwxH6kb20oPQ/ZphxmQ=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -4099,24 +3851,27 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk=\""
+          "Value": "W/\"rFrcIwm99QNX0F10Hd+gI0wDfpCpwu6MnQBwB4dWxDc=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "c02e98xu2y"
+        },
+        {
+          "Name": "label",
+          "Value": "css/add-supplier.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk="
+          "Value": "sha256-rFrcIwm99QNX0F10Hd+gI0wDfpCpwu6MnQBwB4dWxDc="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/add-supplier.c02e98xu2y.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css",
-=======
-      "Route": "css/add-supplier.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4125,7 +3880,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5479"
+          "Value": "7610"
         },
         {
           "Name": "Content-Type",
@@ -4133,160 +3888,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk=\""
+          "Value": "\"rFrcIwm99QNX0F10Hd+gI0wDfpCpwu6MnQBwB4dWxDc=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk="
-        }
-      ]
-    },
-    {
-      "Route": "css/add-supplier.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-usghz4a64s.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1468"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"wDmmZ06+uT4fPlrg+wpfQAM9m+kQAyvSAhiOPIXj7gg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-wDmmZ06+uT4fPlrg+wpfQAM9m+kQAyvSAhiOPIXj7gg="
-        }
-      ]
-    },
-    {
-      "Route": "css/add-supplier.usghz4a64s.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-usghz4a64s.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000680735194"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1468"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"wDmmZ06+uT4fPlrg+wpfQAM9m+kQAyvSAhiOPIXj7gg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "usghz4a64s"
-        },
-        {
-          "Name": "label",
-          "Value": "css/add-supplier.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk="
-        }
-      ]
-    },
-    {
-      "Route": "css/add-supplier.usghz4a64s.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\add-supplier.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5479"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -4296,7 +3902,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "usghz4a64s"
+          "Value": "c02e98xu2y"
         },
         {
           "Name": "label",
@@ -4304,18 +3910,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-st0305Lm39jzmmLNEEwEuUgFfm7FAja0tq7OvWxD1Bk="
+          "Value": "sha256-rFrcIwm99QNX0F10Hd+gI0wDfpCpwu6MnQBwB4dWxDc="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/add-supplier.c02e98xu2y.css.gz",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-c02e98xu2y.gz",
-=======
-      "Route": "css/add-supplier.usghz4a64s.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\mpl887pv2v-usghz4a64s.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4324,7 +3925,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1468"
+          "Value": "2421"
         },
         {
           "Name": "Content-Type",
@@ -4332,15 +3933,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wDmmZ06+uT4fPlrg+wpfQAM9m+kQAyvSAhiOPIXj7gg=\""
+          "Value": "\"gnWM9jteMuO2KN8+LPIdBBInhwxH6kb20oPQ/ZphxmQ=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -4358,7 +3955,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "usghz4a64s"
+          "Value": "c02e98xu2y"
         },
         {
           "Name": "label",
@@ -4366,7 +3963,6 @@
         },
         {
           "Name": "integrity",
-<<<<<<< HEAD
           "Value": "sha256-gnWM9jteMuO2KN8+LPIdBBInhwxH6kb20oPQ/ZphxmQ="
         }
       ]
@@ -4505,9 +4101,6 @@
         {
           "Name": "integrity",
           "Value": "sha256-gnWM9jteMuO2KN8+LPIdBBInhwxH6kb20oPQ/ZphxmQ="
-=======
-          "Value": "sha256-wDmmZ06+uT4fPlrg+wpfQAM9m+kQAyvSAhiOPIXj7gg="
->>>>>>> origin/tunay/pseudomain
         }
       ]
     },
@@ -4811,16 +4404,12 @@
     },
     {
       "Route": "css/Customer.css",
-<<<<<<< HEAD
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-r2shpopx4m.gz",
-=======
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-q52azctp4x.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000501756147"
+          "Quality": "0.000353356890"
         }
       ],
       "ResponseHeaders": [
@@ -4830,19 +4419,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1992"
+          "Value": "2829"
         },
         {
           "Name": "ETag",
-          "Value": "\"DWZOeJII97U8W6cyLgE8cRz83Xo9svI54PnvV1NcrrA=\""
+          "Value": "\"NQ+oIB3OGSB8Sq4a5I99+BpRy+ftJNfh1Oboct6TOmM=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -4862,13 +4447,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow=\""
+          "Value": "W/\"Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow="
+          "Value": "sha256-Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY="
         }
       ]
     },
@@ -4883,7 +4468,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "10000"
+          "Value": "11759"
         },
         {
           "Name": "Content-Type",
@@ -4891,15 +4476,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow=\""
+          "Value": "\"Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -4909,17 +4490,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow="
+          "Value": "sha256-Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY="
         }
       ]
     },
     {
       "Route": "css/Customer.css.gz",
-<<<<<<< HEAD
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-r2shpopx4m.gz",
-=======
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-q52azctp4x.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4928,7 +4505,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1992"
+          "Value": "2829"
         },
         {
           "Name": "Content-Type",
@@ -4936,15 +4513,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"DWZOeJII97U8W6cyLgE8cRz83Xo9svI54PnvV1NcrrA=\""
+          "Value": "\"NQ+oIB3OGSB8Sq4a5I99+BpRy+ftJNfh1Oboct6TOmM=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -4962,23 +4535,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-DWZOeJII97U8W6cyLgE8cRz83Xo9svI54PnvV1NcrrA="
+          "Value": "sha256-NQ+oIB3OGSB8Sq4a5I99+BpRy+ftJNfh1Oboct6TOmM="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/Customer.r2shpopx4m.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-r2shpopx4m.gz",
-=======
-      "Route": "css/Customer.q52azctp4x.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-q52azctp4x.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000501756147"
+          "Quality": "0.000353356890"
         }
       ],
       "ResponseHeaders": [
@@ -4988,19 +4556,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1992"
+          "Value": "2829"
         },
         {
           "Name": "ETag",
-          "Value": "\"DWZOeJII97U8W6cyLgE8cRz83Xo9svI54PnvV1NcrrA=\""
+          "Value": "\"NQ+oIB3OGSB8Sq4a5I99+BpRy+ftJNfh1Oboct6TOmM=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5020,13 +4584,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow=\""
+          "Value": "W/\"Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "q52azctp4x"
+          "Value": "r2shpopx4m"
         },
         {
           "Name": "label",
@@ -5034,18 +4598,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow="
+          "Value": "sha256-Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/Customer.r2shpopx4m.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\Customer.css",
-=======
-      "Route": "css/Customer.q52azctp4x.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\Customer.css",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5054,7 +4613,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "10000"
+          "Value": "11759"
         },
         {
           "Name": "Content-Type",
@@ -5062,15 +4621,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow=\""
+          "Value": "\"Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5080,7 +4635,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "q52azctp4x"
+          "Value": "r2shpopx4m"
         },
         {
           "Name": "label",
@@ -5088,18 +4643,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-khM3ERUYQA3zG9UWgbFB86imH4bHecWA0SdqeKqfWow="
+          "Value": "sha256-Y5GHdVXRHV1ysFdGQH7TksJVy4XSrGN97MCcifPTWMY="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/Customer.r2shpopx4m.css.gz",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-r2shpopx4m.gz",
-=======
-      "Route": "css/Customer.q52azctp4x.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\w6ld8qzrrg-q52azctp4x.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5108,7 +4658,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1992"
+          "Value": "2829"
         },
         {
           "Name": "Content-Type",
@@ -5116,15 +4666,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"DWZOeJII97U8W6cyLgE8cRz83Xo9svI54PnvV1NcrrA=\""
+          "Value": "\"NQ+oIB3OGSB8Sq4a5I99+BpRy+ftJNfh1Oboct6TOmM=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:32:05 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5142,7 +4688,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "q52azctp4x"
+          "Value": "r2shpopx4m"
         },
         {
           "Name": "label",
@@ -5150,7 +4696,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-DWZOeJII97U8W6cyLgE8cRz83Xo9svI54PnvV1NcrrA="
+          "Value": "sha256-NQ+oIB3OGSB8Sq4a5I99+BpRy+ftJNfh1Oboct6TOmM="
         }
       ]
     },
@@ -5454,16 +5000,12 @@
     },
     {
       "Route": "css/supplier.css",
-<<<<<<< HEAD
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-yrgowgux7v.gz",
-=======
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-hrp92ade7u.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000281293952"
+          "Quality": "0.000278706800"
         }
       ],
       "ResponseHeaders": [
@@ -5473,19 +5015,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3554"
+          "Value": "3587"
         },
         {
           "Name": "ETag",
-          "Value": "\"j8o4ICjyS/qRINgGTY5vXaiH6rrnTt+dA7LCzcVeu3U=\""
+          "Value": "\"UKhzbOT6G4vKc7RQTAtRNFuKF/wbGGzk8MKJTFFR3aw=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:36:11 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5505,13 +5043,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss=\""
+          "Value": "W/\"7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss="
+          "Value": "sha256-7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ="
         }
       ]
     },
@@ -5526,7 +5064,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13289"
+          "Value": "13390"
         },
         {
           "Name": "Content-Type",
@@ -5534,15 +5072,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss=\""
+          "Value": "\"7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:36:11 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5552,17 +5086,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss="
+          "Value": "sha256-7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ="
         }
       ]
     },
     {
       "Route": "css/supplier.css.gz",
-<<<<<<< HEAD
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-yrgowgux7v.gz",
-=======
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-hrp92ade7u.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5571,7 +5101,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3554"
+          "Value": "3587"
         },
         {
           "Name": "Content-Type",
@@ -5579,15 +5109,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"j8o4ICjyS/qRINgGTY5vXaiH6rrnTt+dA7LCzcVeu3U=\""
+          "Value": "\"UKhzbOT6G4vKc7RQTAtRNFuKF/wbGGzk8MKJTFFR3aw=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:36:11 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5605,23 +5131,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-j8o4ICjyS/qRINgGTY5vXaiH6rrnTt+dA7LCzcVeu3U="
+          "Value": "sha256-UKhzbOT6G4vKc7RQTAtRNFuKF/wbGGzk8MKJTFFR3aw="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/supplier.yrgowgux7v.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-yrgowgux7v.gz",
-=======
-      "Route": "css/supplier.hrp92ade7u.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-hrp92ade7u.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000281293952"
+          "Quality": "0.000278706800"
         }
       ],
       "ResponseHeaders": [
@@ -5631,19 +5152,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3554"
+          "Value": "3587"
         },
         {
           "Name": "ETag",
-          "Value": "\"j8o4ICjyS/qRINgGTY5vXaiH6rrnTt+dA7LCzcVeu3U=\""
+          "Value": "\"UKhzbOT6G4vKc7RQTAtRNFuKF/wbGGzk8MKJTFFR3aw=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:36:11 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5663,13 +5180,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss=\""
+          "Value": "W/\"7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "hrp92ade7u"
+          "Value": "yrgowgux7v"
         },
         {
           "Name": "label",
@@ -5677,18 +5194,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss="
+          "Value": "sha256-7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/supplier.yrgowgux7v.css",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\wwwroot\\css\\supplier.css",
-=======
-      "Route": "css/supplier.hrp92ade7u.css",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\wwwroot\\css\\supplier.css",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5697,7 +5209,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13289"
+          "Value": "13390"
         },
         {
           "Name": "Content-Type",
@@ -5705,15 +5217,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss=\""
+          "Value": "\"7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:36:11 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5723,7 +5231,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "hrp92ade7u"
+          "Value": "yrgowgux7v"
         },
         {
           "Name": "label",
@@ -5731,18 +5239,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-UxshVdDkJ1WZB3ZMrI/ueQXA8zJk50npUJWIWPpnvss="
+          "Value": "sha256-7ursoXi7GMwlrmi6Gx2VOHtPC9U038vaQkjwEgaWDWQ="
         }
       ]
     },
     {
-<<<<<<< HEAD
       "Route": "css/supplier.yrgowgux7v.css.gz",
       "AssetFile": "C:\\Users\\novam\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-yrgowgux7v.gz",
-=======
-      "Route": "css/supplier.hrp92ade7u.css.gz",
-      "AssetFile": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\Debug\\net9.0\\compressed\\zfxkfnnz67-hrp92ade7u.gz",
->>>>>>> origin/tunay/pseudomain
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5751,7 +5254,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3554"
+          "Value": "3587"
         },
         {
           "Name": "Content-Type",
@@ -5759,15 +5262,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"j8o4ICjyS/qRINgGTY5vXaiH6rrnTt+dA7LCzcVeu3U=\""
+          "Value": "\"UKhzbOT6G4vKc7RQTAtRNFuKF/wbGGzk8MKJTFFR3aw=\""
         },
         {
           "Name": "Last-Modified",
-<<<<<<< HEAD
           "Value": "Sun, 18 May 2025 06:45:46 GMT"
-=======
-          "Value": "Sun, 18 May 2025 07:36:11 GMT"
->>>>>>> origin/tunay/pseudomain
         },
         {
           "Name": "Cache-Control",
@@ -5785,7 +5284,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "hrp92ade7u"
+          "Value": "yrgowgux7v"
         },
         {
           "Name": "label",
@@ -5793,7 +5292,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-j8o4ICjyS/qRINgGTY5vXaiH6rrnTt+dA7LCzcVeu3U="
+          "Value": "sha256-UKhzbOT6G4vKc7RQTAtRNFuKF/wbGGzk8MKJTFFR3aw="
         }
       ]
     },

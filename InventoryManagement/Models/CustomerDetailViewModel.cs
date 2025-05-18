@@ -41,20 +41,21 @@ namespace InventoryManagement.Models // Or a ViewModels namespace
                 Status = "Unpaid",
                 ShippingTo = "21 Rand st., North Fairview Quezon City",
                 Courier = "JNT",
-                Quote = true,
-                Started = false
+                Quote = true, // Assuming 'Quote' button state means it can be quoted
+                Started = false // Assuming 'Started' button state means it's not started
             };
         }
 
         private string GetAvatarColor(string initial)
         {
-            if (string.IsNullOrEmpty(initial)) return "#cccccc";
+            if (string.IsNullOrEmpty(initial)) return "#cccccc"; // Default gray
             int charCode = (int)initial[0];
             var colors = new[] { "#3b82f6", "#8b5cf6", "#10b981", "#f59e0b", "#ef4444", "#6366f1", "#ec4899", "#f43f5e" };
             return colors[charCode % colors.Length];
         }
     }
 
+    // Dummy classes for placeholder data
     public class DummyTransaction
     {
         public string Id { get; set; }

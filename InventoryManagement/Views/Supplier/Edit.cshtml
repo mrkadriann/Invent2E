@@ -12,13 +12,13 @@
             <i class="fas fa-arrow-left"></i>
             <span>Back To supplier list</span>
         </a>
-        <h1 class="page-title-supplier">@ViewData["Title"]</h1>
+        <h1 class="page-title-supplier">@ViewData["Title"]</h1> @* Dynamic title *@
     </div>
 
     <form asp-action="Edit" asp-route-id="@Model.SupplierId" method="post" enctype="multipart/form-data">
         @* Changed asp-action, added asp-route-id *@
         @Html.AntiForgeryToken()
-        <input type="hidden" asp-for="SupplierId" />
+        <input type="hidden" asp-for="SupplierId" /> @* IMPORTANT: Hidden field for ID *@
         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
         <div class="add-supplier-form-layout">
@@ -26,6 +26,7 @@
             <div class="form-section-card">
                 <div class="profile-image-area">
                     <div class="profile-image-preview-container">
+                        @* Show existing image by default *@
                         <img id="profileImagePreview"
                              src="@(Model.SupplierId > 0 && Model.HasExistingProfileImage ? Url.Action("GetSupplierImage", "Supplier", new { id = Model.SupplierId }) : "#")"
                              alt="Profile Preview"
@@ -36,6 +37,7 @@
                                class="profile-image-upload-button profile-image-placeholder"
                                title="Upload new profile image"
                                style="@(Model.SupplierId > 0 && Model.HasExistingProfileImage ? "display:none;" : "display:flex;")">
+                            @* Text for placeholder - JS will update this based on CompanyName too *@
                             @((Model.SupplierId > 0 && Model.HasExistingProfileImage) ? "+" : (!string.IsNullOrEmpty(Model.CompanyName) ? Model.CompanyName.Substring(0, 1).ToUpper() : "+"))
                         </label>
                     </div>
@@ -80,6 +82,7 @@
                 </div>
 
                 <div class="form-section-card">
+                    @* Or wherever you want to place this section *@
                     <h4>Other Contact Persons</h4>
                     <div id="otherContactsContainer">
                         @if (Model.OtherContacts != null)
@@ -107,10 +110,14 @@
                                             <span asp-validation-for="OtherContacts[i].Phone" class="text-danger"></span>
                                         </div>
                                     </div>
+                                    @* Optional: Add a "Remove" button for this contact (requires JS) *@
+                                    @* <button type="button" class="btn btn-danger btn-sm remove-contact-btn mt-2">Remove Contact</button> *@
                                 </fieldset>
                             }
                         }
                     </div>
+                    @* Optional: Button to dynamically add a new contact form section (requires JS) *@
+                    @* <button type="button" id="addOtherContactBtn" class="btn btn-outline-info mt-2">Add Other Contact</button> *@
                 </div>
             </div>
 
@@ -175,11 +182,12 @@
     }
     <script>
         $(document).ready(function () {
-            const imageUploadInput = $('#profileImageUpload');
-            const imagePreview = $('#profileImagePreview');
-            const imagePlaceholder = $('.profile-image-placeholder');
-            const companyNameInput = $('#CompanyName');
+            const imageUploadInput = $('#profileImageUpload'); // Your <input type="file">
+            const imagePreview = $('#profileImagePreview');   // Your <img> tag for preview
+            const imagePlaceholder = $('.profile-image-placeholder'); // Your placeholder label element
+            const companyNameInput = $('#CompanyName'); // ID for company name input
 
+            // Store the original src of the preview image (for Edit page, if an image already exists)
             const originalImageSrc = imagePreview.attr('src');
 
             function updatePlaceholderText() {
@@ -206,29 +214,36 @@
 
             function revertToOriginalOrPlaceholder() {
                 if (originalImageSrc && originalImageSrc !== '#' && originalImageSrc !== '') {
+                    // Check if the original image can be loaded, otherwise show placeholder
                     const tempImg = new Image();
                     tempImg.onload = function() { showImagePreview(originalImageSrc); }
-                    tempImg.onerror = function() { showPlaceholder(); }
+                    tempImg.onerror = function() { showPlaceholder(); } // Fallback to placeholder if original image also fails
                     tempImg.src = originalImageSrc;
                 } else {
                     showPlaceholder();
                 }
             }
 
+            // --- Initial Setup ---
+            // Razor's inline styles and `onerror` attribute on <img> handle the very initial state.
+            // This JS ensures dynamic parts like placeholder text are correct.
             if (imagePlaceholder.length && imagePlaceholder.is(':visible')) {
-                updatePlaceholderText();
+                updatePlaceholderText(); // Ensure placeholder text is correct if it's initially visible
             } else if (imagePreview.length && imagePreview.is(':visible') && imagePlaceholder.length) {
-                imagePlaceholder.css('display', 'none');
+                imagePlaceholder.css('display', 'none'); // Ensure placeholder is hidden if image is visible
             }
+            // Add pointer cursor to image preview and placeholder to indicate they are clickable
             if(imagePreview.length) imagePreview.css('cursor', 'pointer');
             if(imagePlaceholder.length) imagePlaceholder.css('cursor', 'pointer');
 
+
+            // --- Event Listener for File Input Change ---
             if (imageUploadInput.length) {
                 imageUploadInput.on('change', function (event) {
                     if (event.target.files && event.target.files[0]) {
                         const reader = new FileReader();
                         reader.onload = function (e) {
-                            showImagePreview(e.target.result);
+                            showImagePreview(e.target.result); // Show preview of newly selected file
                         };
                         reader.readAsDataURL(event.target.files[0]);
                     } else {
@@ -239,11 +254,12 @@
 
             if (imagePreview.length && imageUploadInput.length) {
                 imagePreview.on('click', function() {
-                    imageUploadInput.click();
+                    imageUploadInput.click(); // Programmatically click the (possibly hidden) file input
                 });
             }
             if (companyNameInput.length && imagePlaceholder.length) {
                 companyNameInput.on('input', function() {
+                    // Only update placeholder text if the placeholder is currently visible
                     if (imagePlaceholder.is(':visible')) {
                         updatePlaceholderText();
                     }

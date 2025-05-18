@@ -1,22 +1,4 @@
-﻿:root {
-    --customer-tab-overall-bg: #172125;
-    --customer-tab-active-bg: #224B4B;
-    --customer-tab-active-text: #38BDAE;
-    --customer-tab-inactive-text: #8899A1;
-    --customer-tab-hover-text: #A0B0B8;
-    --customer-tab-hover-bg: rgba(45, 75, 75, 0.2);
-    --customer-tab-container-border-radius: 8px;
-    --customer-tab-button-border-radius: 6px;
-    --customer-tab-container-padding: 4px;
-    --customer-tab-buttons-gap: 4px;
-    --customer-tab-button-padding: 0.6rem 1.2rem;
-    --modal-tab-active-bg-green: #224B4B;
-    --modal-tab-active-text-green: #38BDAE;
-    --modal-tab-inactive-text: #8899A1;
-    --modal-tab-hover-text: #A0B0B8;
-    --modal-tab-hover-bg: rgba(45, 75, 75, 0.2);
-}
-
+﻿/* customer.css - Adapted from supplier.css and target customer list image */
 .customers-container {
     display: flex;
     flex-direction: column;
@@ -82,31 +64,31 @@
 .customer-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 10px; /* Reduced gap from 16px to 10px to match target image more closely */
 }
 
 .customer-card {
     background-color: var(--card-bg);
-    border-radius: 8px;
-    padding: 12px 20px;
+    border-radius: 8px; /* Matches image */
+    padding: 12px 20px; /* Adjusted padding */
     color: var(--text-light);
     display: flex;
-    align-items: center; 
-    gap: 20px;
+    align-items: center; /* Vertically align items in the row */
+    gap: 20px; /* Space between elements in the card */
     border: 1px solid var(--border-color);
-    min-height: 90px;
+    min-height: 90px; /* Ensure a consistent height */
 }
 
 .customer-avatar-image-container {
-    width: 40px;
-    height: 40px;
+    width: 40px; /* Matches image */
+    height: 40px; /* Matches image */
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e0e0e0;
+    background-color: #e0e0e0; /* Fallback */
 }
 
 .customer-profile-img {
@@ -121,7 +103,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2em;
+    font-size: 1.2em; /* Adjusted */
     font-weight: bold;
     color: white;
     border-radius: 50%;
@@ -130,19 +112,19 @@
 .customer-name-type {
     display: flex;
     flex-direction: column;
-    min-width: 150px;
-    flex-basis: 20%;
+    min-width: 150px; /* Give it some space */
+    flex-basis: 20%; /* Allow some flex grow/shrink */
 }
 
 .customer-name {
-    font-size: 15px;
+    font-size: 15px; /* Adjusted from image */
     font-weight: 600;
     color: var(--text-light);
     margin: 0;
 }
 
 .customer-type {
-    font-size: 12px;
+    font-size: 12px; /* Adjusted from image */
     color: var(--text-muted);
     margin: 0;
     text-transform: capitalize;
@@ -151,12 +133,12 @@
 .customer-info-item {
     display: flex;
     flex-direction: column;
-    min-width: 160px;
+    min-width: 160px; /* Give it some space */
     flex-basis: 20%;
 }
 
 .info-label {
-    font-size: 10px;
+    font-size: 10px; /* Smaller label */
     color: var(--text-gray);
     margin-bottom: 2px;
     text-transform: uppercase;
@@ -164,7 +146,7 @@
 }
 
 .info-value {
-    font-size: 13px;
+    font-size: 13px; /* Value text size */
     color: var(--text-light);
     white-space: nowrap;
     overflow: hidden;
@@ -182,27 +164,27 @@
 
 
 .customer-remarks .info-value {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Green for "Add Remarks" */
     cursor: pointer;
 }
 
     .customer-remarks .info-value.has-remark {
-        color: var(--text-light);
+        color: var(--text-light); /* Normal text color if remark exists */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 120px;
+        max-width: 120px; /* Limit width of remark display */
     }
 
 
 .more-options-btn-customer {
     background: transparent;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-color); /* Subtle border like image */
     color: var(--text-muted);
     cursor: pointer;
-    padding: 5px;
-    margin-left: auto;
-    border-radius: 6px;
+    padding: 5px; /* Small padding */
+    margin-left: auto; /* Push to the far right */
+    border-radius: 6px; /* Rounded corners */
     width: 36px;
     height: 36px;
     display: flex;
@@ -211,7 +193,7 @@
 }
 
     .more-options-btn-customer i.material-icons {
-        font-size: 20px;
+        font-size: 20px; /* Smaller icon */
     }
 
     .more-options-btn-customer:hover {
@@ -219,12 +201,36 @@
         color: var(--text-light);
     }
 
+
+/* Ensure material icons are vertically aligned with text */
 .material-icons {
     vertical-align: middle;
 }
 
+/* --- Reusing Supplier Modal Styles (to be adapted later for Customer) --- */
+/* Define color and dimension variables for easy theming */
+:root {
+    --customer-tab-overall-bg: #172125;
+    --customer-tab-active-bg: #224B4B;
+    --customer-tab-active-text: #38BDAE;
+    --customer-tab-inactive-text: #8899A1;
+    --customer-tab-hover-text: #A0B0B8;
+    --customer-tab-hover-bg: rgba(45, 75, 75, 0.2);
+    --customer-tab-container-border-radius: 8px;
+    --customer-tab-button-border-radius: 6px;
+    --customer-tab-container-padding: 4px;
+    --customer-tab-buttons-gap: 4px;
+    --customer-tab-button-padding: 0.6rem 1.2rem;
+    /* Active state for GREEN tabs (like supplier's) */
+    --modal-tab-active-bg-green: #224B4B; /* Dark teal/green background */
+    --modal-tab-active-text-green: #38BDAE; /* Bright teal/green text */
+    /* Inactive state */
+    --modal-tab-inactive-text: #8899A1;
+    --modal-tab-hover-text: #A0B0B8;
+    --modal-tab-hover-bg: rgba(45, 75, 75, 0.2);
+}
 
-#customerTab.nav-tabs {
+#customerTab.nav-tabs { /* Changed from supplierTab */
     border-bottom: none;
     background-color: var(--customer-tab-overall-bg);
     padding: var(--customer-tab-container-padding);
@@ -272,10 +278,10 @@
 
 #customerDetailTab.nav-tabs {
     border-bottom: none;
-    background-color: var(--modal-tab-overall-bg, #172125);
+    background-color: var(--modal-tab-overall-bg, #172125); /* Use generic or supplier var */
     padding: var(--modal-tab-container-padding, 4px);
-    border-radius: var(--modal-tab-button-border-radius, 8px);
-    display: inline-flex;
+    border-radius: var(--modal-tab-button-border-radius, 8px); /* Match container radius to button radius if buttons fill it */
+    display: inline-flex; /* So it wraps its content */
     gap: var(--modal-tab-buttons-gap, 4px);
     margin-bottom: 20px !important;
 }
@@ -289,7 +295,7 @@
         border-radius: var(--modal-tab-button-border-radius, 6px);
         padding: var(--modal-tab-button-padding, 0.6rem 1.2rem);
         color: var(--modal-tab-inactive-text, #8899A1);
-        background-color: transparent;
+        background-color: transparent; /* Inactive tabs are transparent */
         font-weight: 500;
         line-height: 1.2;
         text-align: center;
@@ -297,10 +303,11 @@
         font-size: 0.85rem;
     }
 
+        /* THIS IS THE CRUCIAL CHANGE FOR THE ACTIVE "GREEN" TAB */
         #customerDetailTab.nav-tabs .nav-link.active {
-            background-color: var(--modal-tab-active-bg-green, #224B4B);
-            color: var(--modal-tab-active-text-green, #38BDAE);
-            font-weight: 600;
+            background-color: var(--modal-tab-active-bg-green, #224B4B); /* Use your green active BG */
+            color: var(--modal-tab-active-text-green, #38BDAE); /* Use your green active TEXT */
+            font-weight: 600; /* Often active tabs are bolder */
         }
 
         #customerDetailTab.nav-tabs .nav-link:not(.active):hover {
@@ -323,8 +330,8 @@
 
 .info-grid-customer {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 20px;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 10px 20px; /* Row gap, Column gap */
     margin-bottom: 15px;
 }
 
@@ -347,9 +354,9 @@
     }
 
     .info-item-customer .remark-value {
-        white-space: pre-wrap;
+        white-space: pre-wrap; /* Allows remarks to wrap */
         word-break: break-word;
-        max-height: 60px;
+        max-height: 60px; /* Limit height and show scroll if needed */
         overflow-y: auto;
     }
 
@@ -358,12 +365,12 @@
     border-radius: 5px;
     font-size: 0.75rem !important;
     font-weight: 500;
-    display: inline-block;
+    display: inline-block; /* To allow padding and background */
     text-transform: capitalize;
 }
 
     .status-badge-customer.status-active {
-        background-color: rgba(var(--primary-rgb), 0.15);
+        background-color: rgba(var(--primary-rgb), 0.15); /* Assuming --primary-rgb is defined */
         color: var(--primary-color);
     }
 
@@ -373,13 +380,13 @@
     }
 
     .status-badge-customer.status-pending {
-        background-color: rgba(245, 158, 11, 0.15);
+        background-color: rgba(245, 158, 11, 0.15); /* Yellowish */
         color: #f59e0b;
     }
 
 
 .address-card-customer {
-    background-color: var(--input-bg);
+    background-color: var(--input-bg); /* Slightly different from card-bg for distinction */
     border-radius: 6px;
     padding: 12px 15px;
     margin-bottom: 10px;

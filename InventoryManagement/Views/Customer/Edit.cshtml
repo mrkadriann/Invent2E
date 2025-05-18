@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit Customer Details";
 }
 
-<link rel="stylesheet" href="~/css/add-customer.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/add-customer.css" asp-append-version="true" /> @* Reusing create styles *@
 
 <div class="add-customer-container">
     <div class="page-header-customer">
@@ -18,8 +18,8 @@
     <form asp-action="Edit" method="post" enctype="multipart/form-data">
         @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-        <input type="hidden" asp-for="CustomerId" /> 
-        <input type="hidden" asp-for="CustomerInfoId" />
+        <input type="hidden" asp-for="CustomerId" /> @* Important for POST to identify the customer *@
+        <input type="hidden" asp-for="CustomerInfoId" /> @* If you need to track this for updates *@
         <input type="hidden" asp-for="HasExistingPicture" />
 
 
@@ -182,6 +182,7 @@
                 updateImagePreview(this);
             });
 
+            // Update placeholder initial based on Customer Name input
             $('#CustomerName').on('input', function() {
                 var customerName = $(this).val();
                 var initial = customerName ? customerName.trim().substring(0, 1).toUpperCase() : 'C';
@@ -191,7 +192,8 @@
                 }
             });
 
-            $('.customer-image-preview-container').on('click', function() {
+            // Trigger file input when the preview area (label) is clicked
+            $('.customer-image-preview-container').on('click', function() { // Assuming this class is on the label
                 $('#customerImageUpload').click();
             });
         });
