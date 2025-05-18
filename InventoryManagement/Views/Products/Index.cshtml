@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Products";
 }
+<link rel="stylesheet" href="~/css/InventoryStock.css" />
 
 <div class="products-container">
     <div class="products-actions-row">
@@ -144,3 +145,172 @@
         </div>
     </div>
 </div>
+
+<!-- Adjustment Quantity Modal -->
+<div class="modal fade" id="adjustmentQuantityModal" tabindex="-1" aria-labelledby="adjustmentQuantityModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        @* Or modal-md for a smaller modal *@
+        <div class="modal-content">
+            @* Content will be loaded here by JavaScript *@
+            <div id="adjustmentQuantityModalContent">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/lib/jquery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        var productDetailModalInstance;
+        var adjustmentModalInstance;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const productDetailModalEl = document.getElementById('productDetailModal');
+            if (productDetailModalEl) {
+                productDetailModalInstance = new bootstrap.Modal(productDetailModalEl);
+                productDetailModalEl.addEventListener('hidden.bs.modal', function () {
+                    const contentPlaceholder = document.getElementById('productDetailContent');
+                    // Reset to loader or an empty state to ensure fresh load next time
+                    contentPlaceholder.innerHTML = `
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>`;
+                });
+            }
+
+            const adjustmentModalEl = document.getElementById('adjustmentQuantityModal');
+            if (adjustmentModalEl) {
+                adjustmentModalInstance = new bootstrap.Modal(adjustmentModalEl);
+                 adjustmentModalEl.addEventListener('hidden.bs.modal', function () {
+                    const contentPlaceholder = document.getElementById('adjustmentQuantityModalContent');
+                    contentPlaceholder.innerHTML = `
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>`;
+                });
+            }
+        });
+
+        function openProductDetailPopup(productId) {
+            if (!productDetailModalInstance) {
+                console.error("Product detail modal instance not initialized");
+                return;
+            }
+
+            const contentPlaceholder = document.getElementById('productDetailContent');
+            // Show loader immediately
+            contentPlaceholder.innerHTML = `
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>`;
+            productDetailModalInstance.show(); // Show modal with loader
+
+            fetch(`/Products/GetProductDetail/${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    contentPlaceholder.innerHTML = html;
+                    
+                })
+                .catch(error => {
+                    console.error('Error loading product detail modal:', error);
+                    contentPlaceholder.innerHTML = '<p class="text-danger p-3">Error loading product details. Please try again.</p>';
+                });
+        }
+
+        function openAdjustStockModal(productId) {
+            if (!adjustmentModalInstance) {
+                 console.error("Adjustment modal instance not initialized");
+                return;
+            }
+
+            const contentPlaceholder = document.getElementById('adjustmentQuantityModalContent');
+            contentPlaceholder.innerHTML = '<div class="d-flex justify-content-center align-items-center" style="min-height: 200px;"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>'; // Show loader
+
+            fetch(`/Products/GetAdjustmentQuantityPartial?productId=${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status} for URL: ${response.url}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    contentPlaceholder.innerHTML = html;
+                    adjustmentModalInstance.show();
+                    // If using jquery-unobtrusive-ajax, ensure form is parsed for validation if reloaded
+                    if (typeof $ !== 'undefined' && $.validator && $.validator.unobtrusive) {
+                        $.validator.unobtrusive.parse(contentPlaceholder.querySelector('form'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading adjustment modal:', error);
+                    contentPlaceholder.innerHTML = `<p class="text-danger p-3">Error loading content: ${error.message}. Please try again.</p>`;
+                    adjustmentModalInstance.show(); // Still show the modal to display the error
+                });
+        }
+
+        function handleAdjustmentSuccess(data) {
+            if (typeof data === 'string' && data.toLowerCase().includes('<form')) {
+                console.log("Adjustment form reloaded due to validation errors.");
+                 if ($.validator && $.validator.unobtrusive) {
+                    $.validator.unobtrusive.parse("#adjustmentQuantityModalContent form");
+                }
+                return;
+            }
+
+            if (data && data.success) {
+                console.log(data.message);
+                if (adjustmentModalInstance) {
+                    adjustmentModalInstance.hide();
+                }
+
+                // Update stock in Product Detail Modal if it's open and displaying the correct product
+                var productDetailModalElement = document.getElementById('productDetailModal');
+                if (productDetailModalElement && productDetailModalElement.classList.contains('show')) {
+                    var productDetailContent = document.getElementById('productDetailContent');
+                    var stockAmountDisplay = productDetailContent.querySelector('.stock-panel .stock-amount');
+                    if (stockAmountDisplay) {
+                        let statusSpan = stockAmountDisplay.querySelector('.stock-status');
+                        stockAmountDisplay.innerHTML = `${data.newQuantity} ${statusSpan ? statusSpan.outerHTML : ''}`;
+                    }
+                }
+
+                // Update stock on the main product card
+                var productCard = document.querySelector(`.product-card[onclick*="openProductDetailPopup(${data.productId})"]`);
+                if (productCard) {
+                    var productCardStockElement = productCard.querySelector('.product-stock span:not(.stock-status)');
+                    if (productCardStockElement) {
+                        productCardStockElement.textContent = `Stock: ${data.newQuantity} in stocks`;
+                    }
+                    var productCardStatusElement = productCard.querySelector('.product-stock .stock-status');
+                }
+
+                alert('Success: ' + data.message);
+            } else {
+                 var errorMessage = "Adjustment failed or unexpected response.";
+                 if(data && data.message) errorMessage = data.message;
+                 console.log("Adjustment failed or unexpected response.", data);
+                 const contentPlaceholder = document.getElementById('adjustmentQuantityModalContent');
+                 alert('Error: ' + errorMessage);
+            }
+        }
+    </script>
+}

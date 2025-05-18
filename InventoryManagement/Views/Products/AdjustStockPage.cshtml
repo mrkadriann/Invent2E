@@ -1,0 +1,227 @@
+﻿@model InventoryManagement.Models.AdjustmentViewModel
+
+@{
+    ViewData["Title"] = $"Adjust Stock: {Model.ProductName}";
+    Layout = "_Layout"; // Assuming you have a main layout file
+}
+
+<link rel="stylesheet" href="~/css/InventoryStock.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+
+@* This container helps center the .bed element on the page if desired *@
+<div class="container-fluid d-flex justify-content-center align-items-start py-5" style="min-height: 90;">
+    <div class="bed">
+        <h1 class="title">Adjust Stock: @Model.ProductName</h1>
+        <div class="content-texts w-100">
+            <form asp-action="AdjustQuantity" asp-controller="Products" method="post" id="adjustQuantityForm">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="ProductId" />
+                <input type="hidden" asp-for="ProductName" />
+                <input type="hidden" asp-for="ProductImageUrl" />
+                <input type="hidden" asp-for="CurrentStockQuantity" />
+                <input type="hidden" asp-for="StockStatus" />
+
+                <!-- Item details -->
+                <div class="ItemContainer mb-3">
+                    <div class="ImageHolder me-3">
+                        <img src="@(string.IsNullOrEmpty(Model.ProductImageUrl) ? "/images/placeholder-sm.jpg" : Model.ProductImageUrl)"
+                             alt="@Model.ProductName"
+                             style="width: 70px; height: 70px; object-fit: cover; border-radius: 5px;"
+                             onerror="this.onerror=null;this.src='/images/placeholder-sm.jpg';" />
+                    </div>
+                    <div class="ItemDetails">
+                        <h5 class="ItemName mb-1">@Model.ProductName</h5>
+                        <p class="ItemStock mb-1"><i class="bi bi-box"></i> Current: <strong>@Model.CurrentStockQuantity</strong> in stock</p>
+                        <p class="ItemStatus mb-0">Status: <span class="badge bg-@Model.StockStatus?.ToLower()">@Model.StockStatus</span></p>
+                    </div>
+                </div>
+
+                @* Show all validation errors at the top, or only non-property errors *@
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+
+                <!-- Adjustment Type -->
+                <div class="AdjustmentTypeContainer mb-3">
+                    <label class="form-label mb-1">Adjustment Type</label>
+                    <div class="d-flex bg-input rounded p-1 gap-2">
+                        <input type="radio" asp-for="AdjustmentTypeValue" value="Quantity" id="adjTypeQuantity_@Model.ProductId" class="d-none" />
+                        <label for="adjTypeQuantity_@Model.ProductId" class="btn btn-toggle flex-grow-1 @(Model.AdjustmentTypeValue == "Quantity" ? "active" : "")">
+                            <span class="toggle-text">Quantity Adjustment</span>
+                            <i class="bi @(Model.AdjustmentTypeValue == "Quantity" ? "bi-check-circle-fill" : "bi-circle")"></i>
+                        </label>
+                        <input type="radio" asp-for="AdjustmentTypeValue" value="Value" id="adjTypeValue_@Model.ProductId" class="d-none" />
+                        <label for="adjTypeValue_@Model.ProductId" class="btn btn-toggle flex-grow-1 @(Model.AdjustmentTypeValue == "Value" ? "active" : "")">
+                            <span class="toggle-text">Value Adjustment</span>
+                            <i class="bi @(Model.AdjustmentTypeValue == "Value" ? "bi-check-circle-fill" : "bi-circle")"></i>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Date & Reason -->
+                <div class="DateContainer mb-3">
+                    <label class="form-label mb-1">Details</label>
+                    <div class="d-flex bg-input rounded p-1 gap-2">
+                        <input type="date" asp-for="Date" class="form-control form-control-sm" id="calendarInput_@Model.ProductId" />
+                        <select asp-for="Reason" asp-items="Model.AdjustmentReasons" class="form-select form-control form-control-sm"></select>
+                    </div>
+                    <span asp-validation-for="Date" class="text-danger d-block"></span>
+                    <span asp-validation-for="Reason" class="text-danger d-block"></span>
+                </div>
+
+                <!-- Quantity Adjustment Section -->
+                <div id="quantityAdjustmentSection_@Model.ProductId" class="NewQuantityContainer mb-4" style="@(Model.AdjustmentTypeValue == "Quantity" ? "display:block;" : "display:none;")">
+                    <label asp-for="AdjustedQuantity" class="form-label">New Quantity on Hand</label>
+                    <div class="input-group">
+                        <button style="color: White" type="button" class="btn btn-quantity-adjust" data-action="decrement">
+                            <i class="bi bi-dash"></i>
+                        </button>
+                        <input type="number" asp-for="AdjustedQuantity" id="AdjustedQuantity_@Model.ProductId" class="form-control text-center" min="0" />
+                        <button style="color: white;" type="button" class="btn btn-quantity-adjust" data-action="increment">
+                            <i class="bi bi-plus"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="AdjustedQuantity" class="text-danger d-block mt-1"></span>
+                </div>
+
+                <!-- Value Adjustment Section -->
+                <div id="valueAdjustmentSection_@Model.ProductId" class="mb-3" style="@(Model.AdjustmentTypeValue == "Value" ? "display:block;" : "display:none;")">
+                    <label asp-for="AdjustmentValueAmount" class="form-label mb-1">Adjustment Value Amount (₱)</label>
+                    <div class="bg-input rounded p-1">
+                        <input type="number" asp-for="AdjustmentValueAmount" class="form-control form-control-sm" step="0.01" placeholder="e.g., -50.00 or 25.50" />
+                    </div>
+                    <span asp-validation-for="AdjustmentValueAmount" class="text-danger"></span>
+                    <small class="form-text text-muted" style="color: #ccc !important;">Enter a positive value for increase, negative for decrease.</small>
+                </div>
+
+                <!-- Description -->
+                <div class="DescriptionContainer mb-3">
+                    <label asp-for="Description" class="form-label mb-1">Notes / Description <small>(Optional)</small></label>
+                    <div class="d-flex bg-input rounded p-1 gap-2">
+                        <textarea asp-for="Description" class="form-control form-control-sm" rows="2" placeholder="Reason for adjustment, specific details..."></textarea>
+                    </div>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-end">
+                    <a asp-action="Index" asp-controller="Products" class="btn btn-sm me-2" style="background-color: #555; color:white; border-color: #444;">Cancel</a>
+                    <button type="submit" class="btn btn-sm" style="background-color: rgba(0, 223, 114, 1); color: black; font-weight:500;">Save Adjustment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        (function() {
+            var form = document.getElementById('adjustQuantityForm');
+            if (!form) return;
+
+            var productIdSuffix = '_@Model.ProductId'; // Use Model.ProductId to ensure unique IDs
+            var quantityRadio = document.getElementById('adjTypeQuantity' + productIdSuffix);
+            var valueRadio = document.getElementById('adjTypeValue' + productIdSuffix);
+            var quantitySection = document.getElementById('quantityAdjustmentSection' + productIdSuffix);
+            var valueSection = document.getElementById('valueAdjustmentSection' + productIdSuffix);
+
+            var adjustedQuantityInput = form.querySelector('input[name="AdjustedQuantity"]');
+            var adjustmentValueInput = form.querySelector('input[name="AdjustmentValueAmount"]');
+
+            function toggleSections() {
+                var quantityRadioChecked = quantityRadio && quantityRadio.checked;
+                var valueRadioChecked = valueRadio && valueRadio.checked;
+
+                if (quantitySection) quantitySection.style.display = quantityRadioChecked ? 'block' : 'none';
+                if (adjustedQuantityInput) adjustedQuantityInput.required = quantityRadioChecked;
+
+                if (valueSection) valueSection.style.display = valueRadioChecked ? 'block' : 'none';
+                if (adjustmentValueInput) adjustmentValueInput.required = valueRadioChecked; // Or based on your logic
+            }
+
+            if (quantityRadio) quantityRadio.addEventListener('change', function() {
+                updateToggleActiveState();
+                toggleSections();
+            });
+            if (valueRadio) valueRadio.addEventListener('change', function() {
+                updateToggleActiveState();
+                toggleSections();
+            });
+
+            function updateToggleActiveState() {
+                form.querySelectorAll('.AdjustmentTypeContainer .btn-toggle').forEach(label => {
+                    const radioInput = document.getElementById(label.htmlFor);
+                    if (radioInput && radioInput.checked) {
+                        label.classList.add('active');
+                        label.querySelector('i.bi').classList.remove('bi-circle');
+                        label.querySelector('i.bi').classList.add('bi-check-circle-fill');
+                    } else {
+                        label.classList.remove('active');
+                        label.querySelector('i.bi').classList.remove('bi-check-circle-fill');
+                        label.querySelector('i.bi').classList.add('bi-circle');
+                    }
+                });
+            }
+
+
+            if (quantitySection) { 
+            const quantityAdjustButtons = quantitySection.querySelectorAll('.btn-quantity-adjust');
+            const quantityInput = quantitySection.querySelector('input[type="number"]');
+
+            if (quantityInput && quantityAdjustButtons.length > 0) {
+                quantityAdjustButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const action = this.dataset.action;
+                        let currentValue = parseInt(quantityInput.value, 10);
+                        const minValue = parseInt(quantityInput.min, 10);
+
+                        if (isNaN(currentValue)) {
+                            currentValue = isNaN(minValue) ? 0 : minValue;
+                        }
+
+                        if (action === 'increment') {
+                            currentValue++;
+                        } else if (action === 'decrement') {
+                            currentValue--;
+                        }
+
+                        if (!isNaN(minValue) && currentValue < minValue) {
+                            currentValue = minValue;
+                        }
+
+                        quantityInput.value = currentValue;
+                        quantityInput.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+                        quantityInput.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+                    });
+                });
+            }
+        }
+
+            form.querySelectorAll('.AdjustmentTypeContainer .btn-toggle').forEach(label => {
+                label.addEventListener('click', function() {
+                    const radioId = this.getAttribute('for');
+                    const radioElement = document.getElementById(radioId);
+                    if(radioElement && !radioElement.checked) {
+                        radioElement.checked = true;
+                        radioElement.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                });
+            });
+
+            const calendarInput = document.getElementById('calendarInput' + productIdSuffix);
+            if (calendarInput && !calendarInput.value) {
+                var today = new Date();
+                var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                var day = ('0' + today.getDate()).slice(-2);
+                calendarInput.value = today.getFullYear() + '-' + month + '-' + day;
+            }
+
+            if (typeof $ !== 'undefined' && $.validator && $.validator.unobtrusive) {
+                $.validator.unobtrusive.parse(form);
+            }
+
+        })();
+    </script>
+}

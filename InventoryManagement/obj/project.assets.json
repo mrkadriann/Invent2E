@@ -4711,23 +4711,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\D3YB\\.nuget\\packages\\": {},
+    "C:\\Users\\DELL\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\D3YB\\Source\\Repos\\Invent2E\\InventoryManagement\\InventoryManagement.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\InventoryManagement.csproj",
       "projectName": "InventoryManagement",
-      "projectPath": "C:\\Users\\D3YB\\Source\\Repos\\Invent2E\\InventoryManagement\\InventoryManagement.csproj",
-      "packagesPath": "C:\\Users\\D3YB\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\D3YB\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\",
+      "projectPath": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\InventoryManagement.csproj",
+      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DELL\\Source\\Repos\\Invent2E\\InventoryManagement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\D3YB\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

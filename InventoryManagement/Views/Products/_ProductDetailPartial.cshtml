@@ -1,4 +1,7 @@
 ﻿@model InventoryManagement.Models.ProductDetailViewModel
+@{
+    var adjustStockPageUrl = Url.Action("AdjustStockPage", "Products", new { productId = Model.Id });
+}
 <div class="product-detail-header">
     <div class="product-detail-actions">
         <div class="left-actions">
@@ -70,10 +73,15 @@
             <div class="stock-amount-wrapper">
                 <div class="stock-amount">
                     @Model.Stock
-                    <span class="stock-status">@Model.StockStatus</span>
+                    <span class="stock-status @Model.StockStatus?.ToLowerInvariant()">@Model.StockStatus</span>
                 </div>
             </div>
-            <button class="adjust-stock-button">Adjust Stocks</button>
+            <button type="button"
+                    class="btn btn-primary adjust-stock-button" @* Apply Bootstrap or custom button styling *@
+                    style="margin-top:20px;"
+                    onclick="window.location.href='@adjustStockPageUrl'">
+                Adjust Stock
+            </button>
         </div>
     </div>
 </div>
