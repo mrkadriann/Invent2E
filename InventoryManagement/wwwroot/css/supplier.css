@@ -1,8 +1,8 @@
-﻿.suppliers-container {
+﻿﻿.suppliers-container {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Or calc(100vh - heightOfNavbar) if navbar is fixed */
-    padding: 0; /* Assuming parent content-area has padding */
+    height: 100%;
+    padding: 0;
 }
 
 .suppliers-actions-row {

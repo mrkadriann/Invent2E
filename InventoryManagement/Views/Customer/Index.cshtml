@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Customers";
-    var defaultSort = ""; // Or your preferred default
+    var defaultSort = "";
 }
 <link rel="stylesheet" href="~/css/customer.css" asp-append-version="true" />
 
@@ -169,33 +169,7 @@
                                 }
                             </div>
 
-                            <div class="dropdown ms-auto">
-                                <button class="more-options-btn-customer" type="button" id="dropdownMenuButton_@customer.CustomerId" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="material-icons">more_horiz</i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton_@customer.CustomerId"
-                                    style="background-color: var(--card-bg); border-color: var(--border-color);">
-                                    <li>
-                                        <a class="dropdown-item view-customer-details" href="#" data-customer-id="@customer.CustomerId"
-                                           style="color: var(--text-muted);">
-                                            <i class="material-icons" style="font-size: 18px; vertical-align: text-bottom; margin-right: 8px;">visibility</i> View Details
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-action="Edit" asp-controller="Customer" asp-route-id="@customer.CustomerId"
-                                           style="color: var(--text-muted);">
-                                            <i class="material-icons" style="font-size: 18px; vertical-align: text-bottom; margin-right: 8px;">edit</i> Edit
-                                        </a>
-                                    </li>
-                                    <li><hr class="dropdown-divider" style="border-color: var(--border-color);"></li>
-                                    <li>
-                                        <a class="dropdown-item btn-delete-customer" href="#" data-customer-id="@customer.CustomerId" data-customer-name="@customer.CustomerName"
-                                           style="color: var(--danger);">
-                                            <i class="material-icons" style="font-size: 18px; vertical-align: text-bottom; margin-right: 8px;">delete</i> Delete
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                          
                         </div>
                     }
                 </div>
@@ -320,13 +294,8 @@
                 var $clickedElement = $(this);
                 var customerId;
 
-                // Determine if the click should open the modal
                 if ($clickedElement.hasClass('customer-card')) {
-                    // If card is clicked, check if the actual target was an interactive element
-                    // (like a dropdown button, edit/delete button directly on card, etc.)
-                    // This prevents the modal from opening if an action *within* the card was intended.
                     if ($(e.target).closest('.dropdown, .btn-delete-customer-on-card, .btn-edit-customer-on-card, a[asp-action="Edit"], input, select, textarea').length > 0) {
-                        // Allow if the specific target was a "view details" link, even if inside a dropdown
                         if (!$(e.target).hasClass('view-customer-details') && !$(e.target).closest('.view-customer-details').length) {
                            return; // Don't open modal
                         }
@@ -342,7 +311,7 @@
                     console.error("Customer ID not found for modal trigger.");
                     return;
                 }
-                e.preventDefault(); // Prevent default action for links
+                e.preventDefault();
 
                 console.log("Attempting to open modal for customer ID:", customerId);
 
@@ -355,22 +324,19 @@
                 }
                 var customerModal = bootstrap.Modal.getInstance(customerModalElement) || new bootstrap.Modal(customerModalElement);
 
-                // Show loading spinner
                 modalContent.html('<div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: var(--dark-bg); border-radius: 12px;"><div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"><span class="visually-hidden">Loading...</span></div></div>');
                 customerModal.show();
 
-                // AJAX call to get customer details partial view
                 $.ajax({
                     url: '@Url.Action("GetCustomerDetailsPartial", "Customer")/' + customerId,
                     type: 'GET',
                     success: function (result) {
                         modalContent.html(result);
-                        initializeCustomerModalFeatures(); // Initialize any JS features within the loaded modal content
+                        initializeCustomerModalFeatures();
                     },
                     error: function (xhr, status, error) {
                         var errorMessage = `Error loading customer details. Status: ${xhr.status} ${error}.`;
                         if(xhr.responseText) {
-                            // Try to parse if it's a JSON error from the server
                             try {
                                 var errObj = JSON.parse(xhr.responseText);
                                 if (errObj && errObj.message) errorMessage = errObj.message;
@@ -385,12 +351,11 @@
             });
 
             // delete
-            $(document).on('click', '.btn-delete-customer', function () { // Changed class to '.btn-delete-customer'
+            $(document).on('click', '.btn-delete-customer', function () {
             var $button = $(this);
-            var customerId = $button.data('customer-id'); // Changed data attribute to 'customer-id'
-            var customerName = $button.data('customer-name') || 'this customer'; // Changed data attribute to 'customer-name'
+            var customerId = $button.data('customer-id');
+            var customerName = $button.data('customer-name') || 'this customer';
 
-            // Check if customerId was found
             if (typeof customerId === 'undefined') {
                 console.error("Customer ID not found on the delete button. Ensure 'data-customer-id' attribute is set.");
                 alert("Error: Could not get customer ID for deletion.");
@@ -398,39 +363,34 @@
             }
 
             if (confirm(`Are you sure you want to delete customer: ${customerName}? This action cannot be undone.`)) {
-                // User confirmed
                 $.ajax({
-                    url: '@Url.Action("DeleteConfirmed", "Customer")/' + customerId, // Changed controller to "Customer" and action to "DeleteConfirmed"
+                    url: '@Url.Action("DeleteConfirmed", "Customer")/' + customerId, 
                     type: 'POST',
-                    // If your "DeleteConfirmed" action in CustomerController expects the ID in the body:
                     data: {
                         id: customerId
                     },
                     beforeSend: function() {
-                        // Store original HTML to restore it properly
                         if (!$button.data('original-html')) {
                              $button.data('original-html', $button.html());
                         }
-                        $button.prop('disabled', true).html('<i class="fas fa-spinner fa-spin" style="font-size:20px;"></i>'); // Assuming Font Awesome for spinner
+                        $button.prop('disabled', true).html('<i class="fas fa-spinner fa-spin" style="font-size:20px;"></i>');
                     },
                     success: function (response) {
-                        if (response && response.success) { // Check if response and response.success exist
+                        if (response && response.success) {
                             alert('Deleted! ' + response.message);
 
-                            // Close the customer detail modal if it's open
                             var customerModalElement = document.getElementById('customerDetailModal'); // Changed modal ID
                             if (customerModalElement) {
                                 var customerModal = bootstrap.Modal.getInstance(customerModalElement);
-                                if (customerModal && $(customerModalElement).hasClass('show')) { // Check if modal is currently shown
+                                if (customerModal && $(customerModalElement).hasClass('show')) {
                                     customerModal.hide();
-                                    // Wait for modal to hide completely before reloading page
                                     $(customerModalElement).one('hidden.bs.modal', function () {
                                         window.location.reload();
                                     });
-                                    return; // Important to prevent immediate reload below if modal was open
+                                    return;
                                 }
                             }
-                            setTimeout(function() { window.location.reload(); }, 300); // Adjusted delay slightly
+                            setTimeout(function() { window.location.reload(); }, 300);
 
                         } else {
                             alert('Deleted Successfully!');
