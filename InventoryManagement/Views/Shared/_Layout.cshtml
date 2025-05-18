@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,53 +19,55 @@
 </head>
 <body>
     <div class="main-container">
-        <header class="top-navbar">
-            <div class="logo-container">
-                <a href="/" class="logo">
-                    <img src="~/images/logo.png" alt="invent2E" id="logo-img" />
-                    <span>invent2E</span>
-                </a>
-            </div>
-            <nav class="top-menu">
-                @{
-                    var currentPageTitle = ViewData["Title"] as string ?? "";
-                }
-                <a href="/dashboard" class="nav-item @(currentPageTitle == "Dashboard" ? "active" : "")">
-                    <i class="material-icons">dashboard</i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="/products" class="nav-item @(currentPageTitle == "Products" ? "active" : "")">
-                    <i class="material-icons">inventory_2</i>
-                    <span>Products</span>
-                </a>
-                <a href="/Supplier" class="nav-item @(currentPageTitle == "Suppliers" ? "active" : "")">
-                    <i class="material-icons">local_shipping</i>
-                    <span>Supplier</span>
-                </a>
-                <a href="/Customer" class="nav-item @(currentPageTitle == "Customers" ? "active" : "")">
-                    <i class="material-icons">people</i>
-                    <span>Customer</span>
-                </a>
-                <a href="/orders" class="nav-item @(currentPageTitle == "Orders" ? "active" : "")">
-                    <i class="material-icons">shopping_cart</i>
-                    <span>Orders</span>
-                </a>
-                <a href="/reports" class="nav-item @(currentPageTitle == "Reports" ? "active" : "")">
-                    <i class="material-icons">bar_chart</i>
-                    <span>Reports</span>
-                </a>
-            </nav>
-            <div class="user-actions">
-                <button class="btn icon-btn">
-                    <i class="material-icons">settings</i>
-                </button>
-                <button class="btn icon-btn">
-                    <i class="material-icons">notifications</i>
-                </button>
-                <div class="user-avatar">J</div>
-            </div>
-        </header>
-
+        @if (!(currentController == "Account" && currentAction == "Login") && !(currentController == "Account" && currentAction == "Register"))
+        {
+            <header class="top-navbar">
+                <div class="logo-container">
+                    <a href="/" class="logo">
+                        <img src="~/images/logo.png" alt="invent2E" id="logo-img" />
+                        <span>invent2E</span>
+                    </a>
+                </div>
+                <nav class="top-menu">
+                    @{
+                        var currentPageTitle = ViewData["Title"] as string ?? "";
+                    }
+                    <a href="/dashboard" class="nav-item @(currentPageTitle == "Dashboard" ? "active" : "")">
+                        <i class="material-icons">dashboard</i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="/products" class="nav-item @(currentPageTitle == "Products" ? "active" : "")">
+                        <i class="material-icons">inventory_2</i>
+                        <span>Products</span>
+                    </a>
+                    <a href="/Supplier" class="nav-item @(currentPageTitle == "Suppliers" ? "active" : "")">
+                        <i class="material-icons">local_shipping</i>
+                        <span>Supplier</span>
+                    </a>
+                    <a href="/Customer" class="nav-item @(currentPageTitle == "Customers" ? "active" : "")">
+                        <i class="material-icons">people</i>
+                        <span>Customer</span>
+                    </a>
+                    <a href="/orders" class="nav-item @(currentPageTitle == "Orders" ? "active" : "")">
+                        <i class="material-icons">shopping_cart</i>
+                        <span>Orders</span>
+                    </a>
+                    <a href="/reports" class="nav-item @(currentPageTitle == "Reports" ? "active" : "")">
+                        <i class="material-icons">bar_chart</i>
+                        <span>Reports</span>
+                    </a>
+                </nav>
+                <div class="user-actions">
+                    <button class="btn icon-btn">
+                        <i class="material-icons">settings</i>
+                    </button>
+                    <button class="btn icon-btn">
+                        <i class="material-icons">notifications</i>
+                    </button>
+                    <div class="user-avatar">J</div>
+                </div>
+            </header>
+        }
         <main class="content-area">
             @RenderBody()
         </main>
