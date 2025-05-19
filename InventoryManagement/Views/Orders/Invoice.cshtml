@@ -1,0 +1,124 @@
+﻿@model InventoryManagement.Models.Invoice
+@{
+    ViewData["Title"] = "Invoice";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />
+<link rel="stylesheet" href="~/css/invoice_site.css" />
+
+<div class="invoice-container">
+    <div class="invoice-header">
+        Invoice #@Model.InvoiceNumber
+    </div>
+    <div class="invoice-card">
+        <div class="invoice-body">
+            <div class="company-header">
+                <div class="company-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1eca8b">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16h-2v-6h2v6zm4 0h-2v-6h2v6zm0-8h-6V8h6v2z" />
+                    </svg>
+                </div>
+                <div class="company-name">Invent2E</div>
+            </div>
+
+            <div class="invoice-details">
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Invoice Number</div>
+                    <div class="detail-value">@Model.InvoiceNumber</div>
+                </div>
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Invoice Date</div>
+                    <div class="detail-value">@Model.InvoiceDate.ToString("MM-dd-yyyy")</div>
+                </div>
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Payment Method</div>
+                    <div class="detail-value">@Model.PaymentMethod</div>
+                </div>
+            </div>
+
+            <div class="invoice-details">
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Shipping Address</div>
+                    <div class="detail-value">@Model.ShippingAddress</div>
+                </div>
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Status</div>
+                    <div class="detail-value">@Model.Status</div>
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>₱@item.UnitPrice.ToString("N2")</td>
+                                <td>₱@item.TotalPrice.ToString("N2")</td>
+                            </tr>
+                        }
+                        <tr class="subtotal-row">
+                            <td colspan="3" class="subtotal">Subtotal</td>
+                            <td>₱@Model.Subtotal.ToString("N2")</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3" class="subtotal">Total Amount</td>
+                            <td>₱@Model.TotalAmount.ToString("N2")</td>
+                        </tr>
+                        @if (Model.PaymentMethod == "Cash")
+                        {
+                            <tr class="payment-row">
+                                <td colspan="3" class="subtotal">Amount Paid</td>
+                                <td>₱@Model.PaymentAmount.ToString("N2")</td>
+                            </tr>
+                            <tr class="change-row">
+                                <td colspan="3" class="subtotal">Change</td>
+                                <td>₱@((Model.PaymentAmount - Model.TotalAmount).ToString("N2"))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-outline" onclick="window.print()">Print Invoice</button>
+                <button class="btn btn-primary">Send Email</button>
+                <form action="/Orders/Index" method="get" style="display:inline-block; margin-left: 10px;">
+                    <button type="submit" class="btn btn-secondary">Back to Orders</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .order-summary {
+        margin-top: 2rem;
+    }
+    .order-summary h3 {
+        color: #fff;
+        margin-bottom: 1rem;
+    }
+    .subtotal-row {
+        border-top: 1px solid #2e414d;
+    }
+    .total-row {
+        border-top: 2px solid #2e414d;
+        font-weight: bold;
+    }
+    .subtotal {
+        text-align: right;
+        padding-right: 1rem;
+    }
+</style>

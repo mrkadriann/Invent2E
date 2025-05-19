@@ -1,0 +1,358 @@
+﻿@model InventoryManagement.Models.Order
+@{
+    ViewData["Title"] = "Record Payment";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="~/css/rp_site.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #181f22;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .order-form-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #232c31;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+            padding: 2rem 2.5rem;
+        }
+
+        .order-form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .order-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 1.5rem;
+        }
+
+        .order-form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        .order-form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #b0b8bb;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            background: #232c31;
+            border: 1px solid #2e414d;
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #00df72;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 223, 114, 0.2);
+        }
+
+        input[readonly] {
+            background: #2e414d;
+            cursor: not-allowed;
+        }
+
+        .order-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #00df72;
+            color: #181f22;
+        }
+
+        .btn-primary:hover {
+            background: #00c766;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #00df72;
+            color: #00df72;
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 223, 114, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .validation-summary-errors {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .field-validation-error {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        #orderProductsTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+            background: #232c31;
+            color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #orderProductsTable th,
+        #orderProductsTable td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #2e414d;
+        }
+
+        #orderProductsTable th {
+            background: #2e414d;
+            font-weight: 600;
+        }
+
+        #orderProductsTable tr:last-child td {
+            border-bottom: none;
+        }
+
+        @@media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+            
+            .order-form-container {
+                padding: 1.5rem;
+                margin: 20px auto;
+            }
+
+            .order-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order-form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="order-form-container">
+        <div class="order-form-title">Record Payment</div>
+        <form asp-action="RecordPayment" method="post" id="paymentForm">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+            
+            <div class="order-form-grid">
+                <div class="order-form-group full-width" style="display: flex; gap: 1.5rem; align-items: flex-end;">
+                    <div style="flex:1;">
+                        <label asp-for="OrderID">Order ID</label>
+                        <input asp-for="OrderID" readonly />
+                    </div>
+                    <div style="flex:1;">
+                        <label asp-for="OrderDate">Order Date</label>
+                        <input asp-for="OrderDate" type="date" required />
+                        <span asp-validation-for="OrderDate" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <div class="order-form-group full-width">
+                    <label>Customer Name</label>
+                    <input type="text" name="CustomerName" required />
+                </div>
+
+                <input type="hidden" asp-for="CustomerID" value="1" />
+                <input type="hidden" asp-for="OrderSource" value="Website" />
+                <input type="hidden" asp-for="Location" value="Manila" />
+                <input type="hidden" asp-for="Status" value="New" />
+                <input type="hidden" asp-for="ProgressPercentage" value="0" />
+
+                <div class="order-form-group full-width">
+                    <label>Add Product to Order</label>
+                    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+                        <select id="productSelect" style="flex:2;">
+                            <option value="">Select a product...</option>
+                            @if (ViewBag.Products != null)
+                            {
+                                @foreach (var product in ViewBag.Products)
+                                {
+                                    <option value="@product.ItemId"
+                                            data-price="@(product.Description?.RetailPrice ?? 0)"
+                                            data-name="@product.ItemName">
+                                        @product.ItemName - ₱@((product.Description?.RetailPrice ?? 0).ToString("N2"))
+                                    </option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="" disabled>No products available</option>
+                            }
+                        </select>
+                        <input type="number" id="productQty" min="1" value="1" style="width:80px;flex:1;" />
+                        <button type="button" class="btn btn-primary" id="addProductBtn">Add</button>
+                    </div>
+                </div>
+
+                <div class="order-form-group full-width">
+                    <label>Products in Order</label>
+                    <table id="orderProductsTable">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th style="text-align:right;">Quantity</th>
+                                <th style="text-align:right;">Unit Price</th>
+                                <th style="text-align:right;">Total</th>
+                                <th style="text-align:center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderProductsBody">
+                            <!-- Products will be added here dynamically -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" style="text-align:right;"><strong>Order Total:</strong></td>
+                                <td style="text-align:right;"><strong id="orderTotal">₱0.00</strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="order-form-group">
+                    <label>House No.</label>
+                    <input type="text" name="HouseNo" required />
+                </div>
+
+                <div class="order-form-group">
+                    <label>Street Address</label>
+                    <input type="text" name="StreetAddress" required />
+                </div>
+
+                <div class="order-form-group">
+                    <label>Barangay</label>
+                    <input type="text" name="Barangay" required />
+                </div>
+
+                <div class="order-form-group">
+                    <label>Postal ID</label>
+                    <input type="text" name="PostalId" required />
+                </div>
+
+                <div class="order-form-group">
+                    <label>City</label>
+                    <input type="text" name="City" required />
+                </div>
+
+                <div class="order-form-group">
+                    <label asp-for="OrderTotal">Order Total</label>
+                    <input asp-for="OrderTotal" readonly />
+                    <span asp-validation-for="OrderTotal" class="field-validation-error"></span>
+                </div>
+
+                <div class="order-form-group">
+                    <label asp-for="IsPaid">Is Paid</label>
+                    <select asp-for="IsPaid" id="isPaidSelect">
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>
+                    <span asp-validation-for="IsPaid" class="field-validation-error"></span>
+                </div>
+
+                <div class="order-form-group" id="paymentMethodGroup" style="display: none;">
+                    <label asp-for="PaymentMethod">Payment Method</label>
+                    <select asp-for="PaymentMethod" id="paymentMethodSelect">
+                        <option value="">Select...</option>
+                        <option value="Cash">Cash</option>
+                        <option value="GCash">GCash</option>
+                        <option value="Maya">Maya</option>
+                        <option value="Bank">Bank Transfer</option>
+                    </select>
+                    <span asp-validation-for="PaymentMethod" class="field-validation-error"></span>
+                </div>
+
+                <div class="order-form-group" id="cashPaymentGroup" style="display: none;">
+                    <label asp-for="PaymentAmount">Amount Paid (Cash)</label>
+                    <input type="number" asp-for="PaymentAmount" id="paymentAmount" step="0.01" min="0" />
+                    <div id="changeAmount" class="field-validation-error" style="display: none; margin-top: 0.5rem; color: #00df72;"></div>
+                    <div id="insufficientAmount" class="field-validation-error" style="display: none; margin-top: 0.5rem; color: #ff6b6b;"></div>
+                    <span asp-validation-for="PaymentAmount" class="field-validation-error"></span>
+                </div>
+
+                <div class="order-form-group" id="referenceNumberGroup" style="display: none;">
+                    <label asp-for="ReferenceNumber">Reference Number</label>
+                    <input type="text" asp-for="ReferenceNumber" id="referenceNumber" />
+                    <span asp-validation-for="ReferenceNumber" class="field-validation-error"></span>
+                </div>
+
+                <div class="order-form-actions">
+                    <button type="button" class="btn btn-outline" onclick="window.location.href='/Orders'">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitOrder">Record Payment</button>
+                </div>
+            </div>
+
+            <!-- Hidden field for order items -->
+            <input type="hidden" id="orderItemsJson" name="OrderItemsJson" />
+        </form>
+    </div>
+
+    <script src="~/js/record-payment.js"></script>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>

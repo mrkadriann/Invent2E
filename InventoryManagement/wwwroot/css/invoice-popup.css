@@ -1,0 +1,252 @@
+.invoice-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #181f26;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.invoice-card {
+    background: #232c31;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.invoice-body {
+    color: #fff;
+}
+
+.company-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.company-logo {
+    width: 48px;
+    height: 48px;
+}
+
+.company-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00df72;
+}
+
+.invoice-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.invoice-detail-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.detail-label {
+    color: #b0b8bb;
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    font-weight: 600;
+}
+
+.order-summary {
+    margin-top: 2rem;
+}
+
+.order-summary h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.invoice-table th,
+.invoice-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #2e414d;
+}
+
+.invoice-table th {
+    color: #b0b8bb;
+    font-weight: 600;
+}
+
+.subtotal-row {
+    border-top: 1px solid #2e414d;
+}
+
+.total-row {
+    border-top: 2px solid #2e414d;
+    font-weight: bold;
+}
+
+#paymentAmountRow,
+#changeAmountRow {
+    color: #00df72;
+    font-weight: 600;
+}
+
+.subtotal {
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: #00df72;
+    color: #181f22;
+}
+
+.btn-primary:hover {
+    background: #00c766;
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1.5px solid #00df72;
+    color: #00df72;
+}
+
+.btn-outline:hover {
+    background: rgba(0, 223, 114, 0.1);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .invoice-card {
+        padding: 1rem;
+    }
+
+    .invoice-details {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media print {
+    /* Hide everything by default */
+    body * {
+        visibility: hidden;
+    }
+    
+    /* Show only the invoice popup and its contents */
+    #invoicePopup,
+    #invoicePopup * {
+        visibility: visible;
+    }
+    
+    /* Position the invoice popup at the top of the page */
+    #invoicePopup {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        background: white;
+        padding: 0;
+        margin: 0;
+        overflow: visible;
+    }
+    
+    /* Ensure the invoice card takes full width */
+    .invoice-card {
+        width: 100%;
+        max-width: none;
+        box-shadow: none;
+        padding: 20px;
+        margin: 0;
+        height: auto;
+        overflow: visible;
+    }
+    
+    /* Hide the actions during print */
+    .actions {
+        display: none !important;
+    }
+    
+    /* Ensure proper page breaks */
+    .invoice-details {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+    
+    .invoice-table {
+        page-break-inside: auto;
+        page-break-after: auto;
+    }
+    
+    .invoice-table tr {
+        page-break-inside: avoid;
+    }
+
+    .invoice-table tbody {
+        page-break-inside: auto;
+    }
+
+    .invoice-table tfoot {
+        page-break-inside: auto;
+    }
+
+    .order-summary {
+        page-break-inside: auto;
+    }
+    
+    /* Set reasonable page margins */
+    @page {
+        size: A4;
+        margin: 1cm;
+    }
+
+    /* Prevent blank pages */
+    html, body {
+        height: auto;
+        overflow: visible;
+    }
+}

@@ -1,0 +1,939 @@
+﻿﻿@using System.Linq
+@using TransactionF.Models
+@model IEnumerable<InventoryManagement.Models.Order>
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "_Layout";
+    var statusCounts = Model.Where(o => !o.IsArchived)
+        .GroupBy(o => o.Status)
+        .ToDictionary(g => g.Key, g => g.Count());
+    var totalCount = Model.Count(o => !o.IsArchived);
+
+    // Extract unique cities from shipping addresses
+    var cities = Model.Where(o => !o.IsArchived)
+        .Select(o =>
+        {
+            var addressParts = o.ShippingAddress.Split(',');
+            // Get the city part (second to last part of the address)
+            var city = addressParts.Length > 1 ? addressParts[addressParts.Length - 2].Trim() : o.ShippingAddress;
+            return city;
+        })
+        .Where(c => !string.IsNullOrWhiteSpace(c))
+        .Distinct()
+        .OrderBy(c => c)
+        .ToList();
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+}
+
+<div class="orders-container">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <div>
+                <i class="fas fa-check-circle"></i>
+                @TempData["SuccessMessage"]
+            </div>
+            <button type="button" class="btn-close" onclick="this.parentElement.style.display='none'">×</button>
+        </div>
+    }
+
+    <div class="filters">
+        <div class="filter-section">
+            <div class="filter-title">Order Status</div>
+            <div class="filter-options">
+                <div class="filter-option" data-status="all">
+                    All
+                    <span class="status-count">(@totalCount)</span>
+                </div>
+                <div class="filter-option" data-status="New">
+                    New
+                    <span class="status-count">(@(statusCounts.GetValueOrDefault("New", 0)))</span>
+                </div>
+                <div class="filter-option" data-status="Processing">
+                    Processing
+                    <span class="status-count">(@(statusCounts.GetValueOrDefault("Processing", 0)))</span>
+                </div>
+                <div class="filter-option" data-status="Shipped">
+                    Shipped
+                    <span class="status-count">(@(statusCounts.GetValueOrDefault("Shipped", 0)))</span>
+                </div>
+                <div class="filter-option" data-status="Delivered">
+                    Delivered
+                    <span class="status-count">(@(statusCounts.GetValueOrDefault("Delivered", 0)))</span>
+                </div>
+                <div class="filter-option" data-status="Fulfilled">
+                    Fulfilled
+                    <span class="status-count">(@(statusCounts.GetValueOrDefault("Fulfilled", 0)))</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-title">Order Date</div>
+            <div class="date-range">
+                <input type="date" id="orderDateFrom" placeholder="From" onchange="filterOrders()">
+                <input type="date" id="orderDateTo" placeholder="To" onchange="filterOrders()">
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-title">Location</div>
+            <div class="dropdown" data-type="location">
+                Select Location
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </div>
+            <div class="dropdown-content">
+                @foreach (var city in cities)
+                {
+                    <a href="#" data-location="@city">@city</a>
+                }
+            </div>
+        </div>
+
+        <button class="reset-button" id="resetFilters">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+            </svg>
+            Reset Filters
+        </button>
+    </div>
+
+    <div class="orders-header">
+        <h1 class="page-title">Orders</h1>
+        <div class="actions">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search orders...">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </div>
+            </div>
+            <a href="/Orders/ArchiveHistory" class="archive-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+                </svg>
+                View Archives
+            </a>
+            <a href="/Orders/RecordPayment" class="add-order-button" id="addNewOrder">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+                Add New Order
+            </a>
+        </div>
+    </div>
+
+    <div class="order-list" id="orderList">
+        @foreach (var order in Model.Where(o => !o.IsArchived))
+        {
+            <div class="order-card" data-order-id="@order.OrderID" onclick="showOrderDetails(@order.OrderID)">
+                <div class="order-header">
+                    <div class="order-description">
+                        <div>
+                            <div class="order-id">SO-@order.OrderID</div>
+                            <div class="customer-name">@order.CustomerName</div>
+                            <div>
+                                @string.Join(" / ", order.OrderItems.Select(oi => $"{oi.Product?.ItemName ?? "Unknown"} x{oi.Quantity}"))
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-actions">
+                        <div class="order-price">₱@order.OrderTotal.ToString("N2")</div>
+                        <div class="button-group">
+                            <button class="order-button @(order.IsPaid ? "primary" : "secondary")">
+                                @(order.IsPaid ? "Paid" : "Unpaid")
+                            </button>
+                            <button class="order-button" onclick="event.stopPropagation(); showInvoicePopup(@order.OrderID)">
+                                View Invoice
+                            </button>
+                            <button class="actions-button" onclick="showOrderActions(@order.OrderID, event)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-details">
+                    <div class="location-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                        </svg>
+                        @order.ShippingAddress
+                    </div>
+                    <div class="tracking-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                        </svg>
+                        @if (!string.IsNullOrEmpty(order.TrackingNumber))
+                        {
+                            <span>@order.TrackingProvider: @order.TrackingNumber</span>
+                        }
+                        else
+                        {
+                            <span>No tracking info</span>
+                        }
+                    </div>
+                    <div class="order-status">@order.Status</div>
+                    <div class="status-date">@order.OrderDate.ToString("MMM dd, yyyy")</div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: @order.ProgressPercentage%"></div>
+                        </div>
+                        <div class="progress-steps">
+                            <div class="step @(order.ProgressPercentage >= 0 ? "completed" : "") @(order.Status == "New" ? "active" : "")" title="New">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM7.5 7.5V4a.5.5 0 0 1 1 0v3.5H12a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8.5H4a.5.5 0 0 1 0-1h3.5z" />
+                                </svg>
+                            </div>
+                            <div class="step @(order.ProgressPercentage >= 25 ? "completed" : "") @(order.Status == "Processing" ? "active" : "")" title="Processing">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                    <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                                </svg>
+                            </div>
+                            <div class="step @(order.ProgressPercentage >= 50 ? "completed" : "") @(order.Status == "Shipped" ? "active" : "")" title="Shipped">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                </svg>
+                            </div>
+                            <div class="step @(order.ProgressPercentage >= 75 ? "completed" : "") @(order.Status == "Delivered" ? "active" : "")" title="Delivered">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                    <path d="M2.5 3.5l5.5-2 5.5 2v9l-5.5 2-5.5-2v-9z" fill="none" stroke="currentColor" stroke-width="1.2" />
+                                    <path d="M2.5 3.5l5.5 2 5.5-2" fill="none" stroke="currentColor" stroke-width="1.2" />
+                                    <path d="M8 5.5v9" fill="none" stroke="currentColor" stroke-width="1.2" />
+                                </svg>
+                            </div>
+                            <div class="step @(order.ProgressPercentage >= 100 ? "completed" : "") @(order.Status == "Fulfilled" ? "active" : "")" title="Fulfilled">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Order Details Modal -->
+<div class="modal" id="orderDetailsModal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Order Details</h2>
+            <button class="close-btn" onclick="closeOrderDetails()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="orderDetailsForm">
+                <input type="hidden" id="orderId" name="orderId" />
+
+                <div class="form-group">
+                    <label>Order Status</label>
+                    <select id="orderStatus" name="status" class="form-control" onchange="updateProgressPercentage(this.value)">
+                        <option value="New">New</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Shipped">Shipped</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Fulfilled">Fulfilled</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tracking Provider</label>
+                    <input type="text" id="trackingProvider" name="trackingProvider" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Tracking Number</label>
+                    <input type="text" id="trackingNumber" name="trackingNumber" class="form-control" />
+                </div>
+
+                <input type="hidden" id="progressPercentage" name="progressPercentage" />
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="archiveOrder()">Archive Order</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_InvoicePopup")
+
+@section Scripts {
+    <script src="/js/site.js"></script>
+    <script>
+        let isArchiving = false;
+        let lastArchivedOrderId = null;
+
+        function updateProgressPercentage(status) {
+            let percentage = 0;
+            switch(status) {
+                case 'New':
+                    percentage = 0;
+                    break;
+                case 'Processing':
+                    percentage = 25;
+                    break;
+                case 'Shipped':
+                    percentage = 50;
+                    break;
+                case 'Delivered':
+                    percentage = 75;
+                    break;
+                case 'Fulfilled':
+                    percentage = 100;
+                    break;
+            }
+            document.getElementById('progressPercentage').value = percentage;
+        }
+
+        function showOrderDetails(orderId) {
+            fetch(`/Orders/GetOrderDetails/${orderId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const order = data.order;
+                        document.getElementById('orderId').value = order.orderID;
+                        document.getElementById('orderStatus').value = order.status;
+                        document.getElementById('trackingProvider').value = order.trackingProvider || '';
+                        document.getElementById('trackingNumber').value = order.trackingNumber || '';
+                        updateProgressPercentage(order.status);
+
+                        const modal = document.getElementById('orderDetailsModal');
+                        modal.style.display = 'flex';
+                        setTimeout(() => modal.classList.add('show'), 10);
+                    } else {
+                        alert('Error loading order details');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error loading order details');
+                });
+        }
+
+        function closeOrderDetails() {
+            const modal = document.getElementById('orderDetailsModal');
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        function showOrderActions(orderId, event) {
+            event.stopPropagation();
+            event.preventDefault();
+
+            const actionsMenu = document.createElement('div');
+            actionsMenu.className = 'actions-menu';
+            actionsMenu.innerHTML = `
+                <div class="action-item" data-action="edit-details">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                    </svg>
+                    Update Order
+                </div>
+                <div class="action-item" data-action="archive">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    Archive Order
+                </div>
+            `;
+
+            const existingMenus = document.querySelectorAll('.actions-menu');
+            existingMenus.forEach(menu => menu.remove());
+
+            document.body.appendChild(actionsMenu);
+
+            const button = event.currentTarget;
+            const buttonRect = button.getBoundingClientRect();
+
+            // Position the menu below the button
+            actionsMenu.style.position = 'fixed';
+            actionsMenu.style.top = `${buttonRect.bottom + window.scrollY + 5}px`;
+            actionsMenu.style.left = `${buttonRect.left + window.scrollX}px`;
+
+            actionsMenu.querySelectorAll('.action-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    const action = this.dataset.action;
+                    if (action === 'edit-details') {
+                        showOrderDetails(orderId);
+                    } else if (action === 'archive') {
+                        isArchiving = true;
+                        lastArchivedOrderId = orderId;
+                        archiveOrder(orderId);
+                    }
+                    actionsMenu.remove();
+                });
+            });
+
+            document.addEventListener('click', function closeMenu(e) {
+                if (!actionsMenu.contains(e.target) && e.target !== button) {
+                    actionsMenu.remove();
+                    document.removeEventListener('click', closeMenu);
+                }
+            });
+        }
+
+        document.querySelectorAll('.order-card').forEach(card => {
+            // Remove all click event listeners from the order card
+            card.onclick = null;
+        });
+
+        function archiveOrder(orderId) {
+            if (confirm('Are you sure you want to archive this order?')) {
+                fetch(`/Orders/ArchiveOrder/${orderId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const orderCard = document.querySelector(`[data-order-id="${orderId}"]`);
+                        if (orderCard) {
+                            orderCard.remove();
+                        }
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'alert alert-success';
+                        successMessage.innerHTML = `
+                            <div>
+                                <i class="fas fa-check-circle"></i>
+                                Order has been archived successfully
+                            </div>
+                            <button type="button" class="btn-close" onclick="this.parentElement.style.display='none'">×</button>
+                        `;
+                        document.querySelector('.orders-container').insertBefore(successMessage, document.querySelector('.orders-container').firstChild);
+
+                        setTimeout(() => {
+                            successMessage.style.opacity = '0';
+                            setTimeout(() => {
+                                successMessage.remove();
+                            }, 300);
+                        }, 3000);
+                    } else {
+                        alert('Error archiving order');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error archiving order');
+                })
+                .finally(() => {
+                    isArchiving = false;
+                    lastArchivedOrderId = null;
+                });
+            } else {
+                isArchiving = false;
+                lastArchivedOrderId = null;
+            }
+        }
+
+        document.getElementById('orderDetailsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const orderId = document.getElementById('orderId').value;
+            const formData = new FormData(this);
+
+            fetch(`/Orders/UpdateOrder/${orderId}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Error updating order');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating order');
+            });
+        });
+
+        function updateStatusCounts() {
+            // Get all order cards
+            const allOrders = document.querySelectorAll('.order-card');
+            const statusCounts = {};
+            let totalCount = 0;
+
+            // Count all orders by status
+            allOrders.forEach(card => {
+                const status = card.querySelector('.order-status').textContent;
+                statusCounts[status] = (statusCounts[status] || 0) + 1;
+                totalCount++;
+            });
+
+            // Update the counts in the filter options
+            document.querySelectorAll('.filter-option').forEach(option => {
+                const status = option.dataset.status;
+                const countSpan = option.querySelector('.status-count');
+                const newCount = status === 'all' ? totalCount : (statusCounts[status] || 0);
+
+                // Add animation class
+                countSpan.classList.add('count-update');
+
+                // Update the count
+                countSpan.textContent = `(${newCount})`;
+
+                // Remove animation class after animation completes
+                setTimeout(() => {
+                    countSpan.classList.remove('count-update');
+                }, 300);
+            });
+        }
+
+        function filterOrders() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.querySelector('.filter-option.active')?.dataset.status;
+            const dateFrom = document.getElementById('orderDateFrom').value;
+            const dateTo = document.getElementById('orderDateTo').value;
+            const selectedLocation = document.querySelector('.dropdown[data-type="location"]').textContent.trim();
+
+            // Get all order cards
+            const allOrders = document.querySelectorAll('.order-card');
+            const statusCounts = {};
+            let totalCount = 0;
+
+            // First, count all orders by status
+            allOrders.forEach(card => {
+                const orderStatus = card.querySelector('.order-status').textContent;
+                statusCounts[orderStatus] = (statusCounts[orderStatus] || 0) + 1;
+                totalCount++;
+            });
+
+            // Then apply filters and update visibility
+            allOrders.forEach(card => {
+                const orderId = card.querySelector('.order-id').textContent.toLowerCase();
+                const orderStatus = card.querySelector('.order-status').textContent;
+                const orderDate = new Date(card.querySelector('.status-date').textContent);
+                const orderLocation = card.querySelector('.location-info').textContent.trim();
+
+                // Extract city from shipping address
+                const addressParts = orderLocation.split(',');
+                const city = addressParts.length > 1 ? addressParts[addressParts.length - 2].trim() : orderLocation;
+
+                const matchesStatus = status === 'all' || status === orderStatus;
+                const matchesSearch = orderId.includes(searchTerm);
+                const matchesDate = (!dateFrom || orderDate >= new Date(dateFrom)) &&
+                                  (!dateTo || orderDate <= new Date(dateTo));
+                const matchesLocation = selectedLocation === 'Select Location' || city === selectedLocation;
+
+                const isVisible = matchesStatus && matchesSearch && matchesDate && matchesLocation;
+                card.style.display = isVisible ? 'block' : 'none';
+            });
+
+            // Update the counts in the filter options
+            document.querySelectorAll('.filter-option').forEach(option => {
+                const status = option.dataset.status;
+                const countSpan = option.querySelector('.status-count');
+                const newCount = status === 'all' ? totalCount : (statusCounts[status] || 0);
+
+                // Add animation class
+                countSpan.classList.add('count-update');
+
+                // Update the count
+                countSpan.textContent = `(${newCount})`;
+
+                // Remove animation class after animation completes
+                setTimeout(() => {
+                    countSpan.classList.remove('count-update');
+                }, 300);
+            });
+        }
+
+        // Add event listeners for all filter changes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', filterOrders);
+
+            // Date inputs
+            document.getElementById('orderDateFrom').addEventListener('change', filterOrders);
+            document.getElementById('orderDateTo').addEventListener('change', filterOrders);
+
+            // Status filters
+            document.querySelectorAll('.filter-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    filterOrders();
+                });
+            });
+
+            // Location dropdown
+            const locationDropdown = document.querySelector('.dropdown[data-type="location"]');
+            const locationContent = locationDropdown?.nextElementSibling;
+
+            if (locationDropdown && locationContent) {
+                locationDropdown.addEventListener('click', function() {
+                    const isOpen = locationContent.style.display === 'block';
+                    locationContent.style.display = isOpen ? 'none' : 'block';
+                    locationDropdown.classList.toggle('active', !isOpen);
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!locationDropdown.contains(e.target) && !locationContent.contains(e.target)) {
+                        locationContent.style.display = 'none';
+                        locationDropdown.classList.remove('active');
+                    }
+                });
+
+                // Location options
+                locationContent.querySelectorAll('a[data-location]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const location = this.dataset.location;
+
+                        locationContent.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                        this.classList.add('active');
+
+                        locationDropdown.innerHTML = location + `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                            </svg>`;
+                        locationContent.style.display = 'none';
+                        locationDropdown.classList.remove('active');
+                        filterOrders();
+                    });
+                });
+            }
+
+            // Reset button
+            const resetButton = document.getElementById('resetFilters');
+            if (resetButton) {
+                resetButton.addEventListener('click', function() {
+                    document.getElementById('searchInput').value = '';
+                    document.getElementById('orderDateFrom').value = '';
+                    document.getElementById('orderDateTo').value = '';
+
+                    if (locationDropdown) {
+                        locationDropdown.innerHTML = 'Select Location' + `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                            </svg>`;
+                    }
+
+                    document.querySelectorAll('.filter-option').forEach(opt => opt.classList.remove('active'));
+                    document.querySelector('.filter-option[data-status="all"]').classList.add('active');
+                    filterOrders();
+                });
+            }
+
+            // Initialize filters and counts
+            document.querySelector('.filter-option[data-status="all"]').classList.add('active');
+            updateStatusCounts(); // Initial count update
+            filterOrders(); // Initial filter application
+        });
+    </script>
+}
+
+<style>
+    .archive-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: #232c31;
+        color: #b0b8bb;
+        border: 1px solid #2e414d;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+        .archive-button:hover {
+            background: #2e414d;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .archive-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+    .actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    @@media (max-width: 768px) {
+        .actions {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .archive-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    .button-group {
+        position: relative;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .order-actions {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+    }
+
+    .actions-menu {
+        position: fixed;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 0.5rem;
+        min-width: 180px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        z-index: 9999;
+    }
+
+    .action-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        color: var(--text-light);
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+
+        .action-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .action-item svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+    .alert-success {
+        background-color: var(--accent-green);
+        color: var(--primary-color);
+        border: 2px solid #00df72;
+    }
+
+    .alert-danger {
+        background-color: var(--button-red);
+        color: white;
+    }
+
+    .status-count {
+        font-size: 0.9em;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        min-width: 2.5em;
+        text-align: right;
+        display: inline-block;
+        font-weight: 500;
+    }
+
+    .count-update {
+        animation: countPulse 0.3s ease;
+    }
+
+    @@keyframes countPulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .filter-option.active .status-count {
+        color: var(--primary-color);
+        opacity: 1;
+        font-weight: 600;
+    }
+
+    .date-range {
+        display: flex;
+        gap: 8px;
+    }
+
+        .date-range input {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+            .date-range input:focus {
+                outline: none;
+                border-color: var(--accent-color);
+            }
+
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .filter-section {
+        position: relative;
+        min-width: 200px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.2s ease;
+        color: var(--text-color);
+    }
+
+        .dropdown:hover {
+            background: var(--hover-bg);
+            border-color: var(--accent-color);
+        }
+
+        .dropdown svg {
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown.active svg {
+            transform: rotate(180deg);
+        }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-top: 4px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        z-index: 1000;
+        max-height: 200px;
+        overflow-y: auto;
+        animation: dropdownFadeIn 0.2s ease;
+    }
+
+    .reset-button {
+        margin-left: auto;
+        align-self: flex-start;
+    }
+
+    @@keyframes dropdownFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .dropdown-content a {
+        display: block;
+        padding: 8px 12px;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-left: 2px solid transparent;
+    }
+
+        .dropdown-content a:hover {
+            background-color: var(--hover-bg);
+            border-left-color: var(--accent-color);
+            padding-left: 16px;
+        }
+
+        .dropdown-content a.active {
+            background-color: var(--hover-bg);
+            border-left-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+    /* Custom scrollbar for dropdown */
+    .dropdown-content::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .dropdown-content::-webkit-scrollbar-track {
+        background: var(--card-bg);
+        border-radius: 3px;
+    }
+
+    .dropdown-content::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 3px;
+    }
+
+        .dropdown-content::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+    @@media (max-width: 768px) {
+        .filters {
+            flex-direction: column;
+        }
+
+        .filter-section {
+            width: 100%;
+        }
+
+        .reset-button {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+
+    .customer-name {
+        font-size: 0.9em;
+        color: var(--text-light);
+        margin: 4px 0;
+    }
+
+    .order-card {
+        position: relative;
+    }
+</style>

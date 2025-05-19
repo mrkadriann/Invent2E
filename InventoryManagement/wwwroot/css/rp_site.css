@@ -1,0 +1,120 @@
+:root {
+    --primary-color: #181f22;
+    --secondary-color: #232c31;
+    --accent-color: #00df72;
+    --text-color: #ffffff;
+    --border-color: #2e414d;
+    --gray-color: #b0b8bb;
+}
+
+body {
+    background: var(--primary-color);
+    font-family: 'Poppins', Arial, sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    min-height: 100vh;
+}
+
+.order-form-container {
+    max-width: 800px;
+    margin: 60px auto;
+    background: var(--secondary-color);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    padding: 3rem 4rem;
+}
+
+.order-form-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.order-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 2.5rem;
+}
+
+.order-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.order-form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+label {
+    color: var(--gray-color);
+    font-size: 1.15rem;
+    margin-bottom: 0.7rem;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    background: var(--secondary-color);
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    color: #fff;
+    font-size: 1.15rem;
+    transition: border 0.2s;
+    margin-bottom: 0.5rem;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+.order-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    margin-top: 3rem;
+    grid-column: 1 / -1;
+}
+
+.btn {
+    padding: 1.1rem 2.5rem;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+@media (max-width: 900px) {
+    .order-form-container {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .order-form-container {
+        padding: 1rem;
+    }
+    .order-form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .order-form-title {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,657 @@
+@model IEnumerable<InventoryManagement.Models.ArchiveHistory>
+@{
+    ViewData["Title"] = "Archive History";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+}
+
+<div class="archive-history-container">
+    @Html.AntiForgeryToken()
+    <a href="/Orders" class="btn btn-outline back-button">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+    <div class="page-header">
+        <h1>Archive History</h1>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-circle"></i>
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="filters">
+        <form method="get" class="filter-form" id="filterForm">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <input type="text" name="searchString" value="@ViewBag.CurrentSearch"
+                           placeholder="Search by ID or reason..." class="search-input" />
+                </div>
+
+                <div class="filter-group">
+                    <select name="archivedBy" class="filter-select">
+                        <option value="">All Users</option>
+                        @foreach (var user in ViewBag.ArchivedByList)
+                        {
+                            <option value="@user" selected="@(user == ViewBag.CurrentArchivedBy)">
+                                @user
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="filter-group date-range-group">
+                    <input type="date" name="archiveDateFrom" value="@ViewBag.CurrentDateFrom" class="date-input" />
+                    <input type="date" name="archiveDateTo" value="@ViewBag.CurrentDateTo" class="date-input" />
+                </div>
+
+                <div class="filter-group">
+                    <select name="previousStatus" class="filter-select">
+                        <option value="">All Statuses</option>
+                        @foreach (var status in ViewBag.Statuses)
+                        {
+                            <option value="@status" selected="@(status == ViewBag.CurrentStatus)">
+                                @status
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <select name="previousLocation" class="filter-select">
+                        <option value="">All Locations</option>
+                        @foreach (var location in ViewBag.Locations)
+                        {
+                            <option value="@location" selected="@(location == ViewBag.CurrentLocation)">
+                                @location
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Filter
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="clearFilters()">
+                        <i class="fas fa-times"></i> Clear
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="archive-history-list">
+        @if (!Model.Any())
+        {
+            <div class="no-results">
+                <i class="fas fa-archive"></i>
+                <p>No archive history found</p>
+            </div>
+        }
+        else
+        {
+            <table class="archive-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Archived By</th>
+                        <th>Archive Date</th>
+                        <th>Previous Status</th>
+                        <th>Previous Location</th>
+                        <th>Archive Reason</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var history in Model)
+                    {
+                        <tr data-order-id="@history.OrderID">
+                            <td>
+                                <a href="/Orders/Invoice/@history.OrderID" class="order-link">
+                                    SO-@history.OrderID
+                                </a>
+                            </td>
+                            <td>@history.ArchivedBy</td>
+                            <td>@history.ArchiveDate.ToString("MMM dd, yyyy HH:mm")</td>
+                            <td>
+                                <span class="status-badge @history.PreviousStatus?.ToLower()">
+                                    @history.PreviousStatus
+                                </span>
+                            </td>
+                            <td>@history.PreviousLocation</td>
+                            <td>@history.ArchiveReason</td>
+                            <td class="action-buttons">
+                                <button class="btn btn-restore" onclick="restoreOrder(@history.OrderID)">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                                <button class="btn btn-delete" onclick="deleteOrder(@history.OrderID)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<style>
+    .archive-history-container {
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        margin-left: 266px;
+        padding-top: 1rem;
+    }
+
+    .back-button {
+        align-self: flex-start;
+        padding: 0.35rem 0.75rem;
+        border-radius: 6px;
+        background: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s;
+        white-space: nowrap;
+        margin-bottom: 0.5rem;
+    }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-color);
+        }
+
+        .back-button i {
+            font-size: 0.875rem;
+        }
+
+    .page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        gap: 1rem;
+    }
+
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+    .filter-form {
+        background: var(--card-bg);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+    }
+
+    .filter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.75rem;
+        align-items: end;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--secondary-color);
+            color: #fff;
+            font-size: 0.875rem;
+            transition: border 0.2s;
+            height: 36px;
+        }
+
+            .filter-group input:focus,
+            .filter-group select:focus {
+                border-color: var(--accent-color);
+                outline: none;
+            }
+
+    .date-range-group {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+        .date-range-group input {
+            flex: 1;
+        }
+
+    .filter-actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+        .filter-actions .btn {
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+            .filter-actions .btn i {
+                font-size: 0.875rem;
+            }
+
+    .archive-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        border-radius: 8.5px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+    }
+
+        .archive-table th,
+        .archive-table td {
+            padding: 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .archive-table th {
+            background: var(--secondary-color);
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .archive-table td {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+    .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+        .status-badge.new {
+            background: var(--accent-green);
+            color: var(--primary-color);
+        }
+
+        .status-badge.processing {
+            background: #ffd700;
+            color: var(--primary-color);
+        }
+
+        .status-badge.shipped {
+            background: #1e90ff;
+            color: #fff;
+        }
+
+        .status-badge.delivered {
+            background: #32cd32;
+            color: #fff;
+        }
+
+        .status-badge.fulfilled {
+            background: #9370db;
+            color: #fff;
+        }
+
+        .status-badge.cancelled {
+            background: var(--button-red);
+            color: #fff;
+        }
+
+    .order-link {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+
+        .order-link:hover {
+            color: var(--accent-green-hover);
+        }
+
+    .no-results {
+        text-align: center;
+        padding: 3rem;
+        background: var(--card-bg);
+        border-radius: 8.5px;
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+    }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+    @@media (max-width: 1024px) {
+        .archive-history-container {
+            margin-left: 0;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .archive-history-container {
+            padding: 1rem;
+        }
+
+        .filter-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .archive-table {
+            display: block;
+            overflow-x: auto;
+        }
+
+        .filter-actions {
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+    }
+
+    .btn-restore, .btn-delete {
+        padding: 0.5rem;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+    }
+
+    .btn-restore {
+        background: var(--accent-color);
+        color: var(--primary-color);
+    }
+
+        .btn-restore:hover {
+            background: var(--accent-green-hover);
+            transform: translateY(-1px);
+        }
+
+    .btn-delete {
+        background: var(--button-red);
+        color: white;
+    }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .btn-restore i, .btn-delete i {
+            font-size: 1rem;
+        }
+
+    .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        animation: slideIn 0.3s ease;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .alert-success {
+        background-color: var(--accent-green);
+        color: var(--primary-color);
+        border: 2px solid #00df72;
+    }
+
+    .alert-danger {
+        background-color: var(--button-red);
+        color: white;
+    }
+
+    .alert i {
+        margin-right: 0.5rem;
+    }
+
+    .btn-close {
+        background: none;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 0;
+        line-height: 1;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+
+        .btn-close:hover {
+            opacity: 1;
+        }
+
+    @@keyframes slideIn {
+        from {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    tr {
+        transition: opacity 0.3s ease;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        function showAlert(message, type = 'success') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `
+                <div>
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    ${message}
+                </div>
+                <button type="button" class="btn-close" onclick="this.parentElement.remove()">×</button>
+            `;
+            document.querySelector('.archive-history-container').insertBefore(alertDiv, document.querySelector('.filters'));
+
+            if (type === 'success') {
+                setTimeout(() => {
+                    alertDiv.style.opacity = '0';
+                    setTimeout(() => alertDiv.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        function getToken() {
+            return document.querySelector('input[name="__RequestVerificationToken"]')?.value || '';
+        }
+
+        function restoreOrder(orderId) {
+            if (confirm('Are you sure you want to restore this order?')) {
+                fetch(`/Orders/RestoreOrder/${orderId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': getToken()
+                    }
+                })
+                .then(async response => {
+                    const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Network response was not ok');
+                    }
+                    return data;
+                })
+                .then(data => {
+                    if (data.success) {
+                        showAlert('Order restored successfully');
+                        // Find and remove the row
+                        const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+                        if (row) {
+                            row.style.opacity = '0';
+                            setTimeout(() => {
+                                row.remove();
+                                // Check if there are any rows left
+                                const remainingRows = document.querySelectorAll('.archive-table tbody tr');
+                                if (remainingRows.length === 0) {
+                                    // If no rows left, show the no results message
+                                    const tbody = document.querySelector('.archive-table tbody');
+                                    tbody.innerHTML = `
+                                        <tr>
+                                            <td colspan="7" class="no-results">
+                                                <i class="fas fa-archive"></i>
+                                                <p>No archive history found</p>
+                                            </td>
+                                        </tr>
+                                    `;
+                                }
+                            }, 300);
+                        }
+                    } else {
+                        throw new Error(data.message || 'Failed to restore order');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert(error.message || 'Error restoring order. Please try again.', 'danger');
+                });
+            }
+        }
+
+        function deleteOrder(orderId) {
+            if (confirm('Are you sure you want to permanently delete this order? This action cannot be undone.')) {
+                const token = getToken();
+                fetch(`/Orders/DeleteOrder/${orderId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': token
+                    },
+                    credentials: 'same-origin'
+                })
+                .then(async response => {
+                    const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Failed to delete order');
+                    }
+                    return data;
+                })
+                .then(data => {
+                    if (data.success) {
+                        showAlert('Order deleted successfully');
+                        // Find and remove the row
+                        const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+                        if (row) {
+                            row.style.opacity = '0';
+                            setTimeout(() => {
+                                row.remove();
+                                // Check if there are any rows left
+                                const remainingRows = document.querySelectorAll('.archive-table tbody tr');
+                                if (remainingRows.length === 0) {
+                                    // If no rows left, show the no results message
+                                    const tbody = document.querySelector('.archive-table tbody');
+                                    tbody.innerHTML = `
+                                        <tr>
+                                            <td colspan="7" class="no-results">
+                                                <i class="fas fa-archive"></i>
+                                                <p>No archive history found</p>
+                                            </td>
+                                        </tr>
+                                    `;
+                                }
+                            }, 300);
+                        }
+                    } else {
+                        throw new Error(data.message || 'Failed to delete order');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert(error.message || 'Error deleting order. Please try again.', 'danger');
+                });
+            }
+        }
+
+        function clearFilters() {
+            const form = document.getElementById('filterForm');
+            const inputs = form.querySelectorAll('input, select');
+
+            inputs.forEach(input => {
+                if (input.type === 'text' || input.type === 'date') {
+                    input.value = '';
+                } else if (input.tagName === 'SELECT') {
+                    input.selectedIndex = 0;
+                }
+            });
+
+            form.submit();
+        }
+
+        // Auto-submit on select change
+        document.querySelectorAll('.filter-select').forEach(select => {
+            select.addEventListener('change', () => {
+                document.getElementById('filterForm').submit();
+            });
+        });
+
+        // Debounced search
+        let searchTimeout;
+        document.querySelector('.search-input').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                document.getElementById('filterForm').submit();
+            }, 500);
+        });
+    </script>
+}

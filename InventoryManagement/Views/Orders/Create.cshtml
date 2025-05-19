@@ -1,0 +1,51 @@
+﻿@model InventoryManagement.Models.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create New Order</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="OrderID">Order ID:</label>
+        <input asp-for="OrderID" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OrderDate">Order Date:</label>
+        <input asp-for="OrderDate" class="form-control" type="datetime-local" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CustomerID">Customer ID:</label>
+        <input asp-for="CustomerID" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingAddress">Shipping Address:</label>
+        <input asp-for="ShippingAddress" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OrderTotal">Order Total:</label>
+        <input asp-for="OrderTotal" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IsPaid">Is Paid:</label>
+        <input asp-for="IsPaid" type="checkbox" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PaymentMethod">Payment Method:</label>
+        <input asp-for="PaymentMethod" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PaymentDate">Payment Date:</label>
+        <input asp-for="PaymentDate" type="datetime-local" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Status">Status:</label>
+        <input asp-for="Status" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PaymentAmount">Payment Amount:</label>
+        <input asp-for="PaymentAmount" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

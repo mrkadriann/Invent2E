@@ -1,0 +1,160 @@
+@* No model required *@
+<link rel="stylesheet" href="~/css/invoice-popup.css" />
+
+<div class="invoice-popup" id="invoicePopup" style="display: none;">
+    <div class="invoice-card">
+        <div class="invoice-body">
+            <div class="company-header">
+                <div class="company-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1eca8b">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16h-2v-6h2v6zm4 0h-2v-6h2v6zm0-8h-6V8h6v2z" />
+                    </svg>
+                </div>
+                <div class="company-name">Invent2E</div>
+            </div>
+
+            <div class="invoice-details">
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Invoice Number</div>
+                    <div class="detail-value" id="popupInvoiceNumber"></div>
+                </div>
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Invoice Date</div>
+                    <div class="detail-value" id="popupInvoiceDate"></div>
+                </div>
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Payment Method</div>
+                    <div class="detail-value" id="popupPaymentMethod"></div>
+                </div>
+            </div>
+
+            <div class="invoice-details">
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Shipping Address</div>
+                    <div class="detail-value" id="popupShippingAddress"></div>
+                </div>
+                <div class="invoice-detail-column">
+                    <div class="detail-label">Status</div>
+                    <div class="detail-value" id="popupStatus"></div>
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="popupItemsBody">
+                        <!-- Items will be populated by JavaScript -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="subtotal-row">
+                            <td colspan="3" class="subtotal">Subtotal</td>
+                            <td id="popupSubtotal"></td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3" class="subtotal">Total Amount</td>
+                            <td id="popupTotalAmount"></td>
+                        </tr>
+                        <tr id="paymentAmountRow" style="display: none;">
+                            <td colspan="3" class="subtotal">Amount Paid</td>
+                            <td id="popupPaymentAmount"></td>
+                        </tr>
+                        <tr id="changeAmountRow" style="display: none;">
+                            <td colspan="3" class="subtotal">Change</td>
+                            <td id="popupChangeAmount"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-outline" onclick="printInvoice()">Print Invoice</button>
+                <button class="btn btn-primary" onclick="closeInvoicePopup()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeInvoicePopup() {
+        document.getElementById('invoicePopup').style.display = 'none';
+    }
+
+    function printInvoice() {
+        const popup = document.getElementById('invoicePopup');
+        
+        // Show the popup if it's hidden
+        if (popup.style.display === 'none') {
+            popup.style.display = 'flex';
+        }
+        
+        // Print
+        window.print();
+    }
+
+    function showInvoicePopup(orderId) {
+        fetch(`/Orders/GetInvoice/${orderId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const invoice = data.invoice;
+                    
+                    // Populate invoice details
+                    document.getElementById('popupInvoiceNumber').textContent = invoice.invoiceNumber;
+                    document.getElementById('popupInvoiceDate').textContent = new Date(invoice.invoiceDate).toLocaleDateString();
+                    document.getElementById('popupPaymentMethod').textContent = invoice.paymentMethod;
+                    document.getElementById('popupShippingAddress').textContent = invoice.shippingAddress;
+                    document.getElementById('popupStatus').textContent = invoice.status;
+                    
+                    // Populate items
+                    const itemsBody = document.getElementById('popupItemsBody');
+                    itemsBody.innerHTML = '';
+                    invoice.items.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.productName}</td>
+                            <td>${item.quantity}</td>
+                            <td>₱${item.unitPrice.toFixed(2)}</td>
+                            <td>₱${item.totalPrice.toFixed(2)}</td>
+                        `;
+                        itemsBody.appendChild(row);
+                    });
+                    
+                    // Populate totals
+                    document.getElementById('popupSubtotal').textContent = `₱${invoice.subtotal.toFixed(2)}`;
+                    document.getElementById('popupTotalAmount').textContent = `₱${invoice.totalAmount.toFixed(2)}`;
+                    
+                    // Show payment amount and change if payment method is Cash
+                    const paymentAmountRow = document.getElementById('paymentAmountRow');
+                    const changeAmountRow = document.getElementById('changeAmountRow');
+                    
+                    if (invoice.paymentMethod === 'Cash' && invoice.paymentAmount) {
+                        paymentAmountRow.style.display = '';
+                        changeAmountRow.style.display = '';
+                        document.getElementById('popupPaymentAmount').textContent = `₱${invoice.paymentAmount.toFixed(2)}`;
+                        const change = invoice.paymentAmount - invoice.totalAmount;
+                        document.getElementById('popupChangeAmount').textContent = `₱${change.toFixed(2)}`;
+                    } else {
+                        paymentAmountRow.style.display = 'none';
+                        changeAmountRow.style.display = 'none';
+                    }
+                    
+                    // Show popup
+                    document.getElementById('invoicePopup').style.display = 'flex';
+                } else {
+                    alert('Error loading invoice');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error loading invoice');
+            });
+    }
+</script> 
