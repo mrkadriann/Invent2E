@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\SettingsIPT101.props" />
-</Project>
