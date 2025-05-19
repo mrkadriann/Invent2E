@@ -37,7 +37,7 @@ namespace InventoryManagement.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("category");
+                    b.ToTable("category", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.Customer", b =>
@@ -74,7 +74,7 @@ namespace InventoryManagement.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("customer");
+                    b.ToTable("customer", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.CustomerInformation", b =>
@@ -115,7 +115,7 @@ namespace InventoryManagement.Migrations
                     b.HasIndex("CustomerId")
                         .IsUnique();
 
-                    b.ToTable("customer_information");
+                    b.ToTable("customer_information", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.Description", b =>
@@ -172,7 +172,7 @@ namespace InventoryManagement.Migrations
                     b.HasIndex("ItemId")
                         .IsUnique();
 
-                    b.ToTable("descriptions");
+                    b.ToTable("descriptions", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.ImageData", b =>
@@ -201,7 +201,7 @@ namespace InventoryManagement.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("image");
+                    b.ToTable("image", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.Product", b =>
@@ -240,7 +240,7 @@ namespace InventoryManagement.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("product");
+                    b.ToTable("product", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.Quantity", b =>
@@ -267,7 +267,7 @@ namespace InventoryManagement.Migrations
                     b.HasIndex("ItemId")
                         .IsUnique();
 
-                    b.ToTable("quantity");
+                    b.ToTable("quantity", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.Supplier", b =>
@@ -339,7 +339,7 @@ namespace InventoryManagement.Migrations
                     b.HasIndex("CompanyName")
                         .IsUnique();
 
-                    b.ToTable("supplier");
+                    b.ToTable("supplier", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.SupplierContact", b =>
@@ -374,7 +374,7 @@ namespace InventoryManagement.Migrations
 
                     b.HasIndex("SupplierCompanyId");
 
-                    b.ToTable("supplierContact");
+                    b.ToTable("supplierContact", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Models.CustomerInformation", b =>

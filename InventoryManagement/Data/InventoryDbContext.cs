@@ -25,6 +25,9 @@ namespace InventoryManagement.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerInformation> CustomerInformations { get; set; }
 
+        //Settings
+        public DbSet<Settings> Settings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -97,6 +100,17 @@ namespace InventoryManagement.Data
                .HasForeignKey<CustomerInformation>(ci => ci.CustomerId)
                .OnDelete(DeleteBehavior.Cascade);
 
+
+            // Settings
+            modelBuilder.Entity<Settings>(entity =>
+            {
+                entity.Property(e => e.EnableTax).HasDefaultValue(false);
+                entity.Property(e => e.NotifyLowStock).HasDefaultValue(false);
+                entity.Property(e => e.NotifyOutOfStock).HasDefaultValue(false);
+                entity.Property(e => e.NotifyReplenish).HasDefaultValue(false);
+                entity.Property(e => e.DisableFeature1).HasDefaultValue(false);
+                entity.Property(e => e.DisableFeature2).HasDefaultValue(false);
+            });
 
         }
     }
